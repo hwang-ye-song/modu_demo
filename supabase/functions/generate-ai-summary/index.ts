@@ -1,5 +1,11 @@
-// 수정할 때마다 다시 배포: supabase functions deploy generate-ai-summary
-// 비밀값: supabase secrets set WEBHOOK_SECRET=<임의의 긴 문자열>  (RUNYOUR_AI_API_KEY도 같은 방법으로 설정)
+// 대시보드 에디터로 배포할 때: Edge Functions → Deploy a new function → Via Editor
+//   이름 generate-ai-summary, 이 파일 전체를 붙여넣고 Deploy → 함수 설정에서 'Verify JWT' 끄기
+//   🔑 비밀 키는 코드에 쓰지 말고 Edge Functions → Secrets에 GEMINI_API_KEY, WEBHOOK_SECRET 이름으로 넣기
+// 수정할 때마다 다시 배포: supabase functions deploy generate-ai-summary --no-verify-jwt
+//   (브라우저는 JWT가 아닌 publishable 키(sb_publishable_...)를 쓰므로 JWT 검사를 끔. 웹훅은 x-webhook-secret으로 확인)
+// 비밀값: supabase secrets set WEBHOOK_SECRET=<임의의 긴 문자열> GEMINI_API_KEY=<Gemini API 키>
+//   (선택) GEMINI_MODEL=<모델 이름>  기본값 gemini-2.5-flash-lite (무료 한도가 있는 모델 중 가장 쌈)
+//   프로젝트에서 legacy 키를 껐다면 supabase secrets set SERVICE_KEY=<sb_secret_... 키> 도 설정
 // AI 요약은 태블릿이 아니라 DB 저장 뒤 여기서 만듦. Database Webhook 설정:
 //   Supabase Dashboard → Database → Webhooks → Create a new hook
 //   1. Table: surveys / Events: Insert
@@ -24,7 +30,7 @@ const MAX_ENTRIES = 10
 const MAX_ENTRIES_BYTES = 20 * 1024
 const MAX_TRANSCRIPT_CHARS = 300
 const MAX_FIELD_CHARS = 100
-const MAX_TOKENS = 1024
+const MAX_TOKENS = 4096   // 최신 Flash 모델은 답하기 전 생각(thinking)에도 토큰을 써서 넉넉히 둠
 const UPSTREAM_TIMEOUT_MS = 14000
 const DB_TIMEOUT_MS = 10000
 const LANGS = ['ko', 'en', 'zh', 'ru', 'vi', 'ja', 'tl', 'km', 'th', 'mn', 'uz', 'ar']
@@ -113,21 +119,24 @@ type AIResult = { content: string } | { error: string, status: number }
 
 // AI 호출 (키 없음·시간 초과·네트워크 오류는 throw)
 async function callAI(promptText: string): Promise<AIResult> {
-  // Supabase Secrets에서 안전하게 꺼내옵니다.
-  const apiKey = Deno.env.get('RUNYOUR_AI_API_KEY')
+  // 🔑 Secrets의 GEMINI_API_KEY (Google AI Studio에서 받은 Gemini API 키)
+  const apiKey = Deno.env.get('GEMINI_API_KEY')
+  // 모델 이름은 코드 수정 없이 GEMINI_MODEL 비밀값으로 바꿀 수 있음
+  const model = Deno.env.get('GEMINI_MODEL') || 'gemini-2.5-flash-lite'
 
   if (!apiKey) {
-    throw new Error('API Key is missing in environment variables.')
+    throw new Error('GEMINI_API_KEY is missing in environment variables.')
   }
 
-  const response = await fetch('https://api.runyour.ai/v1/chat/completions', {
+  // Gemini의 OpenAI 호환 주소 (요청·응답 형식이 chat/completions와 같음)
+  const response = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: "gemini/gemini-3.5-flash",
+      model,
       messages: [{ role: "user", content: promptText }],
       max_tokens: MAX_TOKENS
     }),
@@ -168,14 +177,18 @@ async function summarizeAndSave(id: string, entries: unknown[]): Promise<boolean
     if (!summary) summary = buildFallbackSummary(entries.slice(0, MAX_ENTRIES))
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL')
-    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
-    if (!supabaseUrl || !serviceKey) throw new Error('SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY is missing.')
+    // 새 형식 비밀 키(sb_secret_...)를 SERVICE_KEY로 넣었으면 그걸 쓰고, 없으면 기본 service_role 키
+    const serviceKey = Deno.env.get('SERVICE_KEY') || Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+    if (!supabaseUrl || !serviceKey) throw new Error('SUPABASE_URL / SERVICE_KEY(SUPABASE_SERVICE_ROLE_KEY) is missing.')
 
+    // sb_ 로 시작하는 새 키는 JWT가 아니라 apikey 헤더로만 보냄
+    const authHeaders: Record<string, string> = serviceKey.startsWith('sb_')
+      ? { 'apikey': serviceKey }
+      : { 'apikey': serviceKey, 'Authorization': `Bearer ${serviceKey}` }
     const res = await fetch(`${supabaseUrl}/rest/v1/surveys?id=eq.${encodeURIComponent(id)}`, {
       method: 'PATCH',
       headers: {
-        'apikey': serviceKey,
-        'Authorization': `Bearer ${serviceKey}`,
+        ...authHeaders,
         'Content-Type': 'application/json',
         'Prefer': 'return=minimal'
       },
@@ -196,6 +209,7 @@ async function summarizeAndSave(id: string, entries: unknown[]): Promise<boolean
 
 // Database Webhook: surveys에 기록이 저장되면 AI 요약을 만들어 그 행에 채움
 async function handleWebhook(req: Request): Promise<Response> {
+  // 🔑 Secrets의 WEBHOOK_SECRET (Database Webhook 헤더 x-webhook-secret에도 같은 값)
   const secret = Deno.env.get('WEBHOOK_SECRET')
   // 비밀값이 설정되지 않았거나 다르면 거부 (db.js에 있는 anon 키만으로는 호출 못 하게)
   if (!secret || req.headers.get('x-webhook-secret') !== secret) {

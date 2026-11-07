@@ -351,6 +351,65 @@
       .care-form button { grid-column: 1 / -1; }
     }
 
+    /* hidden 속성이 .btn·.dashboard-content의 display보다 앞서게 */
+    [hidden] { display: none !important; }
+
+    /* ─── 로그인 ─── */
+    .gate {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      overflow-y: auto;
+    }
+    .gate-card {
+      background: #FFFFFF;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 380px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .gate-card h2 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      text-align: center;
+    }
+    .gate-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .gate-form label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+    .gate-form input {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      border: 1.5px solid var(--secondary);
+      border-radius: 8px;
+      font-size: 1rem;
+      color: var(--text-main);
+      background: #FFFFFF;
+    }
+    .gate-form input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    .gate-status { color: var(--text-sub); font-size: 0.95rem; text-align: center; }
+    .gate-msg { color: #B91C1C; font-size: 0.95rem; white-space: pre-line; overflow-wrap: anywhere; }
+    .gate-status:empty, .gate-msg:empty { display: none; }
+    .gate-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+
     @media (max-width: 768px) {
       .dashboard-header {
         flex-wrap: wrap;
@@ -377,13 +436,34 @@
   <header class="dashboard-header">
     <h1>🏥 보건교사 대시보드</h1>
     <div>
-      <button id="btn-care" class="btn btn-secondary" aria-haspopup="dialog" style="min-height: auto; padding: 0.5rem 1rem; font-size: 1rem; margin-right: 0.5rem;">관리 학생 (0)</button>
-      <button id="btn-refresh" class="btn btn-secondary" style="min-height: auto; padding: 0.5rem 1rem; font-size: 1rem;">새로고침</button>
+      <!-- 관리 학생·새로고침은 보건교사 확인 뒤에만, 로그아웃은 로그인했을 때만 보임 -->
+      <button id="btn-care" class="btn btn-secondary" aria-haspopup="dialog" style="min-height: auto; padding: 0.5rem 1rem; font-size: 1rem; margin-right: 0.5rem;" hidden>관리 학생 (0)</button>
+      <button id="btn-refresh" class="btn btn-secondary" style="min-height: auto; padding: 0.5rem 1rem; font-size: 1rem;" hidden>새로고침</button>
+      <button id="btn-logout" class="btn btn-secondary" style="min-height: auto; padding: 0.5rem 1rem; font-size: 1rem; margin-left: 0.5rem;" hidden>로그아웃</button>
       <button id="btn-exit" class="btn btn-secondary" style="min-height: auto; padding: 0.5rem 1rem; font-size: 1rem; margin-left: 0.5rem;">나가기</button>
     </div>
   </header>
 
-  <div class="dashboard-content">
+  <!-- 로그인: 보건교사 명단(public.nurses)에 등록된 계정만 기록을 볼 수 있음 (서버 RLS) -->
+  <div id="gate" class="gate">
+    <div class="gate-card" role="region" aria-labelledby="gate-title">
+      <h2 id="gate-title">보건교사 로그인</h2>
+      <p id="gate-status" class="gate-status" role="status">로그인 상태를 확인하는 중…</p>
+      <form id="login-form" class="gate-form" novalidate hidden>
+        <label>아이디<input type="text" id="login-email" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="admin"></label>
+        <label>비밀번호<input type="password" id="login-password" autocomplete="current-password"></label>
+        <p id="login-student-note" class="care-warn" hidden>학생 태블릿에서 로그인하면 나갈 때 자동으로 로그아웃돼요.</p>
+        <button type="submit" id="login-submit" class="btn btn-primary">로그인</button>
+      </form>
+      <p id="gate-msg" class="gate-msg" role="alert"></p>
+      <div id="gate-actions" class="gate-actions" hidden>
+        <button type="button" id="gate-retry" class="btn btn-secondary">다시 확인</button>
+        <button type="button" id="gate-logout" class="btn btn-secondary">로그아웃</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content" id="dashboard" hidden>
     <aside class="sidebar">
       <div class="stat-card">
         <h3>확인 대기 학생</h3>
@@ -501,20 +581,19 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('btn-exit').addEventListener('click', () => {
-        window.location.href = 'index.html';
-      });
+      document.getElementById('btn-exit').addEventListener('click', exitPage);
 
       document.getElementById('btn-refresh').addEventListener('click', () => {
         fetchRecords();
       });
 
-      // 관리 학생 패널 (여기서 오류가 나도 문진표 목록은 그대로 동작)
-      try {
-        initCare();
-      } catch (err) {
-        console.error("Care init error:", err && err.message);
-      }
+      document.getElementById('login-form').addEventListener('submit', onLoginSubmit);
+      document.getElementById('btn-logout').addEventListener('click', logout);
+      document.getElementById('gate-logout').addEventListener('click', logout);
+      document.getElementById('gate-retry').addEventListener('click', verifyNurse);
+      window.addEventListener('pagehide', onPageHide);
+      // 뒤로 가기로 이 화면이 복원되면 나가기 버튼을 다시 쓸 수 있게
+      window.addEventListener('pageshow', () => { exiting = false; });
 
       // 확인 완료 버튼 (목록을 다시 그려도 한 번만 등록)
       document.getElementById('records-container').addEventListener('click', (e) => {
@@ -522,39 +601,247 @@
         if (btn) resolveRecord(btn.dataset.id);
       });
 
+      initAuth();
+    });
+
+    // ─── 로그인 ───
+    // 기록 읽기·확인 완료는 로그인 + 보건교사 명단(public.nurses) 등록 계정만 가능 (서버 RLS). 화면도 그에 맞춰 잠금
+    const MSG_BAD_LOGIN = '아이디 또는 비밀번호가 맞지 않아요.';
+    // 아이디만 입력하면 이 주소를 붙여 Supabase 계정 이메일로 씀 (admin → admin@example.com)
+    const LOGIN_DOMAIN = 'example.com';
+    const MSG_OFFLINE = '서버에 연결할 수 없어요. 인터넷 연결을 확인해 주세요.';
+    const MSG_NOT_NURSE = '보건교사로 등록되지 않은 계정이에요. 관리자에게 등록을 요청해 주세요.';
+
+    let signedIn = false;      // 이 브라우저에 로그인 세션이 있는지
+    let dashboardOn = false;   // 보건교사 확인 뒤 대시보드가 돌고 있는지
+    let authSeq = 0;           // 로그아웃할 때마다 늘림 (그 전에 시작한 보건교사 확인 결과는 버림)
+    let loginBusy = false;
+    let autoSignOut = false;   // 학생 태블릿에서 로그인했으면 나갈 때 로그아웃
+    let exiting = false;
+    let signOutPending = null; // 로그아웃이 끝나기 전에 다시 로그인하면 새 세션이 지워지지 않게 기다림
+    let careStarted = false;
+    let refreshTimer = null;
+    let realtimeChannel = null;
+    let channelSeq = 0;
+
+    function setHidden(id, hide) {
+      document.getElementById(id).hidden = hide;
+    }
+
+    function setGateText(status, msg) {
+      document.getElementById('gate-status').textContent = status || '';
+      document.getElementById('gate-msg').textContent = msg || ''; // textContent라 따로 이스케이프 불필요
+    }
+
+    function updateHeader() {
+      setHidden('btn-logout', !signedIn);
+      setHidden('btn-care', !dashboardOn);
+      setHidden('btn-refresh', !dashboardOn);
+    }
+
+    // 로그인 카드 상태: 확인 중 / 로그인 입력 / 막힘(메시지 + 버튼)
+    function showGate(mode, msg, canRetry) {
+      setHidden('dashboard', true);
+      setHidden('gate', false);
+      setHidden('login-form', mode !== 'login');
+      setHidden('gate-actions', mode !== 'blocked');
+      setHidden('gate-retry', !canRetry);
+      if (mode === 'checking') setGateText(msg, '');
+      else setGateText('', msg);
+      if (mode === 'login') setHidden('login-student-note', !isStudentDevice());
+      updateHeader();
+    }
+
+    function showLoginForm(msg) {
+      showGate('login', msg);
+    }
+
+    async function initAuth() {
+      if (!db) {
+        // supabase-js를 못 불러옴 → 기존 오류 표시
+        setHidden('gate', true);
+        setHidden('dashboard', false);
+        document.getElementById('records-container').innerHTML = `
+          <div style="text-align: center; padding: 3rem; color: var(--emergency);">
+            데이터를 불러오는 중 오류가 발생했습니다.<br>
+            서버 연결 도구를 불러오지 못했어요. 인터넷 연결을 확인하고 새로고침해 주세요.
+          </div>
+        `;
+        return;
+      }
+      // 직접 로그아웃·다른 탭 로그아웃·토큰 갱신 실패 모두 SIGNED_OUT으로 옴
+      db.auth.onAuthStateChange((event) => {
+        if (event === 'SIGNED_OUT') endSession();
+      });
+      let session = null;
+      try {
+        const { data, error } = await db.auth.getSession();
+        if (error) throw error;
+        session = data && data.session;
+      } catch (err) {
+        console.error("Session error:", err && err.message);
+      }
+      // 학생 태블릿에 남은 세션은 이어 쓰지 않음 (탭이 강제로 닫혀 로그아웃을 못 했을 수 있음)
+      if (session && isStudentDevice()) {
+        await signOutHere();
+        session = null;
+      }
+      if (session) onSignedIn();
+      else showLoginForm('');
+    }
+
+    function isNetworkError(err, status) {
+      if (status === 0) return true;
+      if (!err) return false;
+      if (err.name === 'AuthRetryableFetchError' || err.status === 0) return true;
+      return /failed to fetch|networkerror|network request failed|load failed|fetch failed/i.test(String(err.message || err));
+    }
+
+    function shortError(err) {
+      const m = err && err.message ? String(err.message) : String(err);
+      return m.length > 120 ? m.slice(0, 120) + '…' : m;
+    }
+
+    function loginErrorText(err) {
+      if (!err) return '로그인하지 못했어요. 다시 시도해 주세요.';
+      if (err.code === 'invalid_credentials' || /invalid login credentials/i.test(String(err.message || ''))) return MSG_BAD_LOGIN;
+      if (isNetworkError(err)) return MSG_OFFLINE;
+      return `로그인하지 못했어요. (${shortError(err)})`;
+    }
+
+    async function onLoginSubmit(e) {
+      e.preventDefault();
+      if (loginBusy || !db) return; // 두 번 눌러도 한 번만
+      const emailEl = document.getElementById('login-email');
+      const pwEl = document.getElementById('login-password');
+      const btn = document.getElementById('login-submit');
+      const id = emailEl.value.trim();
+      const email = id.includes('@') ? id : `${id}@${LOGIN_DOMAIN}`;
+      const password = pwEl.value;
+      if (!id || !password) {
+        setGateText('', '아이디와 비밀번호를 입력해 주세요.');
+        return;
+      }
+      loginBusy = true;
+      btn.disabled = true;
+      btn.textContent = '로그인 중…';
+      setGateText('', '');
+      let res;
+      try {
+        if (signOutPending) await signOutPending;
+        res = await db.auth.signInWithPassword({ email, password });
+      } catch (err) {
+        res = { error: err };
+      } finally {
+        loginBusy = false;
+        btn.disabled = false;
+        btn.textContent = '로그인';
+      }
+      if (res.error || !res.data || !res.data.session) {
+        console.error("Login error:", res.error && res.error.message);
+        const text = loginErrorText(res.error);
+        if (text === MSG_BAD_LOGIN) {
+          pwEl.value = '';
+          pwEl.focus();
+        }
+        setGateText('', text);
+        return;
+      }
+      pwEl.value = '';
+      onSignedIn();
+    }
+
+    // 로그인 시점에 학생 태블릿이면 나갈 때 자동 로그아웃
+    function onSignedIn() {
+      signedIn = true;
+      autoSignOut = isStudentDevice();
+      verifyNurse();
+    }
+
+    // 로그인한 계정이 보건교사 명단에 있는지 서버에 물음 (있을 때만 대시보드 시작)
+    async function verifyNurse() {
+      if (dashboardOn || !signedIn) return;
+      const seq = authSeq;
+      showGate('checking', '보건교사 계정인지 확인하는 중…');
+      let res;
+      try {
+        res = await db.rpc('is_nurse');
+      } catch (err) {
+        res = { error: err };
+      }
+      if (seq !== authSeq || !signedIn) return; // 확인하는 동안 로그아웃됨
+      if (res.error) {
+        console.error("is_nurse error:", res.error.message);
+        const why = isNetworkError(res.error, res.status) ? MSG_OFFLINE : `(${shortError(res.error)})`;
+        showGate('blocked', `계정을 확인하지 못했어요. ${why}`, true);
+        return;
+      }
+      if (res.data !== true) {
+        showGate('blocked', MSG_NOT_NURSE, false);
+        return;
+      }
+      startDashboard();
+    }
+
+    // 보건교사 확인 뒤에만 시작. 두 번 불려도 구독·타이머는 하나
+    function startDashboard() {
+      if (dashboardOn) return;
+      dashboardOn = true;
+      setHidden('gate', true);
+      setHidden('dashboard', false);
+      updateHeader();
+
+      // 관리 학생 패널 (여기서 오류가 나도 문진표 목록은 그대로 동작)
+      try {
+        if (!careStarted) {
+          careStarted = true;
+          initCare();
+        } else {
+          loadCareStudents();
+        }
+      } catch (err) {
+        console.error("Care init error:", err && err.message);
+      }
+
       fetchRecords();
 
       // 실시간 연결이 조용히 끊겨도 1분마다·네트워크가 돌아오면 다시 불러옴
-      setInterval(fetchRecords, 60000);
+      refreshTimer = setInterval(fetchRecords, 60000);
       window.addEventListener('online', fetchRecords);
 
-      if (!db) return;
+      subscribeRealtime();
+    }
 
-      // Realtime subscription setup
-      const channel = db.channel('schema-db-changes')
-        .on(
-          'postgres_changes',
-          {
-            event: 'INSERT',
-            schema: 'public',
-            table: 'surveys'
-          },
-          () => {
-            console.log("New record received!");
-            fetchRecords();
-          }
-        )
-        // 다른 화면에서 확인 완료한 기록은 바로 사라지고, 서버가 채운 AI 요약은 바로 보이게
-        .on(
-          'postgres_changes',
-          {
-            event: 'UPDATE',
-            schema: 'public',
-            table: 'surveys'
-          },
-          () => fetchRecords()
-        )
-        .subscribe((status, err) => {
+    function subscribeRealtime() {
+      let ch;
+      try {
+        // 이름은 매번 새로 (다시 로그인할 때 닫히는 중인 이전 채널과 겹치지 않게)
+        ch = db.channel('schema-db-changes-' + (++channelSeq))
+          .on(
+            'postgres_changes',
+            {
+              event: 'INSERT',
+              schema: 'public',
+              table: 'surveys'
+            },
+            () => {
+              console.log("New record received!");
+              fetchRecords();
+            }
+          )
+          // 다른 화면에서 확인 완료한 기록은 바로 사라지고, 서버가 채운 AI 요약은 바로 보이게
+          .on(
+            'postgres_changes',
+            {
+              event: 'UPDATE',
+              schema: 'public',
+              table: 'surveys'
+            },
+            () => fetchRecords()
+          );
+        realtimeChannel = ch;
+        ch.subscribe((status, err) => {
+          if (realtimeChannel !== ch) return; // 로그아웃으로 닫은 채널
           if (status === 'SUBSCRIBED') {
             realtimeDown = false;
             fetchRecords(); // (재)연결될 때마다 끊긴 동안 들어온 기록을 다시 불러옴
@@ -564,9 +851,124 @@
             updateStatusLine();
           }
         });
-    });
+      } catch (err) {
+        console.error("Realtime setup error:", err && err.message);
+        realtimeDown = true;
+        updateStatusLine();
+      }
+    }
+
+    // 대시보드 멈춤: 구독·타이머 해제, 화면의 기록·숫자·관리 학생 표를 지움 (개인정보)
+    function stopDashboard() {
+      authSeq++;
+      fetchSeq++; // 받는 중이던 목록은 도착해도 버림
+      dashboardOn = false;
+      if (refreshTimer !== null) {
+        clearInterval(refreshTimer);
+        refreshTimer = null;
+      }
+      window.removeEventListener('online', fetchRecords);
+      if (realtimeChannel) {
+        const ch = realtimeChannel;
+        realtimeChannel = null;
+        try {
+          Promise.resolve(db.removeChannel(ch)).catch(() => {});
+        } catch (err) {
+          console.error("Realtime remove error:", err && err.message);
+        }
+      }
+      lastRecords = null;
+      hasRendered = false;
+      lastUpdatedText = '';
+      realtimeDown = false;
+      document.getElementById('records-container').innerHTML = `
+        <div style="text-align: center; padding: 3rem; color: var(--text-sub);">
+          데이터를 불러오는 중입니다...
+        </div>
+      `;
+      document.getElementById('stat-total').innerText = '0';
+      document.getElementById('stat-emergency').innerText = '0';
+      document.getElementById('last-updated').innerText = '';
+      try {
+        resetCareMsgs();
+        document.getElementById('care-modal').hidden = true;
+        document.getElementById('care-tbody').textContent = '';
+        ['care-paste', 'care-grade', 'care-class', 'care-num', 'care-note'].forEach(id => {
+          document.getElementById(id).value = '';
+        });
+      } catch (err) {
+        console.error("Care reset error:", err && err.message);
+      }
+      setHidden('dashboard', true);
+      updateHeader();
+    }
+
+    // 로그인이 끝났을 때 (로그아웃 버튼·SIGNED_OUT 알림 모두 여기로, 여러 번 불려도 같음)
+    function endSession() {
+      signedIn = false;
+      autoSignOut = false;
+      stopDashboard();
+      showLoginForm('');
+    }
+
+    // 이 기기에 저장된 로그인 세션 지우기 (서버에 못 닿아 signOut이 실패했을 때)
+    function forgetStoredSession() {
+      try {
+        const keys = [];
+        for (let i = 0; i < localStorage.length; i++) keys.push(localStorage.key(i));
+        keys.filter(k => k && /^sb-.+-auth-token/.test(k)).forEach(k => localStorage.removeItem(k));
+      } catch (e) { /* 저장 공간을 못 쓰면 지울 것도 없음 */ }
+    }
+
+    // 이 브라우저의 로그인만 끝냄 (다른 PC 로그인은 그대로). 3초 안에 안 끝나거나 실패하면 저장된 세션을 직접 지움
+    async function signOutHere() {
+      let timer = null;
+      let ok = false;
+      try {
+        const res = await Promise.race([
+          db.auth.signOut({ scope: 'local' }),
+          new Promise(resolve => { timer = setTimeout(() => resolve({ error: new Error('timeout') }), 3000); })
+        ]);
+        ok = !!res && !res.error;
+        if (!ok) console.error("Sign out error:", res && res.error && res.error.message);
+      } catch (err) {
+        console.error("Sign out error:", err && err.message);
+      }
+      clearTimeout(timer);
+      if (!ok) forgetStoredSession();
+    }
+
+    async function logout() {
+      if (!db) return;
+      endSession();
+      signOutPending = signOutHere().finally(() => { signOutPending = null; });
+      await signOutPending;
+    }
+
+    // 나가기: 학생 태블릿이면 로그아웃까지 마친 뒤 이동
+    async function exitPage() {
+      if (exiting) return;
+      exiting = true;
+      if (db && (autoSignOut || isStudentDevice())) {
+        endSession();
+        await signOutHere();
+      }
+      window.location.href = 'index.html';
+    }
+
+    // 학생 태블릿에서 다른 방법(뒤로 가기·탭 닫기)으로 떠날 때도 로그아웃.
+    // 페이지가 닫히는 중이라 서버 요청은 못 기다리므로 저장된 세션을 바로 지움 (뒤로 가기로 돌아와도 기록이 안 보이게 화면도 비움)
+    function onPageHide() {
+      if (!db || !(autoSignOut || isStudentDevice())) return;
+      endSession();
+      try {
+        Promise.resolve(db.auth.signOut({ scope: 'local' })).catch(() => {});
+      } catch (err) { /* 아래에서 직접 지움 */ }
+      forgetStoredSession();
+    }
 
     async function fetchRecords() {
+      if (!dashboardOn) return; // 로그인·보건교사 확인 전, 로그아웃 뒤에는 부르지 않음
       const seq = ++fetchSeq;
       try {
         const { data, error } = await db
@@ -1122,6 +1524,8 @@
       } catch (e) { /* 저장 공간을 못 쓰면 아래로 */ }
       try {
         if (sessionStorage.getItem('medical_state') !== null) return true;
+        // 학생 화면의 🔒로 들어온 탭 (새 태블릿이라 아직 제출 기록이 없어도 학생 기기로 봄)
+        if (sessionStorage.getItem('opened_from_student') !== null) return true;
       } catch (e) { /* 없음 */ }
       return false;
     }

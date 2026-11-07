@@ -1656,12 +1656,13 @@ const translations = {
               }
           });
       });
+      // 보건교사 화면으로 이동 (기록 보호는 nurse.html의 로그인이 맡음)
       const nurseBtn = document.getElementById('btn-nurse-lock');
       if (nurseBtn) {
           nurseBtn.addEventListener('click', () => {
-              const pin = prompt(translations[getState().lang]?.pin_prompt || "비밀번호:");
-              if (pin === "1234") window.location.href = 'nurse.html';
-              else if (pin !== null) alert("비밀번호가 틀렸습니다.");
+              // 학생 화면에서 들어왔다는 표시 (nurse.html이 나갈 때 자동 로그아웃)
+              try { sessionStorage.setItem('opened_from_student', '1'); } catch (e) { /* 저장 못 해도 이동 */ }
+              window.location.href = 'nurse.html';
           });
       }
   });

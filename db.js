@@ -1,6 +1,6 @@
 // Supabase 설정
-const supabaseUrl = 'https://cldztqptvribbiyisoju.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsZHp0cXB0dnJpYmJpeWlzb2p1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5NDIwNDUsImV4cCI6MjA5OTUxODA0NX0.k4jMLJMYXRgmSQ0RxwgZzC-1UkM7wJSG3ZJpqLp5rRo';
+const supabaseUrl = 'https://rvevkkrubpecxfgjmsoj.supabase.co';
+const supabaseKey = 'sb_publishable_4dM_R8kkT4RmG4eIJ-FyUw_YYTGhGP3';
 
 // Supabase 클라이언트 초기화 (CDN 스크립트를 못 불러왔으면 null)
 const db = window.supabase ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
