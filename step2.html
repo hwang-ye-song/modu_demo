@@ -46,6 +46,11 @@
       // 배·팔 묶음이 없으면 고른 부위 하나로 대기열을 만듦
       if (!cur.queue || cur.queue.length === 0) {
           cur.queue = [{ id: 'single', name: cur.part, lookupPart: cur.part }];
+          // 다리는 왼쪽/오른쪽·세부 부위 키를 같이 남겨 언어별로 이름을 만듦
+          if (cur.sub && cur.sub.side === 'leg' && cur.sub.legSide) {
+              cur.queue[0].legSide = cur.sub.legSide;
+              cur.queue[0].legSub = cur.sub.legSub || null;
+          }
       }
       cur.partObj = cur.queue[0];
 
@@ -70,14 +75,14 @@
         // 몇 번째 부위인지 표시 (앞에서 끝낸 기록 + 남은 대기열)
         const doneCount = allEntries(state).length;
         const total = doneCount + cur.queue.length;
-        const currentIdx = doneCount + 1;
+        // 앞에서 이미 고른 같은 부위면 그 번호를 씀 (step3에서 앞 기록에 합쳐지므로)
+        const sameIdx = cur.partObj ? state.visit.entries.findIndex(e => e.partObj && e.partObj.id === cur.partObj.id && e.partObj.name === cur.partObj.name && e.partObj.lookupPart === cur.partObj.lookupPart) : -1;
+        const currentIdx = sameIdx >= 0 ? sameIdx + 1 : doneCount + 1;
 
-        let displayStr = cur.partObj.name;
-        // Translate belly parts if needed
+        // 부위 이름을 학생 언어로 (머리·가슴·다리 등도 번역)
         const t = translations[state.lang] || translations['ko'];
-        if (t[displayStr]) displayStr = t[displayStr];
-        else if (t[cur.partObj.id]) displayStr = t[cur.partObj.id];
-        
+        const displayStr = partDisplayName(cur.partObj, state.lang);
+
         if (total > 1) {
              partDisplay.innerText = `📍 ${t['pain_1'] ? t['pain_1'].replace('1', currentIdx) : '통증 ' + currentIdx}: ${displayStr}`;
         } else {
@@ -88,15 +93,8 @@
         const container = document.getElementById('symptoms-container');
         container.innerHTML = '';
         
-        let lookupPart = cur.partObj.lookupPart;
-        if (lookupPart.includes(' (')) {
-            const base = lookupPart.split(' (')[0];
-            const detail = lookupPart.split(' (')[1].replace(')', '');
-            const subParts = ['어깨·윗팔', '팔꿈치·아랫팔', '손·손목', '허벅지', '무릎', '종아리·발목', '발'];
-            const found = subParts.find(sp => detail.includes(sp));
-            lookupPart = found && symptomsData[found] ? found : base;
-        }
-        
+        const lookupPart = resolveSymptomPart(cur.partObj.lookupPart);
+
         let symptomsList = symptomsData[lookupPart] || [];
         symptomsList.forEach(s => {
           const btn = document.createElement('button');

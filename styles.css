@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Noto+Sans:wght@400;600;700;900&family=Noto+Sans+SC:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;600;700;900&family=Noto+Color+Emoji&display=swap');
 
 :root {
   --primary: #4F46E5;
@@ -19,7 +19,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  font-family: 'Noto Sans KR', 'Noto Sans', -apple-system, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -239,6 +239,13 @@ h2 {
 .lang-btn .emoji { font-size: 1.5rem; margin-right: 0.75rem; }
 .lang-btn .sub-text { margin-left: auto; color: var(--text-sub); font-size: 0.85rem; }
 
+/* 언어별 글꼴: 한국어 글꼴에 없는 글자(중국어 간체, 몽골어 ү/ө 등)가 다른 글꼴로 섞여 보이지 않게 */
+:lang(zh), :lang(zh) * { font-family: 'Noto Sans SC', 'Noto Sans KR', -apple-system, sans-serif; }
+:lang(ja), :lang(ja) * { font-family: 'Noto Sans JP', 'Noto Sans KR', -apple-system, sans-serif; }
+:lang(ru), :lang(ru) *, :lang(mn), :lang(mn) *, :lang(uz), :lang(uz) * { font-family: 'Noto Sans', 'Noto Sans KR', -apple-system, sans-serif; }
+/* 국기 이모지: Windows 기본 글꼴에는 국기가 없어 글자(KR, CN)로 보이므로 컬러 이모지 글꼴 사용 */
+.lang-btn .emoji { font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; }
+
 /* ─── Symptom / Selection Grid ─── */
 .quick-grid, .body-grid, .symptoms-grid {
   display: grid;
@@ -253,6 +260,7 @@ h2 {
 }
 
 .quick-btn, .part-btn, .symptom-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -289,6 +297,23 @@ h2 {
   background-color: var(--primary-light);
   box-shadow: 0 0 0 2px var(--primary), var(--shadow);
 }
+/* 고른 카드에는 체크 표시 (여러 개 고를 때 색만으로 구분하지 않도록) */
+.symptom-card.selected::after, .quick-btn.selected::after, .part-btn.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+}
+[dir="rtl"] .symptom-card.selected::after { right: auto; left: 6px; }
 
 .ko-text {
   font-size: 0.8rem;
@@ -356,6 +381,7 @@ h2 {
 /* ─── Actions (하단 버튼 영역) ─── */
 .step-actions {
   display: flex;
+  flex-wrap: wrap; /* 긴 버튼 글자(우즈베크어 등)가 화면 밖으로 나가지 않게 */
   gap: 0.75rem;
   margin-top: auto; /* 하단에 고정 */
   padding-top: 0.75rem;
@@ -383,11 +409,15 @@ h2 {
 
 .summary-item {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: baseline;
   margin-bottom: 0.5rem;
-  gap: 0.5rem;
+  gap: 0.25rem 0.5rem;
   font-size: 0.95rem;
 }
+/* 이름표(증상:, 알레르기:)가 글자 중간에서 끊기지 않게 줄이지 않고, 값이 길면 다음 줄로 */
+.summary-item > strong { flex: 0 0 auto; max-width: 100%; }
+.summary-item > span { min-width: 0; }
 
 /* ─── Nurse Mode ─── */
 .nurse-header {
@@ -457,6 +487,15 @@ h2 {
   .face-btn .emoji { font-size: 1.5rem; }
 }
 
+/* 휴대폰: 얼굴 6개(0~10)를 한 줄에 (10만 아래 줄로 떨어지지 않게) */
+@media (max-width: 480px) {
+  .faces-container { flex-wrap: nowrap; gap: 0.25rem; }
+  .face-btn { width: 50px; height: 50px; }
+  .face-btn .emoji { font-size: 1.4rem; }
+  .face-btn .label { font-size: 0.7rem; margin-top: 0; }
+  .step-actions .btn { white-space: normal; text-align: center; }
+}
+
 
 /* Belly Sub UI */
 .belly-label {
@@ -469,7 +508,8 @@ h2 {
   z-index: 10;
   pointer-events: none;
 }
-.belly-label .label-text { font-size: 1.2rem; }
+.belly-label { width: 3.3rem; overflow-wrap: anywhere; line-height: 1.2; }
+.belly-label .label-text { font-size: 1rem; }
 .belly-label .label-icon { font-size: 1.5rem; }
 .label-left { left: -3.5rem; }
 .label-right { right: -3.5rem; }
@@ -479,12 +519,12 @@ h2 {
   .label-left { left: 0; }
   .label-right { right: 0; }
   #belly-pos-flow #belly-container { width: calc(100% - 7rem) !important; }
-  .belly-label .label-text { font-size: 1rem; }
+  .belly-label .label-text { font-size: 0.85rem; }
   .belly-label .label-icon { font-size: 1.2rem; }
 }
 
 /* ─── Hover effects (mouse/pointer device) ─── */
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn-primary:hover {
     background: linear-gradient(135deg, #818CF8, var(--primary-hover));
     box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
@@ -493,12 +533,12 @@ h2 {
     background-color: var(--secondary);
     border-color: var(--primary);
   }
-  .symptom-card:hover,
-  .quick-btn:hover,
-  .part-btn:hover {
-    border-color: var(--primary);
-    background-color: var(--primary-light);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+  /* 마우스를 올린 카드는 테두리만 살짝 (고른 카드와 똑같이 보여 '선택이 안 된다'고 느끼지 않게) */
+  .symptom-card:not(.selected):hover,
+  .quick-btn:not(.selected):hover,
+  .part-btn:not(.selected):hover {
+    border-color: #A5B4FC;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.12);
   }
   .lang-btn:hover {
     border-color: var(--primary);
@@ -512,19 +552,18 @@ h2 {
 }
 
 /* ─── RTL (아랍어 등 오른쪽→왼쪽 언어 지원) ─── */
-[dir="rtl"] header {
-  flex-direction: row-reverse;
-}
-[dir="rtl"] .step-actions {
-  flex-direction: row-reverse;
-  justify-content: flex-start;
-}
-[dir="rtl"] .speakable {
-  flex-direction: row-reverse;
-}
+/* dir=rtl이면 flex 줄은 이미 오른쪽→왼쪽이므로 row-reverse로 뒤집지 않음 (뒤집으면 다시 왼쪽→오른쪽이 됨) */
 [dir="rtl"] .summary-item {
-  flex-direction: row-reverse;
   text-align: right;
+}
+/* 화살표(◀ 이전, ▶ 다음)는 RTL에서 방향을 바꿈 */
+[dir="rtl"] .icon {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+/* 왼쪽/오른쪽 고르기 버튼은 실제 몸의 방향과 같게 왼쪽→오른쪽 순서 유지 */
+[dir="rtl"] #side-select-flow .symptoms-grid {
+  direction: ltr;
 }
 [dir="rtl"] .lang-btn .emoji {
   margin-right: 0;

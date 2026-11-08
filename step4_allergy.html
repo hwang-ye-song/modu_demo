@@ -36,7 +36,7 @@
         <button class="symptom-card" data-allergy="allergy_seafood"><span class="emoji">🦐</span><span class="text" data-i18n="allergy_seafood">해산물</span></button>
         <button class="symptom-card" data-allergy="allergy_peach"><span class="emoji">🍑</span><span class="text" data-i18n="allergy_peach">복숭아</span></button>
         <button class="symptom-card" data-allergy="allergy_wheat"><span class="emoji">🌾</span><span class="text" data-i18n="allergy_wheat">밀가루</span></button>
-        <button class="symptom-card" data-allergy="allergy_idk"><span class="emoji">🤷</span><span class="text" data-i18n="med_idk">잘 모르겠어요</span></button>
+        <button class="symptom-card" data-allergy="allergy_idk"><span class="emoji">🤷</span><span class="text" data-i18n="allergy_idk">잘 모르겠어요</span></button>
 
         <button class="symptom-card" id="btn-voice-allergy"><span class="emoji">🎤</span><span class="text" data-i18n="allergy_voice">기타(직접 말하기)</span></button>
       </div>
@@ -101,6 +101,8 @@
       // ----------------------------------------------------
       state.visit.allergies = (state.visit.allergies || []).filter(a => typeof a === 'string');
       state.visit.medications = state.visit.medications || [];
+      // 음성으로 추가한 알레르기의 학생 언어 이름 (custom_새우 -> 'креветки (새우)')
+      state.visit.customAllergyLabels = state.visit.customAllergyLabels || {};
 
       // 기존 선택된 알레르기/약물 버튼 UI 반영
       state.visit.allergies.forEach(a => {
@@ -211,7 +213,7 @@
       // 이전에 음성으로 추가했던 알레르기(custom_*) 동적 생성 및 복원
       // (btnVoice 선언 뒤, 일반 버튼 이벤트 연결 뒤에 실행해야 함)
       state.visit.allergies.filter(a => a.startsWith('custom_')).forEach(key => {
-        createCustomAllergyButton(key, key.substring(7));
+        createCustomAllergyButton(key, state.visit.customAllergyLabels[key] || key.substring(7));
       });
       checkComplete();
 
@@ -242,10 +244,9 @@
       // 기타 버튼 클릭 시 모달 열고 녹음 시작
       btnVoice.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        // "없어요" / "잘 모르겠어요" 가 선택되어 있다면 해제
-        clearExclusiveAllergy();
 
+        // "없어요" / "잘 모르겠어요"는 음성으로 알레르기를 실제로 추가할 때(btnVoiceConfirm) 해제
+        // (여기서 지우면 취소했을 때 화면과 저장된 답이 달라짐)
         if (!recognition) return;
 
         // UI 상태 초기화
@@ -261,7 +262,7 @@
         // 언어 설정
         const langMap = {
           ko: 'ko-KR', en: 'en-US', zh: 'zh-CN', ru: 'ru-RU', vi: 'vi-VN',
-          ja: 'ja-JP', tl: 'tl-PH', km: 'km-KH', th: 'th-TH', mn: 'mn-MN',
+          ja: 'ja-JP', tl: 'fil-PH', km: 'km-KH', th: 'th-TH', mn: 'mn-MN',
           uz: 'uz-UZ', ar: 'ar-SA'
         };
         recognition.lang = langMap[state.lang] || 'ko-KR';
@@ -400,11 +401,14 @@
       // 최종적으로 선택된 카드들 메인 화면으로 이동
       btnVoiceConfirm.addEventListener('click', () => {
         const selectedCards = voiceCardsGrid.querySelectorAll('.symptom-card.selected');
+        // 실제로 추가하는 알레르기가 있을 때만 '없어요/잘 모르겠어요' 해제
+        if (selectedCards.length > 0) clearExclusiveAllergy();
         selectedCards.forEach(card => {
            const koName = card.dataset.ko;
            const nativeName = card.dataset.native;
            const displayTxt = (nativeName && nativeName !== koName) ? `${nativeName} (${koName})` : koName;
            const key = `custom_${koName}`;
+           state.visit.customAllergyLabels[key] = displayTxt;
            
            createCustomAllergyButton(key, displayTxt);
            
@@ -442,6 +446,7 @@
                state.visit.allergies = state.visit.allergies.filter(a => a !== key);
              } else {
                clearExclusiveAllergy();
+               state.visit.customAllergyLabels[key] = displayText;
                e.currentTarget.classList.add('selected');
                state.visit.allergies.push(key);
              }

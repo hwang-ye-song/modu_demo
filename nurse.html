@@ -1062,16 +1062,30 @@
           }
           // 위치: 새 기록은 한국어 partLabel, 예전 기록은 bellyPos 그대로
           const posLabel = e.partLabel || e.bellyPos;
+          // 머리를 다쳤을 때 물어본 질문의 답 (모르겠어요는 null)
+          const headQHtml = (e.headQ === true || e.headQ === false)
+            ? `• 어지럽거나 토할 것 같음: <strong>${e.headQ ? '예' : '아니요'}</strong><br>` : '';
 
           return `
           <div class="entry-box ${isEmergency ? 'emergency-entry' : ''}">
             <strong>[증상 ${idx+1}] ${escapeHtml(e.part)} ${posLabel ? `(${escapeHtml(posLabel)})` : ''}</strong><br>
             <div style="margin-top: 0.5rem; color: #4B5563;">
               ${symptomDisplay}<br>
-              ${(e.followups || []).map(f => `• ${escapeHtml(f.q)} <strong>${escapeHtml(f.a)}</strong><br>`).join('')}
+              ${headQHtml}
             </div>
           </div>
         `}).join('');
+
+        // 추가 질문(밥/약/구토)은 방문 전체에 대한 답이라 [증상 1] 안이 아니라 따로 표시 (첫 기록에 저장되어 있음)
+        const followupContext = { "약을 먹었어요?": "(열이 나서) 약을 먹었어요?" };
+        const allFollowups = entries.flatMap(e => e.followups || []);
+        const followupHtml = allFollowups.length ? `
+          <div class="entry-box">
+            <strong>[추가 질문]</strong><br>
+            <div style="margin-top: 0.5rem; color: #4B5563;">
+              ${allFollowups.map(f => `• ${escapeHtml(followupContext[f.q] || f.q)} <strong>${escapeHtml(f.a)}</strong><br>`).join('')}
+            </div>
+          </div>` : '';
 
 
         let medHtml = "";
@@ -1120,7 +1134,7 @@
                 ${badges}
                 <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 0.25rem; color: var(--primary);">${studentInfoStr}</div>
                 ${careHtml}
-                <div class="record-meta">${escapeHtml(dateStr)} | 작성 언어: ${escapeHtml(r.lang)}</div>
+                <div class="record-meta">${escapeHtml(dateStr)} | 작성 언어: ${escapeHtml(({ ko: '한국어', en: '영어', zh: '중국어', ru: '러시아어', vi: '베트남어', ja: '일본어', tl: '필리핀어(타갈로그어)', km: '크메르어(캄보디아)', th: '태국어', mn: '몽골어', uz: '우즈베크어', ar: '아랍어' })[r.lang] || r.lang)}</div>
               </div>
               <button class="btn-resolve" data-id="${escapeHtml(r.id)}">확인 완료</button>
             </div>
@@ -1132,6 +1146,7 @@
             <div class="record-body" style="margin-top: 1rem;">
               <div class="entry-grid">
                 ${entriesHtml}
+                ${followupHtml}
               </div>
               ${medHtml}${allergyHtml}
             </div>

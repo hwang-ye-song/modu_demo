@@ -78,7 +78,9 @@
 
       // DB entries_json 형태로 바꿈
       const entries = list.map((r, idx) => {
-          const bellyPos = r.partObj.name !== r.partObj.lookupPart ? r.partObj.name : null;
+          // '잘 모르겠어요'로 고른 배·팔은 위치가 아니므로 bellyPos 없음 (이름표만 '배 (어딘지 모름)')
+          const isIdk = r.partObj.id === 'idk';
+          const bellyPos = !isIdk && r.partObj.name !== r.partObj.lookupPart ? r.partObj.name : null;
           const areas = r.partObj.areas || [];
           // 묶음 이름(윗배 전체, 왼쪽 팔 여러 부위 등)이 실제로 고른 구역과 다르면 고른 구역을 그대로 나열
           // (복부 전체·팔 전체, 윗배/아랫배 두 칸을 다 고른 경우는 묶음 이름이 정확하므로 그대로)
@@ -88,7 +90,7 @@
               part: r.partObj.lookupPart,
               bellyPos: bellyPos,
               // 보건실 화면·AI용 한국어 위치 이름 (bellyPos는 응급 판단에 쓰므로 그대로 둠)
-              partLabel: bellyPos ? (listAreas ? areas.map(a => translations.ko[a] || a).join(', ') : (translations.ko[bellyPos] || bellyPos)) : null,
+              partLabel: isIdk ? '어딘지 모름' : (bellyPos ? (listAreas ? areas.map(a => translations.ko[a] || a).join(', ') : (translations.ko[bellyPos] || bellyPos)) : null),
               areas: areas,
               symptoms: r.symptoms,
               painLevels: r.painLevels,
@@ -101,37 +103,43 @@
       });
 
 
+      const lang = state.lang || 'ko';
+      const t = translations[lang] || translations.ko;
       container.innerHTML = entries.map((e, idx) => {
-        const lang = state.lang || 'ko';
-        const t = translations[lang] || translations.ko;
-        
-        let displayPartName = e.part;
-        if (e.bellyPos) displayPartName = e.bellyPos;
-        
-        let translatedPart = escapeHtml(t[displayPartName] || translateKoToLang(displayPartName, state.lang) || displayPartName);
+        // 부위 이름은 고른 부위 정보(partObj)로 학생 언어에 맞게 만듦
+        const translatedPart = escapeHtml(partDisplayName(list[idx].partObj, lang));
 
         const symptomDetails = e.symptoms.map(s => {
-           const tSym = translateKoToLang(s, state.lang);
+           const tSym = translateSymptom(s, e.part, lang);
            const pain = (e.painLevels && e.painLevels[s]) || '0';
            const timeKeyStr = e.startTimes && e.startTimes[s] ? e.startTimes[s] : "잘 모르겠어요";
-           const tTime = translateKoToLang(timeKeyStr, state.lang);
-           return `${escapeHtml(tSym)} (${escapeHtml(pain)}/10, ${escapeHtml(tTime)})`;
+           const tTime = translateKoToLang(timeKeyStr, lang);
+           // 다친 이유도 함께 보여 줌
+           const cause = e.traumaCauses && e.traumaCauses[s] ? ` - ${t.summary_hurt_how}: ${translateKoToLang(e.traumaCauses[s], lang)}` : '';
+           return `${escapeHtml(tSym)} (${escapeHtml(pain)}/10, ${escapeHtml(tTime)})${escapeHtml(cause)}`;
         }).join('<br>');
-        
+
         let itemsHTML = `
           <div class="summary-item"><strong>${t.summary_part}:</strong> <span>${translatedPart}</span></div>
-          <div class="summary-item"><strong>${t.summary_symptom_label}:</strong> <br><span style="display:inline-block; margin-top:0.3rem;">${symptomDetails}</span></div>
+          <div class="summary-item"><strong>${t.summary_symptom_label}:</strong> <span>${symptomDetails}</span></div>
         `;
-        if (idx === 0 && e.followups && e.followups.length) {
-          e.followups.forEach(f => {
-            const translatedQ = t[f.q] || translateKoToLang(f.q, state.lang);
-            // answer might be stored as translation key e.g. 'yes', 'no'
-            const translatedA = t[f.a] || translateKoToLang(f.a, state.lang) || f.a;
-            itemsHTML += `<div class="summary-item"><strong>${escapeHtml(translatedQ)}:</strong> <span>${escapeHtml(translatedA)}</span></div>`;
-          });
+        // 머리를 다쳤을 때 물어본 '어지럽거나 토할 것 같아요?' 답
+        if (e.headQ === true || e.headQ === false) {
+          itemsHTML += `<div class="summary-item"><strong>${escapeHtml(t.summary_head_q)}</strong> <span>${escapeHtml(e.headQ ? t.yes : t.no)}</span></div>`;
         }
         return `<div class="entry-summary"><h3>${t.summary_symptom} ${idx + 1}</h3>${itemsHTML}</div>`;
       }).join('');
+
+      // 추가 질문(밥/약/구토)은 어느 한 부위가 아니라 방문 전체에 대한 답이므로 따로 보여 줌
+      const visitFollowups = state.visit.followups || [];
+      if (visitFollowups.length) {
+        const rows = visitFollowups.map(f => {
+          const translatedQ = translateKoToLang(f.q, lang);
+          const translatedA = translateKoToLang(f.a, lang) || f.a;
+          return `<div class="summary-item"><strong>${escapeHtml(translatedQ)}</strong> <span>${escapeHtml(translatedA)}</span></div>`;
+        }).join('');
+        container.innerHTML += `<div class="entry-summary"><h3>${escapeHtml(t.summary_more_info)}</h3>${rows}</div>`;
+      }
 
 
       // Add medication info
@@ -146,8 +154,10 @@
       if (state.visit.allergies && state.visit.allergies.length > 0) {
         const lang = state.lang || 'ko';
         const t = translations[lang] || translations.ko;
+        const customLabels = state.visit.customAllergyLabels || {};
         const allergyLabels = state.visit.allergies.map(a => {
-           if (a.startsWith('custom_')) return escapeHtml(a.substring(7)); // "custom_새우" -> "새우"
+           // 음성으로 추가한 알레르기: 학생 언어 이름 (없으면 한국어)
+           if (a.startsWith('custom_')) return escapeHtml(customLabels[a] || a.substring(7)); // "custom_새우" -> "새우"
            return escapeHtml(translateKoToLang(translations.ko[a] || a, state.lang));
         }).join(', ');
         container.innerHTML += `<div class="entry-summary"><h3>${t.summary_allergy_info}</h3><div class="summary-item"><strong>${t.summary_allergy_label}:</strong> <span>${allergyLabels}</span></div></div>`;
@@ -161,7 +171,7 @@
         if (submitBtn.disabled) return;
         submitBtn.disabled = true;
 
-        const flags = evaluateEmergency(entries);
+        const flags = evaluateEmergency(entries, state.visit.followups || []);
         const finalEntries = entries;
 
         // DB 스키마 에러 방지: allergies를 별도 컬럼이 아닌 entries_json 내부에 저장

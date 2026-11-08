@@ -63,9 +63,16 @@ function describeEntries(entries: unknown[]): { symptomsText: string, allergyTex
       return `${str(s)}(통증:${str(p)}/10, 발현:${str(t)}${tc})`
     })
     const sText = symptomParts.join(', ')
-    const followupText = list(e.followups).map(f => str(obj(f).q) + ' ' + str(obj(f).a)).join(', ')
-    return `[증상 ${i+1}] 부위: ${str(e.part)} ${str(e.partLabel || e.bellyPos || '')}, 증상 및 상태: ${sText}, 기타: ${followupText}`
+    // 머리를 다쳤을 때 물어본 질문의 답 (모르겠어요는 null)
+    const headQText = e.headQ === true ? ', 어지럽거나 토할 것 같음: 예' : (e.headQ === false ? ', 어지럽거나 토할 것 같음: 아니요' : '')
+    return `[증상 ${i+1}] 부위: ${str(e.part)} ${str(e.partLabel || e.bellyPos || '')}, 증상 및 상태: ${sText}${headQText}`
   }).join('\n')
+  // 추가 질문(밥/약/구토)은 방문 전체에 대한 답이라 특정 부위에 붙이지 않고 따로 적음
+  const followupContext: Record<string, string> = { "약을 먹었어요?": "(열이 나서) 약을 먹었어요?" }
+  const allFollowups = entries.flatMap(item => list(obj(item).followups))
+  const followupLine = allFollowups.length
+    ? '\n[추가 질문] ' + allFollowups.map(f => str(followupContext[String(obj(f).q)] || obj(f).q) + ' ' + str(obj(f).a)).join(', ')
+    : ''
 
   const first = obj(entries[0])
 
@@ -83,21 +90,27 @@ function describeEntries(entries: unknown[]): { symptomsText: string, allergyTex
     medicationText = `\n[복용 중인 약]: ${medications.map(m => str(medMap[m] || m)).join(', ')}`
   }
 
-  return { symptomsText, allergyText, medicationText }
+  return { symptomsText: symptomsText + followupLine, allergyText, medicationText }
+}
+
+// flags: 학생 화면(step5)의 규칙으로 정한 경고 (emergency_flags)
+function flagsText(flags: unknown[]): string {
+  const names = list(flags).map(f => str(f)).filter(Boolean)
+  return names.length ? `\n[규칙 기반 경고]: ${names.join(', ')}` : '\n[규칙 기반 경고]: 없음'
 }
 
 // 보건실 요약 프롬프트 (db.js에서 만들던 문구 그대로)
-function buildSummaryPrompt(entries: unknown[]): string {
+function buildSummaryPrompt(entries: unknown[], flags: unknown[] = []): string {
   const { symptomsText, allergyText, medicationText } = describeEntries(entries)
   // 과거 방문 기록은 AI 요약에 넣지 않습니다.
   // 이름을 받지 않으면 학년·반·번호만으로는 같은 학생인지 알 수 없어(다른 학교·작년 학생과 섞임) 연결 기능을 뺐습니다.
-  return `학생이 선택한 다음 증상들을 바탕으로, 보건 교사가 한눈에 파악할 수 있는 한국어 요약 문장을 2~3줄로 작성해. 병명을 진단하지 말고 의심 조합 규칙에만 기반하여 사실적으로 작성해.${allergyText}${medicationText}\n${symptomsText}`
+  return `학생이 선택한 다음 증상들을 바탕으로, 보건 교사가 한눈에 파악할 수 있는 한국어 요약 문장을 2~3줄로 작성해. 병명을 진단하지 말고, 아래 [규칙 기반 경고]가 있으면 그 내용과 어긋나지 않게 언급하고, 학생이 고른 내용만 사실적으로 작성해.${flagsText(flags)}${allergyText}${medicationText}\n${symptomsText}`
 }
 
 // AI가 실패했을 때 저장할 기본 요약 (예전 db.js의 기본 요약과 같은 줄 구성)
-function buildFallbackSummary(entries: unknown[]): string {
+function buildFallbackSummary(entries: unknown[], flags: unknown[] = []): string {
   const { symptomsText, allergyText, medicationText } = describeEntries(entries)
-  return `[기본 요약(AI 오류)]\n${symptomsText}${allergyText}${medicationText}`
+  return `[기본 요약(AI 오류)]${list(flags).length ? flagsText(flags) : ''}\n${symptomsText}${allergyText}${medicationText}`
 }
 
 // 음성 알레르기 추출 프롬프트 (step4_allergy.html에서 만들던 문구 그대로, 학생 말은 JSON 문자열 데이터로만 넣음)
@@ -160,7 +173,7 @@ async function callAI(promptText: string): Promise<AIResult> {
 }
 
 // 요약을 만들어 그 행에 저장 (오류는 서버 로그에만 남기고 throw하지 않음)
-async function summarizeAndSave(id: string, entries: unknown[]): Promise<boolean> {
+async function summarizeAndSave(id: string, entries: unknown[], flags: unknown[] = []): Promise<boolean> {
   try {
     let summary = ''
     try {
@@ -168,13 +181,13 @@ async function summarizeAndSave(id: string, entries: unknown[]): Promise<boolean
       if (entries.length === 0 || entries.length > MAX_ENTRIES || byteLength(JSON.stringify(entries)) > MAX_ENTRIES_BYTES) {
         throw new Error('bad_entries')
       }
-      const ai = await callAI(buildSummaryPrompt(entries))
+      const ai = await callAI(buildSummaryPrompt(entries, flags))
       if ('content' in ai) summary = ai.content
     } catch (error) {
       console.error('summary AI error:', error instanceof Error ? error.message : String(error))
     }
     // AI 실패·빈 응답이면 기본 요약 (비워 두면 대시보드에 계속 '생성 중'으로 보임)
-    if (!summary) summary = buildFallbackSummary(entries.slice(0, MAX_ENTRIES))
+    if (!summary) summary = buildFallbackSummary(entries.slice(0, MAX_ENTRIES), flags)
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL')
     // 새 형식 비밀 키(sb_secret_...)를 SERVICE_KEY로 넣었으면 그걸 쓰고, 없으면 기본 service_role 키
@@ -237,7 +250,7 @@ async function handleWebhook(req: Request): Promise<Response> {
     return json({ error: 'no_id' }, 400)
   }
 
-  const work = summarizeAndSave(String(record.id), list(record.entries_json))
+  const work = summarizeAndSave(String(record.id), list(record.entries_json), list(record.emergency_flags))
   // AI가 웹훅 대기 시간(대시보드 기본 1초)보다 오래 걸리므로, 가능하면 바로 응답하고 백그라운드에서 마저 저장
   const edgeRuntime = (globalThis as { EdgeRuntime?: { waitUntil?: (p: Promise<unknown>) => void } }).EdgeRuntime
   if (edgeRuntime && typeof edgeRuntime.waitUntil === 'function') {

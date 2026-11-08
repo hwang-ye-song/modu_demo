@@ -41,9 +41,11 @@
       <div id="follow-vomit" class="hidden hurt-flow">
         <h2 class="speakable"><span data-i18n="follow_vomit">몇 번 토했어요?</span><button class="btn-speaker">🔊</button></h2>
         <div class="symptoms-grid single-select">
+          <button class="symptom-card" data-follow="vomit_0"><span class="emoji">❌</span><span class="text" data-i18n="vomit_0">안 토했어요</span></button>
           <button class="symptom-card" data-follow="vomit_1"><span class="emoji">1️⃣</span><span class="text" data-i18n="vomit_1">1번</span></button>
           <button class="symptom-card" data-follow="vomit_2"><span class="emoji">2️⃣</span><span class="text" data-i18n="vomit_2">2번</span></button>
           <button class="symptom-card" data-follow="vomit_3"><span class="emoji">3️⃣</span><span class="text" data-i18n="vomit_3">3번 이상</span></button>
+          <button class="symptom-card" data-follow="vomit_idk"><span class="emoji">❓</span><span class="text" data-i18n="idk">잘 모르겠어요</span></button>
         </div>
       </div>
     </div>
@@ -78,6 +80,9 @@
         cur.symptoms = last.symptoms;
         cur.painLevels = last.painLevels;
         cur.headQ = last.headQ;
+        // 이미 고른 언제부터·다친 원인도 남겨 둠 (step3에서 다음을 누르면 다시 채워짐)
+        cur.startTimes = last.startTimes || {};
+        cur.traumaCauses = last.traumaCauses || {};
         saveState(state);
         window.location.href = 'step3.html';
       });
@@ -95,7 +100,7 @@
          entry.symptoms.forEach((s, sIdx) => {
              allSymptoms.push({
                  id: `time_${eIdx}_${sIdx}`,
-                 partName: entry.partObj.name,
+                 partName: partDisplayName(entry.partObj, state.lang),
                  symptom: s,
                  entryIndex: eIdx
              });
@@ -146,13 +151,8 @@
       allSymptoms.forEach(item => {
         const { id, partName, symptom, entryIndex } = item;
         const entry = entries[entryIndex];
-        const translatedSymptom = escapeHtml(translateKoToLang(symptom, state.lang));
-
-        let translatedPart = partName;
-        const t = translations[state.lang] || translations['ko'];
-        if (t[partName]) translatedPart = t[partName];
-        else if (t[entry.partObj.id]) translatedPart = t[entry.partObj.id];
-        translatedPart = escapeHtml(translatedPart);
+        const translatedSymptom = escapeHtml(translateSymptom(symptom, entry.partObj.lookupPart, state.lang));
+        const translatedPart = escapeHtml(partName);
         
         // 다친 증상만 원인 질문 ('멍해요'는 다친 게 아니므로 제외)
         const isTrauma = /다침|피가|코피|멍이|멍들|삐었|까졌|부딪|부었|데었|끼였/.test(symptom);
@@ -178,7 +178,7 @@
         block.innerHTML = `
           <h3 style="text-align: center; color: var(--primary); margin-bottom: 1rem;"><span style="font-size: 0.9em; color: var(--text-sub);">[${translatedPart}]</span><br>${translatedSymptom}</h3>
           <div class="symptoms-grid single-select time-grid" style="grid-template-columns: repeat(3, 1fr); gap: 0.5rem;" data-id="${id}" data-entry-index="${entryIndex}" data-symptom="${escapeHtml(symptom)}">
-            <button class="symptom-card" data-time="time_before"><span class="emoji">🏠</span><span class="text" data-i18n="time_before" style="font-size:0.9rem;">학교오기 전</span></button>
+            <button class="symptom-card" data-time="time_before"><span class="emoji">🏠</span><span class="text" data-i18n="time_before" style="font-size:0.9rem;">학교 오기 전</span></button>
             <button class="symptom-card" data-time="time_p1"><span class="emoji">1️⃣</span><span class="text" data-i18n="time_p1" style="font-size:0.9rem;">1교시</span></button>
             <button class="symptom-card" data-time="time_p2"><span class="emoji">2️⃣</span><span class="text" data-i18n="time_p2" style="font-size:0.9rem;">2교시</span></button>
             <button class="symptom-card" data-time="time_p3"><span class="emoji">3️⃣</span><span class="text" data-i18n="time_p3" style="font-size:0.9rem;">3교시</span></button>
@@ -255,7 +255,7 @@
           if (document.querySelector('[data-follow="fever_no"].selected')) followups.push({q: "약을 먹었어요?", a: "아니요"});
           if (document.querySelector('[data-follow^="vomit_"].selected')) {
             const v = document.querySelector('[data-follow^="vomit_"].selected').dataset.follow.replace('vomit_', '');
-            const map = { "1": "1번", "2": "2번", "3": "3번 이상"};
+            const map = { "0": "안 토했어요", "1": "1번", "2": "2번", "3": "3번 이상", "idk": "잘 모르겠어요" };
             followups.push({q: "몇 번 토했어요?", a: map[v]});
           }
           saveState(state);
@@ -272,7 +272,7 @@
       const followKeys = {
         '밥을 먹었어요?': { '네': 'belly_yes', '아니요': 'belly_no' },
         '약을 먹었어요?': { '네': 'fever_yes', '아니요': 'fever_no' },
-        '몇 번 토했어요?': { '1번': 'vomit_1', '2번': 'vomit_2', '3번 이상': 'vomit_3' }
+        '몇 번 토했어요?': { '안 토했어요': 'vomit_0', '1번': 'vomit_1', '2번': 'vomit_2', '3번 이상': 'vomit_3', '잘 모르겠어요': 'vomit_idk' }
       };
       // 지금 보이는 질문의 답만 남김
       state.visit.followups = (state.visit.followups || []).filter(f => {

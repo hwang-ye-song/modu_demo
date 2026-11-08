@@ -6,14 +6,11 @@
   <title>그림 터치 문진표 - 어디가 아파요?</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* 터치 영역(svg)이 그림과 정확히 같은 크기가 되도록 상자를 그림 크기에 맞춤
+       (상자가 늘어나면 svg만 늘어나 머리를 눌러도 '가슴'으로 기록됨) */
     .body-map-container {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 0.75rem;
-      min-height: 0; /* flex 자식이 overflow 되지 않도록 */
+      flex: 0 0 auto;
+      display: block;
     }
     .svg-body {
       flex: 1 1 auto;
@@ -86,18 +83,43 @@
       </svg>
     </div>
     
-    <!-- 온몸이 아파요 (몸 전체) 버튼 -->
-    <div style="text-align: center; margin-bottom: 1rem;">
-      <button class="symptom-card" data-part="part_whole" style="padding: 0.6rem 1.5rem; border-radius: 30px; font-weight: bold; background: white; border: 2px solid #e2e8f0; color: var(--primary); display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-        <span class="emoji" style="font-size: 1.2rem;">🤒</span>
+    <!-- 온몸이 아파요 (몸 전체), 그림에서 고를 수 없는 피부·등/허리 버튼 -->
+    <div style="text-align: center; margin-bottom: 1rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">
+      <button class="symptom-card" data-part="part_whole" style="padding: 0.6rem 1.5rem; min-height: 0; border-radius: 30px; font-weight: bold; background: white; border: 2px solid #e2e8f0; color: var(--primary); display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <span class="emoji" style="font-size: 1.2rem; margin-bottom: 0;">🤒</span>
         <span class="text" data-i18n="part_whole">몸 전체</span>
       </button>
+      <button class="symptom-card" data-part="part_skin" style="padding: 0.6rem 1.5rem; min-height: 0; border-radius: 30px; font-weight: bold; background: white; border: 2px solid #e2e8f0; color: var(--primary); display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <span class="emoji" style="font-size: 1.2rem; margin-bottom: 0;">🩹</span>
+        <span class="text" data-i18n="part_skin">피부</span>
+      </button>
+      <button class="symptom-card" data-part="part_back" style="padding: 0.6rem 1.5rem; min-height: 0; border-radius: 30px; font-weight: bold; background: white; border: 2px solid #e2e8f0; color: var(--primary); display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <span class="emoji" style="font-size: 1.2rem; margin-bottom: 0;">🧍</span>
+        <span class="text" data-i18n="part_back">등·허리</span>
+      </button>
+    </div>
+
+    <!-- 다른 곳도 아파요로 온 경우: 더 고를 곳이 없으면 다음 단계로 -->
+    <div id="parts-done-wrap" class="step-actions hidden" style="justify-content: center; margin-top: 0;">
+      <button id="btn-parts-done" class="btn btn-primary"><span class="text" data-i18n="btn_parts_done">다 골랐어요</span> <span class="icon">▶</span></button>
     </div>
   </section>
 
   <script src="data.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 앞에서 끝낸 부위가 있으면 '다 골랐어요' 버튼으로 언제/알레르기 단계로 돌아갈 수 있게
+      const startState = getState();
+      if (startState.visit && startState.visit.entries && startState.visit.entries.length > 0) {
+        document.getElementById('parts-done-wrap').classList.remove('hidden');
+        document.getElementById('btn-parts-done').addEventListener('click', () => {
+          const st = getState();
+          st.current = null;
+          saveState(st);
+          window.location.href = 'step4.html';
+        });
+      }
+
       document.querySelectorAll('.symptom-card, .body-area').forEach(btn => {
         btn.addEventListener('mouseenter', (e) => {
           const partKey = e.currentTarget.dataset.part;

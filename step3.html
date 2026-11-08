@@ -49,7 +49,7 @@
       const cur = state.current;
       if (!cur) { window.location.href = 'step1.html'; return; }
       // 기기 뒤로 가기로 온 경우: 남은 부위가 있으면 증상 선택, 이번 회차를 다 끝냈으면 step4로 (끝낸 기록이 버려지지 않게)
-      if (!cur.partObj || !cur.queue) { window.location.href = (cur.queue && cur.queue.length) ? 'step2.html' : (cur.done.length ? 'step4.html' : 'step1.html'); return; }
+      if (!cur.partObj || !cur.queue) { window.location.href = (cur.queue && cur.queue.length) ? 'step2.html' : (allEntries(state).length ? 'step4.html' : 'step1.html'); return; }
       // 고른 증상이 없으면 증상 선택으로
       if (cur.symptoms.length === 0) { window.location.href = 'step2.html'; return; }
 
@@ -61,7 +61,7 @@
       }
 
       cur.symptoms.forEach(symptom => {
-        const translatedSymptom = escapeHtml(translateKoToLang(symptom, state.lang));
+        const translatedSymptom = escapeHtml(translateSymptom(symptom, cur.partObj.lookupPart, state.lang));
         const block = document.createElement('div');
         block.className = 'symptom-pain-block';
         block.style.marginBottom = '2rem';
@@ -111,16 +111,33 @@
         if (btnNext.disabled || !cur.partObj) return;
         btnNext.disabled = true;
 
-        // 이번 회차에서 끝낸 기록에 추가 (언제부터·다친 원인은 step4에서 채움)
-        cur.done.push({
+        // step4에서 이전으로 돌아온 경우 이미 고른 언제부터·다친 원인을 지금 고른 증상만큼 유지
+        const keepOnly = (obj) => Object.fromEntries(Object.entries(obj || {}).filter(([k]) => cur.symptoms.includes(k)));
+        const record = {
             partObj: cur.partObj,
             symptoms: [...cur.symptoms],
             // 지금 선택된 증상의 통증만 저장 (해제한 증상의 통증이 남지 않게)
             painLevels: Object.fromEntries(cur.symptoms.map(s => [s, cur.painLevels[s]])),
             headQ: cur.headQ,
-            startTimes: {},
-            traumaCauses: {}
-        });
+            startTimes: keepOnly(cur.startTimes),
+            traumaCauses: keepOnly(cur.traumaCauses)
+        };
+
+        // '다른 곳도 아파요'로 같은 부위를 다시 고른 경우: 앞 기록에 합침 (같은 부위가 두 번 나오지 않게)
+        const same = state.visit.entries.find(e => e.partObj && e.partObj.id === record.partObj.id && e.partObj.name === record.partObj.name && e.partObj.lookupPart === record.partObj.lookupPart);
+        if (same) {
+            record.symptoms.forEach(s => {
+                if (!same.symptoms.includes(s)) same.symptoms.push(s);
+                same.painLevels = same.painLevels || {};
+                same.painLevels[s] = record.painLevels[s];
+                if (record.startTimes[s]) { same.startTimes = same.startTimes || {}; same.startTimes[s] = record.startTimes[s]; }
+                if (record.traumaCauses[s]) { same.traumaCauses = same.traumaCauses || {}; same.traumaCauses[s] = record.traumaCauses[s]; }
+            });
+            if (record.headQ !== null && record.headQ !== undefined) same.headQ = record.headQ;
+        } else {
+            // 이번 회차에서 끝낸 기록에 추가 (언제부터·다친 원인은 step4에서 채움)
+            cur.done.push(record);
+        }
 
         // Remove completed part from queue
         cur.queue.shift();
@@ -130,6 +147,8 @@
         cur.symptoms = [];
         cur.painLevels = {};
         cur.headQ = null;
+        cur.startTimes = {};
+        cur.traumaCauses = {};
 
         saveState(state);
 

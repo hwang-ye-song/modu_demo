@@ -20,7 +20,7 @@ const translations = {
     time_lunch: "점심시간",
     time_p5: "5교시",
     time_p6: "6교시",
-    time_before: "학교오기 전",
+    time_before: "학교 오기 전",
     time_days: "며칠 전",
     follow_trauma: "어떻게 다쳤나요?",
     trauma_friend: "친구랑 장난치다",
@@ -29,7 +29,7 @@ const translations = {
 
         arm_left_all: "왼쪽 팔 전체", arm_right_all: "오른쪽 팔 전체",
         arm_left_multi: "왼쪽 팔 여러 부위", arm_right_multi: "오른쪽 팔 여러 부위",
-        arm_left_mid: "왼쪽 팔꿈치·아랫팔", arm_right_mid: "오른쪽 팔꿈치·아랫팔",
+        arm_left_mid: "왼쪽 팔꿈치·아래팔", arm_right_mid: "오른쪽 팔꿈치·아래팔",
         arm_left_bot: "왼쪽 손·손목", arm_right_bot: "오른쪽 손·손목",
         belly_all: "복부 전체",
         belly_top_all: "윗배 전체",
@@ -49,18 +49,18 @@ const translations = {
       part_chest: "가슴", part_belly: "배", part_arm: "팔·손", part_leg: "다리·발", part_back: "등·허리", part_skin: "피부", part_whole: "몸 전체",
       side_select_arm: "어느 쪽 팔이에요?", side_select_leg: "어느 쪽 다리예요?", side_left: "왼쪽", side_right: "오른쪽", side_both: "양쪽 다",
       belly_top: "윗배", belly_navel: "배꼽 주변", belly_bottom: "아랫배",
-      arm_upper: "어깨·윗팔", arm_lower: "팔꿈치·아랫팔", arm_hand: "손·손목",
+      arm_upper: "어깨·위팔", arm_lower: "팔꿈치·아래팔", arm_hand: "손·손목",
       leg_thigh: "허벅지", leg_knee: "무릎", leg_calf: "종아리·발목", leg_foot: "발",
       hurt_how: "어떻게 다쳤어요?", hurt_state: "지금 상태는요?",
       hurt_1: "넘어짐", hurt_2: "부딪힘", hurt_3: "베임", hurt_4: "접질림",
       state_1: "피가 나요", state_2: "부었어요", state_3: "멍들었어요", state_4: "움직이면 아파요",
       head_q: "어지럽거나 토할 것 같아요?", yes: "네", no: "아니요",      follow_belly: "밥을 먹었어요?", follow_fever: "약을 먹었어요?", follow_vomit: "몇 번 토했어요?",
       vomit_1: "1번", vomit_2: "2번", vomit_3: "3번 이상",
-      allergy_title: "알레르기가 있어요?", allergy_none: "없어요", allergy_drug: "약", allergy_peanut: "땅콩/견과류", allergy_milk: "우유", allergy_egg: "계란", allergy_seafood: "해산물", allergy_peach: "복숭아", allergy_wheat: "밀가루", allergy_idk: "잘 모르겠어요",        med_title: "먹고 있는 약이 있나요?", med_none: "안 먹어요", med_cold: "감기약", med_pain: "아픔약", med_digest: "배탈약", med_hospital: "병원에서 받은 약", med_idk: "잘 모르겠어요", summary_med_info: "💊 복용 중인 약", summary_med_label: "복용 약",
+      allergy_title: "알레르기가 있어요?", allergy_none: "없어요", allergy_drug: "약", allergy_peanut: "땅콩/견과류", allergy_milk: "우유", allergy_egg: "계란", allergy_seafood: "해산물", allergy_peach: "복숭아", allergy_wheat: "밀가루", allergy_idk: "잘 모르겠어요",        med_title: "먹고 있는 약이 있나요?", med_none: "안 먹어요", med_cold: "감기약", med_pain: "진통제(아플 때 먹는 약)", med_digest: "소화제·배탈약", med_hospital: "병원에서 받은 약", med_idk: "잘 모르겠어요", summary_med_info: "💊 복용 중인 약", summary_med_label: "복용 약",
       
         allergy_voice: "직접 말할게요",
       nurse_mode: "보건교사 모드", pin_prompt: "비밀번호를 입력하세요:", no_records: "접수된 문진표가 없습니다.", delete: "삭제", summary_title: "AI 요약 내용", error_api: "요약을 만들다가 오류가 났어요.",
-      summary_symptom: "증상", summary_part: "부위", summary_symptom_label: "증상", summary_pain: "통증 정도", summary_time: "시작 시간", summary_allergy_info: "🏥 알레르기 정보", summary_allergy_label: "알레르기",
+      summary_symptom: "아픈 곳", summary_part: "부위", summary_symptom_label: "증상", summary_pain: "통증 정도", summary_time: "시작 시간", summary_allergy_info: "🏥 알레르기 정보", summary_allergy_label: "알레르기",
       pain_min: "안 아파요", pain_max: "너무 아파요", btn_start_over: "새로 작성하기",
       popup_success: "전달 완료!", popup_desc: "선생님께 전달되었습니다.", belly_chest: "가슴", profile_title: "내 정보 입력", profile_grade: "학년", profile_class: "반", profile_number: "번호", profile_name: "이름", profile_placeholder: "입력", profile_next: "다음으로"
     },
@@ -101,11 +101,11 @@ const translations = {
         belly_right_top: "Upper right belly",
         belly_left_bottom: "Lower left belly",
         belly_right_bottom: "Lower right belly",
-        pain_1: "Pain 1",
-        pain_2: "Pain 2",
+        pain_1: "Sore spot 1",
+        pain_2: "Sore spot 2",
 
         lang_name: "English", step_0_title: "Choose your language.", step_1_title: "Where does it hurt?", step_2_title: "How does it hurt?", step_3_title: "How much does it hurt?", step_4_title: "When did it start?", step_5_title: "Is this correct?",
-        btn_prev: "Previous", btn_next: "Next", btn_submit: "Submit", btn_restart: "Add other symptoms",
+        btn_prev: "Previous", btn_next: "Next", btn_submit: "Submit", btn_restart: "Somewhere else hurts too",
         quick_1: "I am hurt", quick_2: "Stomachache", quick_3: "Headache", quick_4: "Fever", quick_5: "Nosebleed", quick_6: "Feel like vomiting",
         front: "Front", back: "Back", idk: "I don't know",
         part_head: "Head", part_eye: "Eyes", part_ear: "Ears", part_nose: "Nose", part_mouth: "Mouth/Teeth", part_neck: "Neck",
@@ -120,11 +120,11 @@ const translations = {
         head_q: "Do you feel dizzy or feel like vomiting?", yes: "Yes", no: "No",        follow_belly: "Did you eat?", follow_fever: "Did you take medicine?", follow_vomit: "How many times did you vomit?",
         vomit_1: "1 time", vomit_2: "2 times", vomit_3: "3 or more times",
         allergy_title: "Do you have any allergies?", allergy_none: "None", allergy_drug: "Medicine", allergy_peanut: "Peanuts/Nuts", allergy_milk: "Milk", allergy_egg: "Eggs", allergy_seafood: "Seafood", allergy_peach: "Peach", allergy_wheat: "Wheat",
-        med_title: "Are you taking any medication?", med_none: "None", med_cold: "Cold medicine", med_pain: "Painkiller", med_digest: "Digestive medicine", med_hospital: "Prescription", med_idk: "I don't know", summary_med_info: "💊 Current Medication", summary_med_label: "Medication",        med_title: "Are you taking any medication?", med_none: "None", med_cold: "Cold medicine", med_pain: "Painkiller", med_digest: "Digestive medicine", med_hospital: "Prescription", med_idk: "I don't know", summary_med_info: "💊 Current Medication", summary_med_label: "Medication",
+        med_title: "Are you taking any medication?", med_none: "None", med_cold: "Cold medicine", med_pain: "Painkiller", med_digest: "Tummy medicine", med_hospital: "Medicine from the doctor", med_idk: "I don't know", summary_med_info: "💊 Current Medication", summary_med_label: "Medication",        med_title: "Are you taking any medication?", med_none: "None", med_cold: "Cold medicine", med_pain: "Painkiller", med_digest: "Tummy medicine", med_hospital: "Medicine from the doctor", med_idk: "I don't know", summary_med_info: "💊 Current Medication", summary_med_label: "Medication",
       
         allergy_voice: "Other (speak)",
         nurse_mode: "Nurse Mode", pin_prompt: "Enter PIN:", no_records: "No records found.", delete: "Delete", summary_title: "AI Summary", error_api: "Error generating summary.",
-        summary_symptom: "Symptom", summary_part: "Part", summary_symptom_label: "Symptoms", summary_pain: "Pain Level", summary_time: "Start Time", summary_allergy_info: "🏥 Allergy Info", summary_allergy_label: "Allergies",
+        summary_symptom: "Sore spot", summary_part: "Part", summary_symptom_label: "Symptoms", summary_pain: "Pain Level", summary_time: "Start Time", summary_allergy_info: "🏥 Allergy Info", summary_allergy_label: "Allergies",
         pain_min: "No pain", pain_max: "Worst pain", btn_start_over: "Start over",
         popup_success: "Successfully Sent!", popup_desc: "It has been sent to the teacher.", belly_chest: "Chest", profile_title: "Enter Profile", profile_grade: "Grade", profile_class: "Class", profile_number: "Number", profile_name: "Name", profile_placeholder: "Type here", profile_next: "Next"
     },
@@ -165,16 +165,16 @@ const translations = {
         belly_right_top: "右上腹",
         belly_left_bottom: "左下腹",
         belly_right_bottom: "右下腹",
-        pain_1: "疼痛 1",
-        pain_2: "疼痛 2",
+        pain_1: "疼的地方 1",
+        pain_2: "疼的地方 2",
 
         lang_name: "中文", step_0_title: "请选择语言。", step_1_title: "哪里不舒服？", step_2_title: "怎么不舒服？", step_3_title: "有多痛？", step_4_title: "什么时候开始的？", step_5_title: "这样发送吗？",
-        btn_prev: "上一步", btn_next: "下一步", btn_submit: "确认 (发送)", btn_restart: "添加其他症状",
+        btn_prev: "上一步", btn_next: "下一步", btn_submit: "确认 (发送)", btn_restart: "别的地方也痛",
         quick_1: "受伤了", quick_2: "肚子痛", quick_3: "头痛", quick_4: "发烧", quick_5: "流鼻血", quick_6: "想吐",
         front: "正面", back: "背面", idk: "不知道",
         part_head: "头", part_eye: "眼睛", part_ear: "耳朵", part_nose: "鼻子", part_mouth: "嘴/牙齿", part_neck: "脖子",
         part_chest: "胸", part_belly: "肚子", part_arm: "胳膊/手", part_leg: "腿/脚", part_back: "背/腰", part_skin: "皮肤", part_whole: "全身",
-        side_select_arm: "哪只胳膊？", side_select_leg: "哪条腿？", side_left: "左边", side_right: "右边", side_both: "两边都",
+        side_select_arm: "哪只胳膊？", side_select_leg: "哪条腿？", side_left: "左边", side_right: "右边", side_both: "两边",
         belly_top: "上腹", belly_navel: "肚脐周围", belly_bottom: "下腹", belly_right_bottom: "右下腹",
         arm_upper: "肩膀/上臂", arm_lower: "手肘/前臂", arm_hand: "手/手腕",
         leg_thigh: "大腿", leg_knee: "膝盖", leg_calf: "小腿/脚踝", leg_foot: "脚",
@@ -188,7 +188,7 @@ const translations = {
       
         allergy_voice: "其他(语音输入)",
         nurse_mode: "护士模式", pin_prompt: "请输入密码:", no_records: "没有记录。", delete: "删除", summary_title: "AI 总结", error_api: "生成总结时出错。",
-        summary_symptom: "症状", summary_part: "部位", summary_symptom_label: "症状", summary_pain: "疼痛程度", summary_time: "开始时间", summary_allergy_info: "🏥 过敏信息", summary_allergy_label: "过敏",
+        summary_symptom: "疼的地方", summary_part: "部位", summary_symptom_label: "症状", summary_pain: "疼痛程度", summary_time: "开始时间", summary_allergy_info: "🏥 过敏信息", summary_allergy_label: "过敏",
         pain_min: "不痛", pain_max: "非常痛", btn_start_over: "重新填写",
         popup_success: "发送成功！", popup_desc: "已经发送给老师。", belly_chest: "胸部", profile_title: "输入信息", profile_grade: "年级", profile_class: "班级", profile_number: "学号", profile_name: "姓名", profile_placeholder: "输入", profile_next: "下一步"
     },
@@ -197,12 +197,12 @@ const translations = {
     arm_left_elbow: "Левый локоть",
     arm_left_lower: "Левое предплечье",
     arm_left_wrist: "Левое запястье",
-    arm_left_hand: "Левая рука",
+    arm_left_hand: "Левая кисть",
     arm_right_upper: "Правое плечо",
     arm_right_elbow: "Правый локоть",
     arm_right_lower: "Правое предплечье",
     arm_right_wrist: "Правое запястье",
-    arm_right_hand: "Правая рука",
+    arm_right_hand: "Правая кисть",
 
     time_p1: "1-й урок",
     time_p2: "2-й урок",
@@ -225,22 +225,22 @@ const translations = {
         belly_all: "Весь живот",
         belly_top_all: "Весь верх живота",
         belly_bottom_all: "Весь низ живота",
-        belly_left_top: "Верхняя левая часть",
-        belly_right_top: "Верхняя правая часть",
-        belly_left_bottom: "Нижняя левая часть",
-        belly_right_bottom: "Нижняя правая часть",
+        belly_left_top: "Живот вверху слева",
+        belly_right_top: "Живот вверху справа",
+        belly_left_bottom: "Живот внизу слева",
+        belly_right_bottom: "Живот внизу справа",
         pain_1: "Боль 1",
         pain_2: "Боль 2",
 
         lang_name: "Русский", step_0_title: "Выберите язык.", step_1_title: "Где болит?", step_2_title: "Как болит?", step_3_title: "Насколько сильно болит?", step_4_title: "Когда это началось?", step_5_title: "Всё верно?",
-        btn_prev: "Назад", btn_next: "Вперед", btn_submit: "Отправить", btn_restart: "Добавить еще симптомы",
+        btn_prev: "Назад", btn_next: "Вперед", btn_submit: "Отправить", btn_restart: "Болит ещё в другом месте",
         quick_1: "Я поранился(лась)", quick_2: "Болит живот", quick_3: "Болит голова", quick_4: "Температура", quick_5: "Кровь из носа", quick_6: "Тошнит",
         front: "Спереди", back: "Сзади", idk: "Я не знаю",
         part_head: "Голова", part_eye: "Глаза", part_ear: "Уши", part_nose: "Нос", part_mouth: "Рот/зубы", part_neck: "Шея",
         part_chest: "Грудь", part_belly: "Живот", part_arm: "Рука/кисть", part_leg: "Нога/ступня", part_back: "Спина/поясница", part_skin: "Кожа", part_whole: "Всё тело",
         side_select_arm: "Какая рука?", side_select_leg: "Какая нога?", side_left: "Левая", side_right: "Правая", side_both: "Обе",
-        belly_top: "Верх живота", belly_navel: "Вокруг пупка", belly_bottom: "Низ живота", belly_right_bottom: "Внизу справа",
-        arm_upper: "Плечо/Предплечье", arm_lower: "Локоть/Предплечье", arm_hand: "Кисть/Запястье",
+        belly_top: "Верх живота", belly_navel: "Вокруг пупка", belly_bottom: "Низ живота", belly_right_bottom: "Живот внизу справа",
+        arm_upper: "Плечо/верх руки", arm_lower: "Локоть/Предплечье", arm_hand: "Кисть/Запястье",
         leg_thigh: "Бедро", leg_knee: "Колено", leg_calf: "Икра/Лодыжка", leg_foot: "Ступня",
         hurt_how: "Как вы поранились?", hurt_state: "Как сейчас?",
         hurt_1: "Упал(а)", hurt_2: "Ударился(лась)", hurt_3: "Порезался(лась)", hurt_4: "Растяжение",
@@ -293,17 +293,17 @@ const translations = {
         belly_right_top: "Bụng trên bên phải",
         belly_left_bottom: "Bụng dưới bên trái",
         belly_right_bottom: "Bụng dưới bên phải",
-        pain_1: "Cơn đau 1",
-        pain_2: "Cơn đau 2",
+        pain_1: "Chỗ đau 1",
+        pain_2: "Chỗ đau 2",
 
         lang_name: "Tiếng Việt", step_0_title: "Chọn ngôn ngữ của bạn.", step_1_title: "Đau ở đâu?", step_2_title: "Đau như thế nào?", step_3_title: "Đau nhiều không?", step_4_title: "Bắt đầu từ khi nào?", step_5_title: "Như thế này đúng không?",
-        btn_prev: "Trước", btn_next: "Tiếp theo", btn_submit: "Gửi", btn_restart: "Thêm triệu chứng khác",
+        btn_prev: "Trước", btn_next: "Tiếp theo", btn_submit: "Gửi", btn_restart: "Chỗ khác cũng đau",
         quick_1: "Bị thương", quick_2: "Đau bụng", quick_3: "Đau đầu", quick_4: "Sốt", quick_5: "Chảy máu cam", quick_6: "Buồn nôn",
         front: "Phía trước", back: "Phía sau", idk: "Không biết",
         part_head: "Đầu", part_eye: "Mắt", part_ear: "Tai", part_nose: "Mũi", part_mouth: "Miệng/Răng", part_neck: "Cổ",
         part_chest: "Ngực", part_belly: "Bụng", part_arm: "Tay", part_leg: "Chân", part_back: "Lưng/Eo", part_skin: "Da", part_whole: "Toàn thân",
         side_select_arm: "Tay nào?", side_select_leg: "Chân nào?", side_left: "Trái", side_right: "Phải", side_both: "Cả hai",
-        belly_top: "Bụng trên", belly_navel: "Quanh rốn", belly_bottom: "Bụng dưới", belly_right_bottom: "Dưới bên phải",
+        belly_top: "Bụng trên", belly_navel: "Quanh rốn", belly_bottom: "Bụng dưới", belly_right_bottom: "Bụng dưới bên phải",
         arm_upper: "Vai/Cánh tay trên", arm_lower: "Khuỷu tay/Cẳng tay", arm_hand: "Bàn tay/Cổ tay",
         leg_thigh: "Đùi", leg_knee: "Đầu gối", leg_calf: "Bắp chân/Mắt cá chân", leg_foot: "Bàn chân",
         hurt_how: "Bị thương thế nào?", hurt_state: "Bây giờ thế nào?",
@@ -316,45 +316,45 @@ const translations = {
       
         allergy_voice: "Khác (nói trực tiếp)",
         nurse_mode: "Chế độ y tá", pin_prompt: "Nhập mật khẩu:", no_records: "Không có hồ sơ.", delete: "Xóa", summary_title: "Tóm tắt AI", error_api: "Lỗi tạo tóm tắt.",
-        summary_symptom: "Triệu chứng", summary_part: "Bộ phận", summary_symptom_label: "Các triệu chứng", summary_pain: "Mức độ đau", summary_time: "Thời gian bắt đầu", summary_allergy_info: "🏥 Thông tin dị ứng", summary_allergy_label: "Dị ứng",
+        summary_symptom: "Chỗ đau", summary_part: "Bộ phận", summary_symptom_label: "Các triệu chứng", summary_pain: "Mức độ đau", summary_time: "Thời gian bắt đầu", summary_allergy_info: "🏥 Thông tin dị ứng", summary_allergy_label: "Dị ứng",
         pain_min: "Không đau", pain_max: "Rất đau", btn_start_over: "Làm lại từ đầu",
         popup_success: "Gửi thành công!", popup_desc: "Đã được gửi cho giáo viên.", belly_chest: "Ngực", profile_title: "Nhập thông tin", profile_grade: "Khối", profile_class: "Lớp", profile_number: "Số", profile_name: "Tên", profile_placeholder: "Nhập", profile_next: "Tiếp theo"
     },
     ja: {
-    arm_left_upper: "左上腕",
-    arm_left_elbow: "左肘",
-    arm_left_lower: "左前腕",
-    arm_left_wrist: "左手首",
-    arm_left_hand: "左手",
-    arm_right_upper: "右上腕",
-    arm_right_elbow: "右肘",
-    arm_right_lower: "右前腕",
-    arm_right_wrist: "右手首",
-    arm_right_hand: "右手",
+    arm_left_upper: "ひだりの にのうで",
+    arm_left_elbow: "ひだりの ひじ",
+    arm_left_lower: "ひだりの まえうで",
+    arm_left_wrist: "ひだりの てくび",
+    arm_left_hand: "ひだりの て",
+    arm_right_upper: "みぎの にのうで",
+    arm_right_elbow: "みぎの ひじ",
+    arm_right_lower: "みぎの まえうで",
+    arm_right_wrist: "みぎの てくび",
+    arm_right_hand: "みぎの て",
 
-    time_p1: "1時間目",
-    time_p2: "2時間目",
-    time_p3: "3時間目",
-    time_p4: "4時間目",
-    time_lunch: "昼休み",
-    time_p5: "5時間目",
-    time_p6: "6時間目",
-    time_before: "学校に来る前",
-    time_days: "数日前",
-    follow_trauma: "どうやって怪我をしましたか？",
-    trauma_friend: "友達とふざけていて",
-    trauma_alone: "一人で転んだ/ぶつけた",
-    trauma_sports: "体育/運動中",
+    time_p1: "1じかんめ",
+    time_p2: "2じかんめ",
+    time_p3: "3じかんめ",
+    time_p4: "4じかんめ",
+    time_lunch: "ひるやすみ",
+    time_p5: "5じかんめ",
+    time_p6: "6じかんめ",
+    time_before: "がっこうに くる まえ",
+    time_days: "なんにちか まえ",
+    follow_trauma: "どうやって けがをしたの？",
+    trauma_friend: "ともだちと ふざけていて",
+    trauma_alone: "ひとりで ころんだ/ぶつけた",
+    trauma_sports: "たいいく・うんどうの とき",
 
-        belly_all: "お腹全体",
-        belly_top_all: "上腹部全体",
-        belly_bottom_all: "下腹部全体",
-        belly_left_top: "左上腹部",
-        belly_right_top: "右上腹部",
-        belly_left_bottom: "左下腹部",
-        belly_right_bottom: "右下腹部",
-        pain_1: "痛み 1",
-        pain_2: "痛み 2",
+        belly_all: "おなか ぜんぶ",
+        belly_top_all: "おなかのうえ ぜんぶ",
+        belly_bottom_all: "おなかのした ぜんぶ",
+        belly_left_top: "おなかの ひだりうえ",
+        belly_right_top: "おなかの みぎうえ",
+        belly_left_bottom: "おなかの ひだりした",
+        belly_right_bottom: "おなかの みぎした",
+        pain_1: "いたいところ 1",
+        pain_2: "いたいところ 2",
 
         lang_name: "日本語",
         step_0_title: "ことばをえらんでね",
@@ -397,14 +397,14 @@ const translations = {
         belly_top: "おなかのうえ",
         belly_navel: "おへそのまわり",
         belly_bottom: "おなかのした",
-        belly_right_bottom: "みぎした",
+        belly_right_bottom: "おなかの みぎした",
         arm_upper: "かた・にのうで",
         arm_lower: "ひじ・うで",
         arm_hand: "て・てくび",
         leg_thigh: "ふともも",
         leg_knee: "ひざ",
         leg_calf: "ふくらはぎ・あしくび",
-        leg_foot: "あし",
+        leg_foot: "あしのさき",
         hurt_how: "どうやってけがをしましたか？",
         hurt_state: "いまはどんなかんじですか？",
         hurt_1: "ころんだ",
@@ -418,35 +418,35 @@ const translations = {
         head_q: "めまいがしたり、きもちわるかったりしますか？",
         yes: "はい",
         no: "いいえ",        follow_belly: "ごはんはたべましたか？",
-        follow_fever: "おぐすりはのみましたか？",
+        follow_fever: "おくすりは のみましたか？",
         follow_vomit: "なんかいもどしましたか？",
         vomit_1: "1かい",
         vomit_2: "2かい",
-        vomit_3: "3かい以上",
+        vomit_3: "3かい いじょう",
         allergy_title: "アレルギーはありますか？",
         allergy_none: "ない",
-        allergy_drug: "おぐすり",
+        allergy_drug: "おくすり",
         allergy_peanut: "ピーナッツ・ナッツ",
         allergy_milk: "ぎゅうにゅう",
         allergy_egg: "たまご",
         allergy_seafood: "シーフード",
         allergy_peach: "もも",
         allergy_wheat: "こむぎ",
-        med_title: "飲んでいる薬はありますか？", med_none: "飲んでいません", med_cold: "かぜ薬", med_pain: "痛み止め", med_digest: "胃腸薬", med_hospital: "病院の薬", med_idk: "わかりません", summary_med_info: "💊 服用中の薬", summary_med_label: "服用薬",
-        arm_left_all: "左うで全体", arm_right_all: "右うで全体", arm_left_mid: "左ひじ・前うで", arm_right_mid: "右ひじ・前うで", arm_left_bot: "左手・手首", arm_right_bot: "右手・手首", arm_left_multi: "左うで複数", arm_right_multi: "右うで複数",
-        allergy_voice: "その他(声で入力)",
-        med_title: "飲んでいる薬はありますか？", med_none: "飲んでいません", med_cold: "かぜ薬", med_pain: "痛み止め", med_digest: "胃腸薬", med_hospital: "病院の薬", med_idk: "わかりません", summary_med_info: "💊 服用中の薬", summary_med_label: "服用薬",
-        arm_left_all: "左うで全体", arm_right_all: "右うで全体", arm_left_mid: "左ひじ・前うで", arm_right_mid: "右ひじ・前うで", arm_left_bot: "左手・手首", arm_right_bot: "右手・手首", arm_left_multi: "左うで複数", arm_right_multi: "右うで複数",
-        allergy_voice: "その他(声で入力)",
+        med_title: "のんでいる くすりは ある？", med_none: "のんで いない", med_cold: "かぜぐすり", med_pain: "いたみどめ", med_digest: "おなかの くすり", med_hospital: "びょういんで もらった くすり", med_idk: "わかりません", summary_med_info: "💊 のんでいる くすり", summary_med_label: "くすり",
+        arm_left_all: "ひだりうで ぜんぶ", arm_right_all: "みぎうで ぜんぶ", arm_left_mid: "ひだりの ひじ・まえうで", arm_right_mid: "みぎの ひじ・まえうで", arm_left_bot: "ひだりの て・てくび", arm_right_bot: "みぎの て・てくび", arm_left_multi: "ひだりうでの いくつかのところ", arm_right_multi: "みぎうでの いくつかのところ",
+        allergy_voice: "そのほか (こえで いう)",
+        med_title: "のんでいる くすりは ある？", med_none: "のんで いない", med_cold: "かぜぐすり", med_pain: "いたみどめ", med_digest: "おなかの くすり", med_hospital: "びょういんで もらった くすり", med_idk: "わかりません", summary_med_info: "💊 のんでいる くすり", summary_med_label: "くすり",
+        arm_left_all: "ひだりうで ぜんぶ", arm_right_all: "みぎうで ぜんぶ", arm_left_mid: "ひだりの ひじ・まえうで", arm_right_mid: "みぎの ひじ・まえうで", arm_left_bot: "ひだりの て・てくび", arm_right_bot: "みぎの て・てくび", arm_left_multi: "ひだりうでの いくつかのところ", arm_right_multi: "みぎうでの いくつかのところ",
+        allergy_voice: "そのほか (こえで いう)",
         nurse_mode: "ほけんしつモード",
         pin_prompt: "パスワードをいれてください:",
         no_records: "きろくがありません。",
         delete: "けす",
         summary_title: "AIのまとめ",
         error_api: "まとめづくりにしっぱいしました。",
-        summary_symptom: "しょうじょう",
+        summary_symptom: "いたいところ",
         summary_part: "ばしょ",
-        summary_symptom_label: "しょうじょう",
+        summary_symptom_label: "ぐあい",
         summary_pain: "いたさ",
         summary_time: "いつから",
         summary_allergy_info: "🏥 アレルギーのじょうほう",
@@ -461,12 +461,12 @@ const translations = {
     tl: {
     arm_left_upper: "Kaliwang Itaas na Braso",
     arm_left_elbow: "Kaliwang Siko",
-    arm_left_lower: "Kaliwang Braso",
+    arm_left_lower: "Kaliwang bisig",
     arm_left_wrist: "Kaliwang Pulso",
     arm_left_hand: "Kaliwang Kamay",
     arm_right_upper: "Kanang Itaas na Braso",
     arm_right_elbow: "Kanang Siko",
-    arm_right_lower: "Kanang Braso",
+    arm_right_lower: "Kanang bisig",
     arm_right_wrist: "Kanang Pulso",
     arm_right_hand: "Kanang Kamay",
 
@@ -481,16 +481,16 @@ const translations = {
     time_days: "Ilang araw na",
     follow_trauma: "Paano ka nasugatan?",
     trauma_friend: "Naglalaro kasama ang kaibigan",
-    trauma_alone: "Nahulog/nabangga mag-isa",
+    trauma_alone: "Nadapa/nabangga mag-isa",
     trauma_sports: "Sa PE/Sports",
 
         belly_all: "Buong tiyan",
-        belly_top_all: "Buong itaas",
-        belly_bottom_all: "Buong ibaba",
-        belly_left_top: "Kaliwang itaas",
-        belly_right_top: "Kanang itaas",
-        belly_left_bottom: "Kaliwang ibaba",
-        belly_right_bottom: "Kanang ibaba",
+        belly_top_all: "Buong itaas na tiyan",
+        belly_bottom_all: "Buong ibabang tiyan",
+        belly_left_top: "Kaliwang itaas ng tiyan",
+        belly_right_top: "Kanang itaas ng tiyan",
+        belly_left_bottom: "Kaliwang ibaba ng tiyan",
+        belly_right_bottom: "Kanang ibaba ng tiyan",
         pain_1: "Sakit 1",
         pain_2: "Sakit 2",
 
@@ -531,7 +531,7 @@ const translations = {
         side_select_leg: "Aling binti?",
         side_left: "Kaliwa",
         side_right: "Kanan",
-        side_both: "Pariho",
+        side_both: "Pareho",
         belly_top: "Itaas ng tiyan",
         belly_navel: "Paligid ng pusod",
         belly_bottom: "Ibaba ng tiyan",
@@ -570,11 +570,11 @@ const translations = {
         allergy_seafood: "Seafood",
         allergy_peach: "Peach",
         allergy_wheat: "Trigo",
-        med_title: "Umiinom ka ba ng gamot?", med_none: "Wala", med_cold: "Gamot sa sipon", med_pain: "Pampasakit", med_digest: "Pampatunaw", med_hospital: "Reseta", med_idk: "Hindi ko alam", summary_med_info: "💊 Kasalukuyang Gamot", summary_med_label: "Gamot",
-        arm_left_all: "Buong kaliwang braso", arm_right_all: "Buong kanang braso", arm_left_mid: "Kaliwang siko·braso", arm_right_mid: "Kanang siko·braso", arm_left_bot: "Kaliwang kamay·pulso", arm_right_bot: "Kanang kamay·pulso", arm_left_multi: "Kaliwang braso (marami)", arm_right_multi: "Kanang braso (marami)",
+        med_title: "Umiinom ka ba ng gamot?", med_none: "Wala", med_cold: "Gamot sa sipon", med_pain: "Gamot sa sakit", med_digest: "Pampatunaw", med_hospital: "Gamot mula sa doktor", med_idk: "Hindi ko alam", summary_med_info: "💊 Kasalukuyang Gamot", summary_med_label: "Gamot",
+        arm_left_all: "Buong kaliwang braso", arm_right_all: "Buong kanang braso", arm_left_mid: "Kaliwang siko·bisig", arm_right_mid: "Kanang siko·bisig", arm_left_bot: "Kaliwang kamay·pulso", arm_right_bot: "Kanang kamay·pulso", arm_left_multi: "Kaliwang braso (marami)", arm_right_multi: "Kanang braso (marami)",
         allergy_voice: "Iba pa (magsalita)",
-        med_title: "Umiinom ka ba ng gamot?", med_none: "Wala", med_cold: "Gamot sa sipon", med_pain: "Pampasakit", med_digest: "Pampatunaw", med_hospital: "Reseta", med_idk: "Hindi ko alam", summary_med_info: "💊 Kasalukuyang Gamot", summary_med_label: "Gamot",
-        arm_left_all: "Buong kaliwang braso", arm_right_all: "Buong kanang braso", arm_left_mid: "Kaliwang siko·braso", arm_right_mid: "Kanang siko·braso", arm_left_bot: "Kaliwang kamay·pulso", arm_right_bot: "Kanang kamay·pulso", arm_left_multi: "Kaliwang braso (marami)", arm_right_multi: "Kanang braso (marami)",
+        med_title: "Umiinom ka ba ng gamot?", med_none: "Wala", med_cold: "Gamot sa sipon", med_pain: "Gamot sa sakit", med_digest: "Pampatunaw", med_hospital: "Gamot mula sa doktor", med_idk: "Hindi ko alam", summary_med_info: "💊 Kasalukuyang Gamot", summary_med_label: "Gamot",
+        arm_left_all: "Buong kaliwang braso", arm_right_all: "Buong kanang braso", arm_left_mid: "Kaliwang siko·bisig", arm_right_mid: "Kanang siko·bisig", arm_left_bot: "Kaliwang kamay·pulso", arm_right_bot: "Kanang kamay·pulso", arm_left_multi: "Kaliwang braso (marami)", arm_right_multi: "Kanang braso (marami)",
         allergy_voice: "Iba pa (magsalita)",
         nurse_mode: "Nurse Mode",
         pin_prompt: "Ilagay ang PIN:",
@@ -601,12 +601,12 @@ const translations = {
     arm_left_elbow: "កែងដៃឆ្វេង",
     arm_left_lower: "កំភួនដៃឆ្វេង",
     arm_left_wrist: "កដៃឆ្វេង",
-    arm_left_hand: "ដៃឆ្វេង",
+    arm_left_hand: "បាតដៃឆ្វេង",
     arm_right_upper: "ដើមដៃស្តាំ",
     arm_right_elbow: "កែងដៃស្តាំ",
     arm_right_lower: "កំភួនដៃស្តាំ",
     arm_right_wrist: "កដៃស្តាំ",
-    arm_right_hand: "ដៃស្តាំ",
+    arm_right_hand: "បាតដៃស្តាំ",
 
     time_p1: "ម៉ោងទី 1",
     time_p2: "ម៉ោងទី 2",
@@ -673,7 +673,7 @@ const translations = {
         belly_top: "ពោះផ្នែកខាងលើ",
         belly_navel: "ជុំវិញផ្ចិត",
         belly_bottom: "ពោះផ្នែកខាងក្រោម",
-        belly_right_bottom: "ផ្នែកខាងក្រោមខាងស្តាំ",
+        belly_right_bottom: "ពោះខាងស្តាំផ្នែកខាងក្រោម",
         arm_upper: "ស្មា/ដើមដៃ",
         arm_lower: "កែងដៃ/កំភួនដៃ",
         arm_hand: "បាតដៃ/កដៃ",
@@ -702,17 +702,17 @@ const translations = {
         allergy_title: "តើអ្នកមានអាឡែស៊ីទេ?",
         allergy_none: "គ្មានទេ",
         allergy_drug: "ថ្នាំពេទ្យ",
-        allergy_peanut: "សណ្តែកដី/គ្រាប់ធញ្ញជាតិ",
+        allergy_peanut: "សណ្តែកដី/គ្រាប់ឈើ",
         allergy_milk: "ទឹកដោះគោ",
         allergy_egg: "ស៊ុត",
         allergy_seafood: "អាហារសមុទ្រ",
         allergy_peach: "ផ្លែប៉េស",
         allergy_wheat: "ស្រូវសាលី",
         med_title: "តើអ្នកកំពុងលេបថ្នាំអ្វីខ្លះ?", med_none: "គ្មានទេ", med_cold: "ថ្នាំផ្តាសាយ", med_pain: "ថ្នាំបំបាត់ការឈឺចាប់", med_digest: "ថ្នាំរំលាយអាហារ", med_hospital: "ថ្នាំវេជ្ជបញ្ជា", med_idk: "ខ្ញុំមិនដឹងទេ", summary_med_info: "💊 ថ្នាំកំពុងលេប", summary_med_label: "ថ្នាំ",
-        arm_left_all: "ដៃឆ្វេងទាំងមូល", arm_right_all: "ដៃស្តាំទាំងមូល", arm_left_mid: "កែងដៃឆ្វេង·សាច់ដៃ", arm_right_mid: "កែងដៃស្តាំ·សាច់ដៃ", arm_left_bot: "ដៃឆ្វេង·កដៃ", arm_right_bot: "ដៃស្តាំ·កដៃ", arm_left_multi: "ដៃឆ្វេង(ច្រើន)", arm_right_multi: "ដៃស្តាំ(ច្រើន)",
+        arm_left_all: "ដៃឆ្វេងទាំងមូល", arm_right_all: "ដៃស្តាំទាំងមូល", arm_left_mid: "កែងដៃឆ្វេង·កំភួនដៃ", arm_right_mid: "កែងដៃស្តាំ·កំភួនដៃ", arm_left_bot: "បាតដៃឆ្វេង·កដៃ", arm_right_bot: "បាតដៃស្តាំ·កដៃ", arm_left_multi: "ដៃឆ្វេង(ច្រើន)", arm_right_multi: "ដៃស្តាំ(ច្រើន)",
         allergy_voice: "ផ្សេងៗ(និយាយ)",
         med_title: "តើអ្នកកំពុងលេបថ្នាំអ្វីខ្លះ?", med_none: "គ្មានទេ", med_cold: "ថ្នាំផ្តាសាយ", med_pain: "ថ្នាំបំបាត់ការឈឺចាប់", med_digest: "ថ្នាំរំលាយអាហារ", med_hospital: "ថ្នាំវេជ្ជបញ្ជា", med_idk: "ខ្ញុំមិនដឹងទេ", summary_med_info: "💊 ថ្នាំកំពុងលេប", summary_med_label: "ថ្នាំ",
-        arm_left_all: "ដៃឆ្វេងទាំងមូល", arm_right_all: "ដៃស្តាំទាំងមូល", arm_left_mid: "កែងដៃឆ្វេង·សាច់ដៃ", arm_right_mid: "កែងដៃស្តាំ·សាច់ដៃ", arm_left_bot: "ដៃឆ្វេង·កដៃ", arm_right_bot: "ដៃស្តាំ·កដៃ", arm_left_multi: "ដៃឆ្វេង(ច្រើន)", arm_right_multi: "ដៃស្តាំ(ច្រើន)",
+        arm_left_all: "ដៃឆ្វេងទាំងមូល", arm_right_all: "ដៃស្តាំទាំងមូល", arm_left_mid: "កែងដៃឆ្វេង·កំភួនដៃ", arm_right_mid: "កែងដៃស្តាំ·កំភួនដៃ", arm_left_bot: "បាតដៃឆ្វេង·កដៃ", arm_right_bot: "បាតដៃស្តាំ·កដៃ", arm_left_multi: "ដៃឆ្វេង(ច្រើន)", arm_right_multi: "ដៃស្តាំ(ច្រើន)",
         allergy_voice: "ផ្សេងៗ(និយាយ)",
         nurse_mode: "របៀបគិលានុបដ្ឋាយិកា",
         pin_prompt: "បញ្ចូលលេខសម្ងាត់៖",
@@ -767,8 +767,8 @@ const translations = {
         belly_right_top: "ท้องส่วนบนขวา",
         belly_left_bottom: "ท้องส่วนล่างซ้าย",
         belly_right_bottom: "ท้องส่วนล่างขวา",
-        pain_1: "ความเจ็บปวด 1",
-        pain_2: "ความเจ็บปวด 2",
+        pain_1: "จุดที่เจ็บ 1",
+        pain_2: "จุดที่เจ็บ 2",
 
         lang_name: "ภาษาไทย",
         step_0_title: "เลือกภาษาของคุณ",
@@ -811,7 +811,7 @@ const translations = {
         belly_top: "ท้องส่วนบน",
         belly_navel: "รอบสะดือ",
         belly_bottom: "ท้องส่วนล่าง",
-        belly_right_bottom: "ท้องด้านล่างขวา",
+        belly_right_bottom: "ท้องส่วนล่างขวา",
         arm_upper: "ไหล่/ต้นแขน",
         arm_lower: "ข้อศอก/แขนท่อนล่าง",
         arm_hand: "มือ/ข้อมือ",
@@ -819,7 +819,7 @@ const translations = {
         leg_knee: "หัวเข่า",
         leg_calf: "น่อง/ข้อเท้า",
         leg_foot: "เท้า",
-        hurt_how: "หนู/ผมไปโดนอะไรมาคะ/ครับ?",
+        hurt_how: "ไปโดนอะไรมาคะ/ครับ?",
         hurt_state: "ตอนนี้เป็นยังไงบ้างคะ/ครับ?",
         hurt_1: "หนู/ผมล้ม",
         hurt_2: "หนู/ผมชน",
@@ -829,15 +829,15 @@ const translations = {
         state_2: "มันบวม",
         state_3: "มันฟกช้ำ",
         state_4: "ขยับแล้วเจ็บ",
-        head_q: "หนู/ผมรู้สึกเวียนหัวหรืออยากอ้วกไหมคะ/ครับ?",
-        yes: "ใช่คะ/ครับ",
-        no: "ไม่คะ/ครับ",        follow_belly: "หนู/ผมกินข้าวหรือยังคะ/ครับ?",
-        follow_fever: "หนู/ผมกินยาหรือยังคะ/ครับ?",
-        follow_vomit: "หนู/ผมอ้วกกี่ครั้งคะ/ครับ?",
+        head_q: "เวียนหัวหรืออยากอ้วกไหมคะ/ครับ?",
+        yes: "ใช่ค่ะ/ครับ",
+        no: "ไม่ใช่ค่ะ/ครับ",        follow_belly: "กินข้าวมาหรือยังคะ/ครับ?",
+        follow_fever: "กินยามาหรือยังคะ/ครับ?",
+        follow_vomit: "อ้วกไปกี่ครั้งคะ/ครับ?",
         vomit_1: "1 ครั้ง",
         vomit_2: "2 ครั้ง",
         vomit_3: "3 ครั้งขึ้นไป",
-        allergy_title: "หนู/ผมแพ้อะไรไหมคะ/ครับ?",
+        allergy_title: "แพ้อะไรไหมคะ/ครับ?",
         allergy_none: "ไม่แพ้อะไรเลย",
         allergy_drug: "ยา",
         allergy_peanut: "ถั่วลิสง/ถั่ว",
@@ -858,7 +858,7 @@ const translations = {
         delete: "ลบ",
         summary_title: "สรุปโดย AI",
         error_api: "เกิดข้อผิดพลาดในการสรุป",
-        summary_symptom: "อาการ",
+        summary_symptom: "จุดที่เจ็บ",
         summary_part: "ส่วนที่เจ็บ",
         summary_symptom_label: "อาการต่างๆ",
         summary_pain: "ระดับความเจ็บ",
@@ -877,12 +877,12 @@ const translations = {
     arm_left_elbow: "Зүүн тохой",
     arm_left_lower: "Зүүн шуу",
     arm_left_wrist: "Зүүн бугуй",
-    arm_left_hand: "Зүүн гар",
+    arm_left_hand: "Зүүн сарвуу",
     arm_right_upper: "Баруун бугалга",
     arm_right_elbow: "Баруун тохой",
     arm_right_lower: "Баруун шуу",
     arm_right_wrist: "Баруун бугуй",
-    arm_right_hand: "Баруун гар",
+    arm_right_hand: "Баруун сарвуу",
 
     time_p1: "1-р цаг",
     time_p2: "2-р цаг",
@@ -901,10 +901,10 @@ const translations = {
         belly_all: "Бүхэл бүтэн гэдэс",
         belly_top_all: "Гэдэсний дээд хэсэг",
         belly_bottom_all: "Гэдэсний доод хэсэг",
-        belly_left_top: "Зүүн дээд хэсэг",
-        belly_right_top: "Баруун дээд хэсэг",
-        belly_left_bottom: "Зүүн доод хэсэг",
-        belly_right_bottom: "Баруун доод хэсэг",
+        belly_left_top: "Гэдэсний зүүн дээд хэсэг",
+        belly_right_top: "Гэдэсний баруун дээд хэсэг",
+        belly_left_bottom: "Гэдэсний зүүн доод хэсэг",
+        belly_right_bottom: "Гэдэсний баруун доод хэсэг",
         pain_1: "Өвдөлт 1",
         pain_2: "Өвдөлт 2",
 
@@ -936,7 +936,7 @@ const translations = {
         part_neck: "Хүзүү",
         part_chest: "Цээж",
         part_belly: "Гэдэс",
-        part_arm: "Гар/Бугуй",
+        part_arm: "Гар/Сарвуу",
         part_leg: "Хөл",
         part_back: "Нуруу",
         part_skin: "Арьс",
@@ -984,11 +984,11 @@ const translations = {
         allergy_seafood: "Далайн гаралтай хоол",
         allergy_peach: "Тоор",
         allergy_wheat: "Улаан буудай",
-        med_title: "Ямар нэгэн эм уудаг уу?", med_none: "Үгүй", med_cold: "Ханиадны эм", med_pain: "Өвдөлт намдаах эм", med_digest: "Хоол боловсруулах эм", med_hospital: "Эмчийн жор", med_idk: "Мэдэхгүй байна", summary_med_info: "💊 Уудаг эм", summary_med_label: "Эм",
-        arm_left_all: "Зүүн гар бүхэлд нь", arm_right_all: "Баруун гар бүхэлд нь", arm_left_mid: "Зүүн тохой·бугалга", arm_right_mid: "Баруун тохой·бугалга", arm_left_bot: "Зүүн гар·бугуй", arm_right_bot: "Баруун гар·бугуй", arm_left_multi: "Зүүн гар (олон)", arm_right_multi: "Баруун гар (олон)",
+        med_title: "Ямар нэгэн эм уудаг уу?", med_none: "Үгүй", med_cold: "Ханиадны эм", med_pain: "Өвдөлт намдаах эм", med_digest: "Хоол боловсруулах эм", med_hospital: "Эмнэлгээс өгсөн эм", med_idk: "Мэдэхгүй байна", summary_med_info: "💊 Уудаг эм", summary_med_label: "Эм",
+        arm_left_all: "Зүүн гар бүхэлд нь", arm_right_all: "Баруун гар бүхэлд нь", arm_left_mid: "Зүүн тохой·шуу", arm_right_mid: "Баруун тохой·шуу", arm_left_bot: "Зүүн сарвуу·бугуй", arm_right_bot: "Баруун сарвуу·бугуй", arm_left_multi: "Зүүн гар (олон)", arm_right_multi: "Баруун гар (олон)",
         allergy_voice: "Бусад (ярих)",
-        med_title: "Ямар нэгэн эм уудаг уу?", med_none: "Үгүй", med_cold: "Ханиадны эм", med_pain: "Өвдөлт намдаах эм", med_digest: "Хоол боловсруулах эм", med_hospital: "Эмчийн жор", med_idk: "Мэдэхгүй байна", summary_med_info: "💊 Уудаг эм", summary_med_label: "Эм",
-        arm_left_all: "Зүүн гар бүхэлд нь", arm_right_all: "Баруун гар бүхэлд нь", arm_left_mid: "Зүүн тохой·бугалга", arm_right_mid: "Баруун тохой·бугалга", arm_left_bot: "Зүүн гар·бугуй", arm_right_bot: "Баруун гар·бугуй", arm_left_multi: "Зүүн гар (олон)", arm_right_multi: "Баруун гар (олон)",
+        med_title: "Ямар нэгэн эм уудаг уу?", med_none: "Үгүй", med_cold: "Ханиадны эм", med_pain: "Өвдөлт намдаах эм", med_digest: "Хоол боловсруулах эм", med_hospital: "Эмнэлгээс өгсөн эм", med_idk: "Мэдэхгүй байна", summary_med_info: "💊 Уудаг эм", summary_med_label: "Эм",
+        arm_left_all: "Зүүн гар бүхэлд нь", arm_right_all: "Баруун гар бүхэлд нь", arm_left_mid: "Зүүн тохой·шуу", arm_right_mid: "Баруун тохой·шуу", arm_left_bot: "Зүүн сарвуу·бугуй", arm_right_bot: "Баруун сарвуу·бугуй", arm_left_multi: "Зүүн гар (олон)", arm_right_multi: "Баруун гар (олон)",
         allergy_voice: "Бусад (ярих)",
         nurse_mode: "Сувилагчийн горим",
         pin_prompt: "Нууц үгээ оруулна уу:",
@@ -1011,16 +1011,16 @@ const translations = {
         belly_chest: "Цээж", profile_title: "Мэдээлэл оруулах", profile_grade: "Анги", profile_class: "Бүлэг", profile_number: "Дугаар", profile_name: "Нэр", profile_placeholder: "Бичих", profile_next: "Дараах"
     },
     uz: {
-    arm_left_upper: "Chap yuqori qo`l",
+    arm_left_upper: "Chap yelka",
     arm_left_elbow: "Chap tirsak",
     arm_left_lower: "Chap bilak",
-    arm_left_wrist: "Chap bilak(qo`l)",
-    arm_left_hand: "Chap qo`l",
-    arm_right_upper: "O`ng yuqori qo`l",
-    arm_right_elbow: "O`ng tirsak",
-    arm_right_lower: "O`ng bilak",
-    arm_right_wrist: "O`ng bilak(qo`l)",
-    arm_right_hand: "O`ng qo`l",
+    arm_left_wrist: "Chap bilak bo'g'imi",
+    arm_left_hand: "Chap kaft",
+    arm_right_upper: "O'ng yelka",
+    arm_right_elbow: "O'ng tirsak",
+    arm_right_lower: "O'ng bilak",
+    arm_right_wrist: "O'ng bilak bo'g'imi",
+    arm_right_hand: "O'ng kaft",
 
     time_p1: "1-dars",
     time_p2: "2-dars",
@@ -1029,11 +1029,11 @@ const translations = {
     time_lunch: "Tushlik",
     time_p5: "5-dars",
     time_p6: "6-dars",
-    time_before: "Maktabgacha",
+    time_before: "Maktabga kelishdan oldin",
     time_days: "Bir necha kun oldin",
     follow_trauma: "Qanday jarohat oldingiz?",
-    trauma_friend: "Dost bilan oynab",
-    trauma_alone: "Ozi yiqildi/urib oldi",
+    trauma_friend: "Do'stim bilan o'ynayotganda",
+    trauma_alone: "O'zim yiqildim/urilib oldim",
     trauma_sports: "Jismoniy tarbiya darsida",
 
         belly_all: "Butun qorin",
@@ -1094,7 +1094,7 @@ const translations = {
         leg_thigh: "Son",
         leg_knee: "Tizza",
         leg_calf: "Boldir / To'piq",
-        leg_foot: "Oyoq uchi",
+        leg_foot: "Oyoq panjasi",
         hurt_how: "Qanday jarohat oldingiz?",
         hurt_state: "Hozir qanday?",
         hurt_1: "Yiqilib tushdim",
@@ -1102,7 +1102,7 @@ const translations = {
         hurt_3: "Kesib oldim",
         hurt_4: "Qayirib oldim",
         state_1: "Qon kelyapti",
-        state_2: "Ishib ketdi",
+        state_2: "Shishib ketdi",
         state_3: "Ko'kardi",
         state_4: "Qimirlatsam og'riyapti",
         head_q: "Bosh aylanishi yoki ko'ngil aynishi bormi?",
@@ -1123,10 +1123,10 @@ const translations = {
         allergy_peach: "Shaftoli",
         allergy_wheat: "Bug'doy",
         med_title: "Biror dori ichyapsizmi?", med_none: "Yo'q", med_cold: "Shamollash dorisi", med_pain: "Og'riq qoldiruvchi", med_digest: "Hazm qilish dorisi", med_hospital: "Retsept dorisi", med_idk: "Bilmayman", summary_med_info: "💊 Ichilayotgan dori", summary_med_label: "Dori",
-        arm_left_all: "Chap qo'l butun", arm_right_all: "O'ng qo'l butun", arm_left_mid: "Chap tirsak·bilak", arm_right_mid: "O'ng tirsak·bilak", arm_left_bot: "Chap qo'l·bilak", arm_right_bot: "O'ng qo'l·bilak", arm_left_multi: "Chap qo'l (ko'p)", arm_right_multi: "O'ng qo'l (ko'p)",
+        arm_left_all: "Chap qo'l butun", arm_right_all: "O'ng qo'l butun", arm_left_mid: "Chap tirsak·bilak", arm_right_mid: "O'ng tirsak·bilak", arm_left_bot: "Chap kaft·bilak bo'g'imi", arm_right_bot: "O'ng kaft·bilak bo'g'imi", arm_left_multi: "Chap qo'l (ko'p)", arm_right_multi: "O'ng qo'l (ko'p)",
         allergy_voice: "Boshqa (gapirib ayting)",
         med_title: "Biror dori ichyapsizmi?", med_none: "Yo'q", med_cold: "Shamollash dorisi", med_pain: "Og'riq qoldiruvchi", med_digest: "Hazm qilish dorisi", med_hospital: "Retsept dorisi", med_idk: "Bilmayman", summary_med_info: "💊 Ichilayotgan dori", summary_med_label: "Dori",
-        arm_left_all: "Chap qo'l butun", arm_right_all: "O'ng qo'l butun", arm_left_mid: "Chap tirsak·bilak", arm_right_mid: "O'ng tirsak·bilak", arm_left_bot: "Chap qo'l·bilak", arm_right_bot: "O'ng qo'l·bilak", arm_left_multi: "Chap qo'l (ko'p)", arm_right_multi: "O'ng qo'l (ko'p)",
+        arm_left_all: "Chap qo'l butun", arm_right_all: "O'ng qo'l butun", arm_left_mid: "Chap tirsak·bilak", arm_right_mid: "O'ng tirsak·bilak", arm_left_bot: "Chap kaft·bilak bo'g'imi", arm_right_bot: "O'ng kaft·bilak bo'g'imi", arm_left_multi: "Chap qo'l (ko'p)", arm_right_multi: "O'ng qo'l (ko'p)",
         allergy_voice: "Boshqa (gapirib ayting)",
         nurse_mode: "Hamshira rejimi",
         pin_prompt: "Parolni kiriting:",
@@ -1293,7 +1293,7 @@ const translations = {
   const extraTranslations = {
     ko: { allergy_idk: "잘 모르겠어요", btn_confirm: "확인 ✔️", btn_cancel: "취소", voice_listening: "마이크에 대고 말해 주세요...", voice_paused: "마이크가 기다리고 있어요.", voice_paused_hint: "(다 말했으면 [✅ 말하기 완료]를 누르세요)", voice_analyzing: "AI가 분석 중이에요... 🤖", voice_confirm_q: "아래 알레르기가 맞나요? (터치해서 선택/해제)", voice_add: "선택한 항목 추가하기", voice_finish: "말하기 완료", voice_retry: "다시 말하기", voice_error: "인식 오류: ", voice_empty: "들린 말이 없어요 😢", voice_not_found: "알레르기를 찾지 못했어요 😢", voice_again: "다시 한 번 말해 줄래요?", voice_fail: "오류가 났어요. 다시 해 주세요.", voice_done: "분석 완료! (터치해서 선택/해제)" },
     en: { allergy_idk: "I don't know", btn_confirm: "OK ✔️", btn_cancel: "Cancel", voice_listening: "Please speak into the microphone...", voice_paused: "The microphone is waiting.", voice_paused_hint: "(When you are done, press [✅ Done speaking])", voice_analyzing: "AI is checking... 🤖", voice_confirm_q: "Are these your allergies? (Tap to select/unselect)", voice_add: "Add selected items", voice_finish: "Done speaking", voice_retry: "Speak again", voice_error: "Recognition error: ", voice_empty: "I didn't hear anything 😢", voice_not_found: "No allergies found 😢", voice_again: "Can you say it one more time?", voice_fail: "Something went wrong. Please try again.", voice_done: "Done! (Tap to select/unselect)" },
-    zh: { allergy_idk: "不知道", btn_confirm: "确认 ✔️", btn_cancel: "取消", voice_listening: "请对着麦克风说话...", voice_paused: "麦克风在等待中。", voice_paused_hint: "(说完后请按 [✅ 说完了])", voice_analyzing: "AI正在分析... 🤖", voice_confirm_q: "下面是你的过敏吗？(点击选择/取消)", voice_add: "添加选中的项目", voice_finish: "说完了", voice_retry: "重新说", voice_error: "识别错误: ", voice_empty: "没有听到声音 😢", voice_not_found: "没有找到过敏 😢", voice_again: "能再说一遍吗？", voice_fail: "出错了，请再试一次。", voice_done: "分析完成！(点击选择/取消)" },
+    zh: { allergy_idk: "不知道", btn_confirm: "确认 ✔️", btn_cancel: "取消", voice_listening: "请对着麦克风说话...", voice_paused: "麦克风在等待中。", voice_paused_hint: "(说完后请按 [✅ 说完了])", voice_analyzing: "AI正在分析... 🤖", voice_confirm_q: "你对下面这些东西过敏吗？(点击选择/取消)", voice_add: "添加选中的项目", voice_finish: "说完了", voice_retry: "重新说", voice_error: "识别错误: ", voice_empty: "没有听到声音 😢", voice_not_found: "没有找到过敏 😢", voice_again: "能再说一遍吗？", voice_fail: "出错了，请再试一次。", voice_done: "分析完成！(点击选择/取消)" },
     ru: { allergy_idk: "Не знаю", btn_confirm: "OK ✔️", btn_cancel: "Отмена", voice_listening: "Говори в микрофон...", voice_paused: "Микрофон ждёт.", voice_paused_hint: "(Когда закончишь, нажми [✅ Готово])", voice_analyzing: "ИИ проверяет... 🤖", voice_confirm_q: "Это твоя аллергия? (Нажми, чтобы выбрать/убрать)", voice_add: "Добавить выбранное", voice_finish: "Готово", voice_retry: "Сказать ещё раз", voice_error: "Ошибка распознавания: ", voice_empty: "Ничего не слышно 😢", voice_not_found: "Аллергия не найдена 😢", voice_again: "Можешь сказать ещё раз?", voice_fail: "Произошла ошибка. Попробуй ещё раз.", voice_done: "Готово! (Нажми, чтобы выбрать/убрать)" },
     vi: { allergy_idk: "Không biết", btn_confirm: "Xác nhận ✔️", btn_cancel: "Hủy", voice_listening: "Hãy nói vào micro...", voice_paused: "Micro đang chờ.", voice_paused_hint: "(Nói xong thì bấm [✅ Nói xong])", voice_analyzing: "AI đang phân tích... 🤖", voice_confirm_q: "Đây có phải là dị ứng của em không? (Chạm để chọn/bỏ chọn)", voice_add: "Thêm mục đã chọn", voice_finish: "Nói xong", voice_retry: "Nói lại", voice_error: "Lỗi nhận dạng: ", voice_empty: "Không nghe thấy gì 😢", voice_not_found: "Không tìm thấy dị ứng 😢", voice_again: "Em nói lại một lần nữa được không?", voice_fail: "Có lỗi xảy ra. Hãy thử lại.", voice_done: "Xong! (Chạm để chọn/bỏ chọn)" },
     ja: { allergy_idk: "わからない", btn_confirm: "OK ✔️", btn_cancel: "やめる", voice_listening: "マイクにむかって話してね...", voice_paused: "マイクがまっています。", voice_paused_hint: "(話しおわったら [✅ 話しおわった] をおしてね)", voice_analyzing: "AIがしらべています... 🤖", voice_confirm_q: "このアレルギーであってる? (タッチしてえらぶ/けす)", voice_add: "えらんだものをついか", voice_finish: "話しおわった", voice_retry: "もう一回話す", voice_error: "にんしきエラー: ", voice_empty: "声がきこえなかったよ 😢", voice_not_found: "アレルギーが見つからなかったよ 😢", voice_again: "もう一回言ってくれる?", voice_fail: "エラーがおきました。もう一回やってね。", voice_done: "できた! (タッチしてえらぶ/けす)" },
@@ -1305,28 +1305,47 @@ const translations = {
     ar: { allergy_idk: "لا أعرف", btn_confirm: "موافق ✔️", btn_cancel: "إلغاء", voice_listening: "تحدث في الميكروفون...", voice_paused: "الميكروفون ينتظر.", voice_paused_hint: "(عندما تنتهي، اضغط [✅ انتهيت])", voice_analyzing: "الذكاء الاصطناعي يتحقق... 🤖", voice_confirm_q: "هل هذه حساسيتك؟ (اضغط للاختيار/الإلغاء)", voice_add: "أضف ما اخترته", voice_finish: "انتهيت", voice_retry: "تحدث مرة أخرى", voice_error: "خطأ في التعرف: ", voice_empty: "لم أسمع شيئاً 😢", voice_not_found: "لم يتم العثور على حساسية 😢", voice_again: "هل يمكنك قولها مرة أخرى؟", voice_fail: "حدث خطأ. حاول مرة أخرى.", voice_done: "تم! (اضغط للاختيار/الإلغاء)" }
   };
   for (const l in extraTranslations) Object.assign(translations[l], extraTranslations[l]);
+
+  // 추가 문구: 다 골랐어요(몸 그림), 다리 위치(왼쪽/오른쪽/양쪽), 안 토했어요, 확인 화면 이름표
+  // ⚠️ km/th/mn/uz/ar 등은 원어민 검수 전 번역이므로 검수 후 고칠 것
+  const moreTranslations = {
+    ko: { btn_parts_done: "다 골랐어요", loc_left: "왼쪽", loc_right: "오른쪽", loc_both: "양쪽", vomit_0: "안 토했어요", summary_more_info: "📝 추가 질문", summary_head_q: "어지럽거나 토할 것 같아요?", summary_hurt_how: "다친 이유" },
+    en: { btn_parts_done: "That's all", loc_left: "left", loc_right: "right", loc_both: "both sides", vomit_0: "I didn't throw up", summary_more_info: "📝 More questions", summary_head_q: "Dizzy or feel like throwing up?", summary_hurt_how: "How I got hurt" },
+    zh: { btn_parts_done: "选好了", loc_left: "左边", loc_right: "右边", loc_both: "两边", vomit_0: "没有吐", summary_more_info: "📝 其他问题", summary_head_q: "头晕或想吐吗？", summary_hurt_how: "怎么受伤的" },
+    ru: { btn_parts_done: "Это всё", loc_left: "слева", loc_right: "справа", loc_both: "с обеих сторон", vomit_0: "Меня не рвало", summary_more_info: "📝 Другие вопросы", summary_head_q: "Кружится голова или тошнит?", summary_hurt_how: "Как ударился(лась)" },
+    vi: { btn_parts_done: "Xong rồi", loc_left: "bên trái", loc_right: "bên phải", loc_both: "cả hai bên", vomit_0: "Chưa nôn", summary_more_info: "📝 Câu hỏi thêm", summary_head_q: "Chóng mặt hoặc buồn nôn?", summary_hurt_how: "Bị thương thế nào" },
+    ja: { btn_parts_done: "これでぜんぶ", loc_left: "ひだり", loc_right: "みぎ", loc_both: "りょうほう", vomit_0: "はいていない", summary_more_info: "📝 ほかのしつもん", summary_head_q: "めまいや はきけが ある？", summary_hurt_how: "けがの りゆう" },
+    tl: { btn_parts_done: "Iyon lang po", loc_left: "kaliwa", loc_right: "kanan", loc_both: "magkabila", vomit_0: "Hindi ako nagsuka", summary_more_info: "📝 Iba pang tanong", summary_head_q: "Nahihilo o nasusuka?", summary_hurt_how: "Paano nasaktan" },
+    km: { btn_parts_done: "អស់ហើយ", loc_left: "ខាងឆ្វេង", loc_right: "ខាងស្តាំ", loc_both: "ទាំងសងខាង", vomit_0: "ខ្ញុំមិនបានក្អួតទេ", summary_more_info: "📝 សំណួរបន្ថែម", summary_head_q: "វិលមុខ ឬចង់ក្អួតទេ?", summary_hurt_how: "របួសដោយរបៀបណា" },
+    th: { btn_parts_done: "แค่นี้แหละ", loc_left: "ข้างซ้าย", loc_right: "ข้างขวา", loc_both: "ทั้งสองข้าง", vomit_0: "ไม่ได้อ้วก", summary_more_info: "📝 คำถามเพิ่มเติม", summary_head_q: "เวียนหัวหรืออยากอ้วกไหม?", summary_hurt_how: "เจ็บได้อย่างไร" },
+    mn: { btn_parts_done: "Ингээд болоо", loc_left: "зүүн талд", loc_right: "баруун талд", loc_both: "хоёр талд", vomit_0: "Бөөлжөөгүй", summary_more_info: "📝 Нэмэлт асуулт", summary_head_q: "Толгой эргэж эсвэл дотор муухайрч байна уу?", summary_hurt_how: "Яаж гэмтсэн" },
+    uz: { btn_parts_done: "Shu xolos", loc_left: "chap tomonda", loc_right: "o'ng tomonda", loc_both: "ikkala tomonda", vomit_0: "Qusmadim", summary_more_info: "📝 Qo'shimcha savollar", summary_head_q: "Boshing aylanyaptimi yoki ko'ngling aynayaptimi?", summary_hurt_how: "Qanday jarohatlandim" },
+    ar: { btn_parts_done: "هذا كل شيء", loc_left: "على اليسار", loc_right: "على اليمين", loc_both: "على الجانبين", vomit_0: "لم أتقيأ", summary_more_info: "📝 أسئلة إضافية", summary_head_q: "هل تشعر بدوخة أو رغبة في التقيؤ؟", summary_hurt_how: "كيف أُصبت" }
+  };
+  for (const l in moreTranslations) Object.assign(translations[l], moreTranslations[l]);
   
-  const tts_codes = { ko: "ko-KR", en: "en-US", zh: "zh-CN", ru: "ru-RU", vi: "vi-VN", ja: "ja-JP", tl: "tl-PH", km: "km-KH", th: "th-TH", mn: "mn-MN", uz: "uz-UZ", ar: "ar-SA" };
+  // 필리핀어는 Chrome·Android에서 'fil-PH'를 씀
+  const tts_codes = { ko: "ko-KR", en: "en-US", zh: "zh-CN", ru: "ru-RU", vi: "vi-VN", ja: "ja-JP", tl: "fil-PH", km: "km-KH", th: "th-TH", mn: "mn-MN", uz: "uz-UZ", ar: "ar-SA" };
   
   const symptomsData = {
     "머리": [
-      { id: "s1", icon: "🤕", ko: "지끈지끈 아파요", en: "Throbbing headache", zh: "一阵阵地疼", ru: "Пульсирующая боль", vi: "Đau nhức", ja: "ズキズキする", tl: "Sumasakit ang ulo", km: "ក្បាលខ្ញុំលោតឌឹបៗ", th: "หนู/ผมปวดหัวตุบๆ", mn: "Миний толгой лугшиж өвдөж байна", uz: "Boshim loqillab og'riyapti", ar: "رأسي يوجعني بقوة" },
+      { id: "s1", icon: "🤕", ko: "지끈지끈 아파요", en: "Throbbing headache", zh: "一阵阵地疼", ru: "Пульсирующая боль", vi: "Đau nhức", ja: "ズキズキする", tl: "Sumasakit ang ulo", km: "ក្បាលខ្ញុំលោតឌឹបៗ", th: "หนู/ผมปวดหัวตุบๆ", mn: "Миний толгой лугшиж өвдөж байна", uz: "Boshim lo'qillab og'riyapti", ar: "رأسي يوجعني بقوة" },
       { id: "s2", icon: "💫", ko: "어지러워요", en: "Dizzy", zh: "头晕", ru: "Кружится голова", vi: "Chóng mặt", ja: "めまいがする", tl: "Nahihilo", km: "ខ្ញុំវិលមុខ", th: "หนู/ผมเวียนหัว", mn: "Миний толгой эргэж байна", uz: "Boshim aylanyapti", ar: "أشعر بدوخة" },
       { id: "s3", icon: "💥", ko: "부딪혔어요", en: "Bumped my head", zh: "撞到了", ru: "Ударился(лась)", vi: "Bị va đập", ja: "あたまをぶつけた", tl: "Nauntog", km: "ខ្ញុំបុកក្បាល", th: "หัวไปกระแทกมา", mn: "Би толгойгоо мөргөчихлөө", uz: "Boshimni urib oldim", ar: "ضربت رأسي" },
-      { id: "s4", icon: "😵‍💫", ko: "멍해요", en: "Feeling dazed", zh: "发呆", ru: "В ступоре", vi: "Choáng váng", ja: "ぼーっとする", tl: "Tulala", km: "ខ្ញុំវង្វេងវង្វាន់", th: "หนู/ผมรู้สึกมึนงง", mn: "Би манарч байна", uz: "Boshim qotib qoldi", ar: "رأسي ثقيل" }
+      { id: "s4", icon: "😵‍💫", ko: "멍해요", en: "Feeling dazed", zh: "头昏昏沉沉的", ru: "Голова как в тумане", vi: "Đầu óc lơ mơ", ja: "ぼーっとする", tl: "Tulala", km: "ខ្ញុំវង្វេងវង្វាន់", th: "หนู/ผมรู้สึกมึนงง", mn: "Би манарч байна", uz: "Boshim qotib qoldi", ar: "رأسي ثقيل" }
     ],
     "팔·손": [
-      { id: "ag1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
+      { id: "ag1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
       { id: "ag2", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
-      { id: "ag3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "ag3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "ag4", icon: "⚡", ko: "삐었어요", en: "Sprained", zh: "扭伤", ru: "Растяжение", vi: "Bong gân", ja: "ひねった", tl: "Napilay", km: "ខ្ញុំគ្រេច", th: "เคล็ดขัดยอก", mn: "Би булгалчихсан", uz: "Qayirib oldim", ar: "التوى" },
       { id: "ag5", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
-      { id: "ag6", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
+      { id: "ag6", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "一动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
     ],
     "다리·발": [
       { id: "lg1", icon: "🩹", ko: "까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ជើង", th: "หนู/ผมมีแผลถลอกที่ขา", mn: "Миний хөл шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
       { id: "lg2", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំជើង", th: "หนู/ผมมีรอยฟกช้ำที่ขา", mn: "Миний хөл хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
-      { id: "lg3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើមជើង", th: "ขาหนู/ผมบวม", mn: "Миний хөл хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "lg3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើមជើង", th: "ขาหนู/ผมบวม", mn: "Миний хөл хавдчихсан", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "lg4", icon: "⚡", ko: "삐었어요", en: "Sprained", zh: "扭伤", ru: "Растяжение", vi: "Bong gân", ja: "ひねった", tl: "Napilay", km: "ខ្ញុំគ្រេចជើង", th: "ขาหนู/ผมเคล็ดขัดยอก", mn: "Миний хөл булгарчихсан", uz: "Qayirib oldim", ar: "التوى" },
       { id: "lg5", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាមជើង", th: "หนู/ผมเลือดไหลที่ขา", mn: "Миний хөлнөөс цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
       { id: "lg6", icon: "🚶", ko: "걸으면 아파요", en: "Hurts to walk", zh: "走路疼", ru: "Больно ходить", vi: "Đau khi đi", ja: "あるくといたい", tl: "Masakit maglakad", km: "វាឈឺនៅពេលខ្ញុំដើរ", th: "เดินแล้วเจ็บ", mn: "Алхахаар өвдөж байна", uz: "Yursam og'riyapti", ar: "يوجعني لما أمشي" }
@@ -1351,16 +1370,16 @@ const translations = {
     "입·이": [
       { id: "m1", icon: "🦷", ko: "이가 아파요", en: "Toothache", zh: "牙疼", ru: "Болит зуб", vi: "Đau răng", ja: "はがいたい", tl: "Masakit ang ngipin", km: "ខ្ញុំឈឺធ្មេញ", th: "หนู/ผมปวดฟัน", mn: "Миний шүд өвдөж байна", uz: "Tishim og'riyapti", ar: "أسناني توجعني" },
       { id: "m2", icon: "〰️", ko: "이가 흔들려요", en: "Loose tooth", zh: "牙齿松动", ru: "Шатается зуб", vi: "Răng lung lay", ja: "はがぐらぐらする", tl: "Umuuga ang ngipin", km: "ធ្មេញខ្ញុំរង្គើ", th: "ฟันหนู/ผมโยก", mn: "Миний шүд хөдөлж байна", uz: "Tishim qimirlayapti", ar: "سني يتحرك" },
-      { id: "m3", icon: "👅", ko: "입안이 헐었어요", en: "Mouth sore", zh: "口腔溃疡", ru: "Язвочка во рту", vi: "Lở miệng", ja: "くちのなかがいたい", tl: "May singaw", km: "ខ្ញុំឈឺក្នុងមាត់", th: "หนู/ผมเจ็บในปาก", mn: "Миний ам өвдөж байна", uz: "Og'zim yaralandi", ar: "فمي مجروح" }
+      { id: "m3", icon: "👅", ko: "입안이 헐었어요", en: "Mouth sore", zh: "口腔溃疡", ru: "Язвочка во рту", vi: "Lở miệng", ja: "くちのなかに できものが できた", tl: "May singaw", km: "ខ្ញុំឈឺក្នុងមាត់", th: "หนู/ผมเจ็บในปาก", mn: "Миний ам өвдөж байна", uz: "Og'zim yaralandi", ar: "فمي مجروح" }
     ],
     "목": [
       { id: "nk1", icon: "😫", ko: "삼킬 때 아파요", en: "Hurts to swallow", zh: "吞咽时疼", ru: "Больно глотать", vi: "Nuốt đau", ja: "のみこむといたい", tl: "Masakit lumunok", km: "ខ្ញុំឈឺពេលលេប", th: "กลืนแล้วเจ็บ", mn: "Залгихад өвдөж байна", uz: "Yutunsam og'riyapti", ar: "يوجعني لما أبلع" },
-      { id: "nk2", icon: "😷", ko: "기침이 나요", en: "Coughing", zh: "咳嗽", ru: "Кашель", vi: "Ho", ja: "せきがでる", tl: "Inuubo", km: "ខ្ញុំក្អក", th: "หนู/ผมไอ", mn: "Би ханиалгаж байна", uz: "Yötalyapman", ar: "عندي كحة" },
+      { id: "nk2", icon: "😷", ko: "기침이 나요", en: "Coughing", zh: "咳嗽", ru: "Кашель", vi: "Ho", ja: "せきがでる", tl: "Inuubo", km: "ខ្ញុំក្អក", th: "หนู/ผมไอ", mn: "Би ханиалгаж байна", uz: "Yo'talyapman", ar: "عندي كحة" },
       { id: "nk3", icon: "🤐", ko: "목소리가 안 나와요", en: "Lost my voice", zh: "发不出声音", ru: "Пропал голос", vi: "Mất tiếng", ja: "こえがでない", tl: "Nawalan ng boses", km: "ខ្ញុំបាត់សំឡេង", th: "หนู/ผมไม่มีเสียง", mn: "Миний хоолой сөөчихсөн", uz: "Ovozim chiqmayapti", ar: "صوتي لا يخرج" },
       { id: "nk4", icon: "🙅", ko: "목을 못 돌려요", en: "Can't turn neck", zh: "脖子转不了", ru: "Не могу повернуть шею", vi: "Không quay được cổ", ja: "くびがまわらない", tl: "Hindi malingon ang leeg", km: "ខ្ញុំងាកកមិនរួចទេ", th: "หนู/ผมหันคอไม่ได้", mn: "Би хүзүүгээ эргүүлж чадахгүй байна", uz: "Bo'ynimni bura olmayapman", ar: "لا أستطيع لف رقبتي" }
     ],
     "가슴": [
-      { id: "c1", icon: "😮‍💨", ko: "숨쉬기 힘들어요", en: "Hard to breathe", zh: "呼吸困难", ru: "Трудно дышать", vi: "Khó thở", ja: "いきがくるしい", tl: "Hirap huminga", km: "ខ្ញុំពិបាកដកដង្ហើម", th: "หนู/ผมหายใจไม่ออก", mn: "Амьсгалахад хэцүү байна", uz: "Nafas olishga qiynalyapman", ar: "لا أستطيع التنفس جيداً" },
+      { id: "c1", icon: "😮‍💨", ko: "숨쉬기 힘들어요", en: "Hard to breathe", zh: "呼吸困难", ru: "Трудно дышать", vi: "Khó thở", ja: "いきがくるしい", tl: "Hirap huminga", km: "ខ្ញុំពិបាកដកដង្ហើម", th: "หนู/ผมหายใจลำบาก", mn: "Амьсгалахад хэцүү байна", uz: "Nafas olishga qiynalyapman", ar: "لا أستطيع التنفس جيداً" },
       { id: "c2", icon: "⚡", ko: "콕콕 아파요", en: "Sharp pain", zh: "刺痛", ru: "Колющая боль", vi: "Đau nhói", ja: "チクチクいたい", tl: "May tumutusok na sakit", km: "ខ្ញុំចាក់ចុកក្នុងទ្រូង", th: "หนู/ผมเจ็บจี๊ดๆที่หน้าอก", mn: "Цээжээр хатгуулж өвдөж байна", uz: "Sanchib og'riyapti", ar: "يوجعني مثل الإبرة" },
       { id: "c3", icon: "💓", ko: "두근거려요", en: "Heart pounding", zh: "心跳加速", ru: "Сердце колотится", vi: "Tim đập nhanh", ja: "ドキドキする", tl: "Mabilis ang tibok ng puso", km: "បេះដូងខ្ញុំលោតញាប់", th: "หัวใจหนู/ผมเต้นแรง", mn: "Миний зүрх дэлсэж байна", uz: "Yuragim dukkillayapti", ar: "قلبي يدق بسرعة" },
       { id: "c4", icon: "🧱", ko: "답답해요", en: "Feels tight", zh: "胸闷", ru: "Давит в груди", vi: "Tức ngực", ja: "むねがくるしい", tl: "Naninikip ang dibdib", km: "ខ្ញុំតឹងទ្រូង", th: "หนู/ผมรู้สึกอึดอัดหน้าอก", mn: "Цээж давчдаж байна", uz: "Nafasim qisyapti", ar: "صدري ضيق" }
@@ -1369,94 +1388,94 @@ const translations = {
       { id: "b1", icon: "⚡", ko: "콕콕 찔러요", en: "Sharp stinging", zh: "刺痛", ru: "Колет", vi: "Đau nhói", ja: "チクチクいたい", tl: "May tumutusok na sakit", km: "ខ្ញុំចាក់ចុកក្នុងពោះ", th: "หนู/ผมเจ็บจี๊ดๆที่ท้อง", mn: "Гэдэс хатгуулж өвдөж байна", uz: "Sanchib og'riyapti", ar: "يوجعني مثل الإبرة" },
       { id: "b2", icon: "🌪️", ko: "쥐어짜듯 아파요", en: "Cramping pain", zh: "绞痛", ru: "Крутит живот", vi: "Đau quặn", ja: "ギュッといたい", tl: "Namimilipit sa sakit", km: "ខ្ញុំរមួលពោះ", th: "หนู/ผมปวดบิดๆที่ท้อง", mn: "Гэдэс базлаж өвдөж байна", uz: "Buralib og'riyapti", ar: "بطني يمغصني" },
       { id: "b3", icon: "🤢", ko: "토할 것 같아요", en: "Feel like vomiting", zh: "想吐", ru: "Тошнит", vi: "Buồn nôn", ja: "きもちわるい", tl: "Gusto kong sumuka", km: "ខ្ញុំចង់ក្អួត", th: "หนู/ผมอยากอ้วก", mn: "Би бөөлжмөөр байна", uz: "Ko'nglim ayniyapti", ar: "أريد أن أستفرغ" },
-      { id: "b6", icon: "😵", ko: "체한 것 같아요", en: "Upset stomach", zh: "消化不良", ru: "Расстройство желудка", vi: "Khó tiêu", ja: "胃もたれがする", tl: "Hindi natunawan", km: "ពិបាករំលាយអាហារ", th: "อาหารไม่ย่อย", mn: "Ходоод эвгүйрхэх", uz: "Ovqat hazm bo'lmayapti", ar: "سوء هضم" },
+      { id: "b6", icon: "😵", ko: "체한 것 같아요", en: "Upset stomach", zh: "消化不良", ru: "Расстройство желудка", vi: "Khó tiêu", ja: "おなかが もたれる", tl: "Hindi natunawan", km: "ពិបាករំលាយអាហារ", th: "อาหารไม่ย่อย", mn: "Ходоод эвгүй байна", uz: "Ovqat hazm bo'lmayapti", ar: "سوء هضم" },
       { id: "b4", icon: "💩", ko: "설사했어요", en: "Diarrhea", zh: "拉肚子", ru: "Понос", vi: "Tiêu chảy", ja: "げりをした", tl: "Nagtatae", km: "ខ្ញុំរាក", th: "หนู/ผมท้องเสีย", mn: "Миний гэдэс гүйлгэж байна", uz: "Ichim ketyapti", ar: "عندي إسهال" },
-      { id: "b5", icon: "🚽", ko: "화장실 못 갔어요", en: "Can't go to bathroom", zh: "上不了厕所", ru: "Не могу сходить в туалет", vi: "Không đi vệ sinh được", ja: "うんちがでない", tl: "Hindi makatae", km: "ខ្ញុំមិនអាចទៅបន្ទប់ទឹកបានទេ", th: "หนู/ผมไปเข้าห้องน้ำไม่ได้", mn: "Би бие засаж чадахгүй байна", uz: "Hojatxonaga bora olmadim", ar: "لا أستطيع دخول الحمام" }
+      { id: "b5", icon: "🚽", ko: "화장실 못 갔어요", en: "Can't go to bathroom", zh: "拉不出大便（便秘）", ru: "Не могу сходить в туалет", vi: "Không đi vệ sinh được", ja: "うんちがでない", tl: "Hindi makatae", km: "ខ្ញុំមិនអាចទៅបន្ទប់ទឹកបានទេ", th: "หนู/ผมไปเข้าห้องน้ำไม่ได้", mn: "Би бие засаж чадахгүй байна", uz: "Hojatxonaga bora olmadim", ar: "عندي إمساك" }
     ],
     "윗배": [
       { id: "b1", icon: "⚡", ko: "콕콕 찔러요", en: "Sharp stinging", zh: "刺痛", ru: "Колет", vi: "Đau nhói", ja: "チクチクいたい", tl: "May tumutusok na sakit", km: "ខ្ញុំចាក់ចុកក្នុងពោះ", th: "หนู/ผมเจ็บจี๊ดๆที่ท้อง", mn: "Гэдэс хатгуулж өвдөж байна", uz: "Sanchib og'riyapti", ar: "يوجعني مثل الإبرة" },
       { id: "b2", icon: "🌪️", ko: "쥐어짜듯 아파요", en: "Cramping pain", zh: "绞痛", ru: "Крутит живот", vi: "Đau quặn", ja: "ギュッといたい", tl: "Namimilipit sa sakit", km: "ខ្ញុំរមួលពោះ", th: "หนู/ผมปวดบิดๆที่ท้อง", mn: "Гэдэс базлаж өвдөж байна", uz: "Buralib og'riyapti", ar: "بطني يمغصني" },
       { id: "b3", icon: "🤢", ko: "토할 것 같아요", en: "Feel like vomiting", zh: "想吐", ru: "Тошнит", vi: "Buồn nôn", ja: "きもちわるい", tl: "Gusto kong sumuka", km: "ខ្ញុំចង់ក្អួត", th: "หนู/ผมอยากอ้วก", mn: "Би бөөлжмөөр байна", uz: "Ko'nglim ayniyapti", ar: "أريد أن أستفرغ" },
-      { id: "b6", icon: "😵", ko: "체한 것 같아요", en: "Upset stomach", zh: "消化不良", ru: "Расстройство желудка", vi: "Khó tiêu", ja: "胃もたれがする", tl: "Hindi natunawan", km: "ពិបាករំលាយអាហារ", th: "อาหารไม่ย่อย", mn: "Ходоод эвгүйрхэх", uz: "Ovqat hazm bo'lmayapti", ar: "سوء هضم" }
+      { id: "b6", icon: "😵", ko: "체한 것 같아요", en: "Upset stomach", zh: "消化不良", ru: "Расстройство желудка", vi: "Khó tiêu", ja: "おなかが もたれる", tl: "Hindi natunawan", km: "ពិបាករំលាយអាហារ", th: "อาหารไม่ย่อย", mn: "Ходоод эвгүй байна", uz: "Ovqat hazm bo'lmayapti", ar: "سوء هضم" }
     ],
     "아랫배": [
       { id: "b1", icon: "⚡", ko: "콕콕 찔러요", en: "Sharp stinging", zh: "刺痛", ru: "Колет", vi: "Đau nhói", ja: "チクチクいたい", tl: "May tumutusok na sakit", km: "ខ្ញុំចាក់ចុកក្នុងពោះ", th: "หนู/ผมเจ็บจี๊ดๆที่ท้อง", mn: "Гэдэс хатгуулж өвдөж байна", uz: "Sanchib og'riyapti", ar: "يوجعني مثل الإبرة" },
       { id: "b2", icon: "🌪️", ko: "쥐어짜듯 아파요", en: "Cramping pain", zh: "绞痛", ru: "Крутит живот", vi: "Đau quặn", ja: "ギュッといたい", tl: "Namimilipit sa sakit", km: "ខ្ញុំរមួលពោះ", th: "หนู/ผมปวดบิดๆที่ท้อง", mn: "Гэдэс базлаж өвдөж байна", uz: "Buralib og'riyapti", ar: "بطني يمغصني" },
       { id: "b4", icon: "💩", ko: "설사했어요", en: "Diarrhea", zh: "拉肚子", ru: "Понос", vi: "Tiêu chảy", ja: "げりをした", tl: "Nagtatae", km: "ខ្ញុំរាក", th: "หนู/ผมท้องเสีย", mn: "Миний гэдэс гүйлгэж байна", uz: "Ichim ketyapti", ar: "عندي إسهال" },
-      { id: "b5", icon: "🚽", ko: "화장실 못 갔어요", en: "Can't go to bathroom", zh: "上不了厕所", ru: "Не могу сходить в туалет", vi: "Không đi vệ sinh được", ja: "うんちがでない", tl: "Hindi makatae", km: "ខ្ញុំមិនអាចទៅបន្ទប់ទឹកបានទេ", th: "หนู/ผมไปเข้าห้องน้ำไม่ได้", mn: "Би бие засаж чадахгүй байна", uz: "Hojatxonaga bora olmadim", ar: "لا أستطيع دخول الحمام" }
+      { id: "b5", icon: "🚽", ko: "화장실 못 갔어요", en: "Can't go to bathroom", zh: "拉不出大便（便秘）", ru: "Не могу сходить в туалет", vi: "Không đi vệ sinh được", ja: "うんちがでない", tl: "Hindi makatae", km: "ខ្ញុំមិនអាចទៅបន្ទប់ទឹកបានទេ", th: "หนู/ผมไปเข้าห้องน้ำไม่ได้", mn: "Би бие засаж чадахгүй байна", uz: "Hojatxonaga bora olmadim", ar: "عندي إمساك" }
     ],
-    "어깨·윗팔": [
+    "어깨·위팔": [
       { id: "au1", icon: "💫", ko: "어깨가 아파요", en: "Shoulder hurts", zh: "肩膀疼", ru: "Болит плечо", vi: "Đau vai", ja: "かたがいたい", tl: "Masakit ang balikat", km: "ខ្ញុំឈឺស្មា", th: "หนู/ผมเจ็บไหล่", mn: "Миний мөр өвдөж байна", uz: "Yelkam og'riyapti", ar: "كتفي يوجعني" },
       { id: "au2", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
-      { id: "au3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "au3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "au4", icon: "😵‍💫", ko: "팔을 못 들겠어요", en: "Can't lift arm", zh: "抬不起胳膊", ru: "Не могу поднять руку", vi: "Không nâng được tay", ja: "うでがあがらない", tl: "Hindi mabuhat ang braso", km: "ខ្ញុំលើកដៃមិនរួចទេ", th: "หนู/ผมยกแขนไม่ขึ้น", mn: "Би гараа өргөж чадахгүй байна", uz: "Qo'limni ko'tara olmayapman", ar: "لا أستطيع رفع يدي" },
-      { id: "au5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
+      { id: "au5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "一动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
     ],
-    "팔꿈치·아랫팔": [
-      { id: "al1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
+    "팔꿈치·아래팔": [
+      { id: "al1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
       { id: "al2", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
-      { id: "al3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
-      { id: "al4", icon: "⚡", ko: "굽힐 때 아파요", en: "Hurts to bend", zh: "弯曲时疼", ru: "Больно сгибать", vi: "Đau khi gập", ja: "まげるといたい", tl: "Masakit pag tinupi", km: "វាឈឺនៅពេលខ្ញុំបត់កែងដៃ", th: "งอแล้วเจ็บ", mn: "Нугалахаар өвдөж байна", uz: "Buksak og'riyapti", ar: "يوجعني لما أثنيه" },
+      { id: "al3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
+      { id: "al4", icon: "⚡", ko: "굽힐 때 아파요", en: "Hurts to bend", zh: "弯曲时疼", ru: "Больно сгибать", vi: "Đau khi gập", ja: "まげるといたい", tl: "Masakit pag tinupi", km: "វាឈឺនៅពេលខ្ញុំបត់កែងដៃ", th: "งอแล้วเจ็บ", mn: "Нугалахаар өвдөж байна", uz: "Buksam og'riyapti", ar: "يوجعني لما أثنيه" },
       { id: "al5", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" }
     ],
     "손·손목": [
-      { id: "ah1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
+      { id: "ah1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
       { id: "ah2", icon: "⚡", ko: "손목을 삐었어요", en: "Sprained wrist", zh: "手腕扭伤", ru: "Растянул(а) запястье", vi: "Bong gân cổ tay", ja: "てくびをひねった", tl: "Napilay ang pulso", km: "ខ្ញុំគ្រេចកដៃ", th: "หนู/ผมข้อมือเคล็ด", mn: "Миний бугуй булгарчихсан", uz: "Bilagimni qayirib oldim", ar: "التوى معصمي" },
-      { id: "ah3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "ah3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "ah4", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
-      { id: "ah5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" },
+      { id: "ah5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "一动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" },
       { id: "ah6", icon: "🫐", ko: "손가락이 끼였어요", en: "Finger got caught", zh: "手指夹到了", ru: "Прищемил(а) палец", vi: "Kẹt ngón tay", ja: "ゆびをはさんだ", tl: "Naipit ang daliri", km: "ខ្ញុំគៀបម្រាមដៃ", th: "หนู/ผมโดนหนีบนิ้ว", mn: "Миний хуруу хавчуулагдчихсан", uz: "Barmog'im qisilib qoldi", ar: "انحشر إصبعي" }
     ],
     "팔꿈치": [
-      { id: "al1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
+      { id: "al1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
       { id: "al2", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
-      { id: "al3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
-      { id: "al4", icon: "⚡", ko: "굽힐 때 아파요", en: "Hurts to bend", zh: "弯曲时疼", ru: "Больно сгибать", vi: "Đau khi gập", ja: "まげるといたい", tl: "Masakit pag tinupi", km: "វាឈឺនៅពេលខ្ញុំបត់កែងដៃ", th: "งอแล้วเจ็บ", mn: "Нугалахаар өвдөж байна", uz: "Buksak og'riyapti", ar: "يوجعني لما أثنيه" },
+      { id: "al3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
+      { id: "al4", icon: "⚡", ko: "굽힐 때 아파요", en: "Hurts to bend", zh: "弯曲时疼", ru: "Больно сгибать", vi: "Đau khi gập", ja: "まげるといたい", tl: "Masakit pag tinupi", km: "វាឈឺនៅពេលខ្ញុំបត់កែងដៃ", th: "งอแล้วเจ็บ", mn: "Нугалахаар өвдөж байна", uz: "Buksam og'riyapti", ar: "يوجعني لما أثنيه" },
       { id: "al5", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" }
     ],
-    "아랫팔": [
-      { id: "al1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
+    "아래팔": [
+      { id: "al1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
       { id: "al2", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
-      { id: "al3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "al3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "al5", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" }
     ],
     "손목": [
-      { id: "ah1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
+      { id: "ah1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
       { id: "ah2", icon: "⚡", ko: "손목을 삐었어요", en: "Sprained wrist", zh: "手腕扭伤", ru: "Растянул(а) запястье", vi: "Bong gân cổ tay", ja: "てくびをひねった", tl: "Napilay ang pulso", km: "ខ្ញុំគ្រេចកដៃ", th: "หนู/ผมข้อมือเคล็ด", mn: "Миний бугуй булгарчихсан", uz: "Bilagimni qayirib oldim", ar: "التوى معصمي" },
-      { id: "ah3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "ah3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "ah4", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
-      { id: "ah5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
+      { id: "ah5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "一动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
     ],
     "손": [
-      { id: "ah1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
-      { id: "ah3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "ah1", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
+      { id: "ah3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "ah4", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
-      { id: "ah5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" },
+      { id: "ah5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "一动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" },
       { id: "ah6", icon: "🫐", ko: "손가락이 끼였어요", en: "Finger got caught", zh: "手指夹到了", ru: "Прищемил(а) палец", vi: "Kẹt ngón tay", ja: "ゆびをはさんだ", tl: "Naipit ang daliri", km: "ខ្ញុំគៀបម្រាមដៃ", th: "หนู/ผมโดนหนีบนิ้ว", mn: "Миний хуруу хавчуулагдчихсан", uz: "Barmog'im qisilib qoldi", ar: "انحشر إصبعي" }
     ],
     "허벅지": [
       { id: "lt1", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
-      { id: "lt2", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "lt2", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "lt3", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
-      { id: "lt4", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدش" },
-      { id: "lt5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
+      { id: "lt4", icon: "🩹", ko: "긁히고 까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدش" },
+      { id: "lt5", icon: "😣", ko: "움직이면 아파요", en: "Hurts when moving", zh: "一动就疼", ru: "Больно двигать", vi: "Đau khi cử động", ja: "うごかすといたい", tl: "Masakit pag ginalaw", km: "វាឈឺនៅពេលខ្ញុំកម្រើក", th: "ขยับแล้วเจ็บ", mn: "Хөдлөхөөр өвдөж байна", uz: "Qimirlatsam og'riyapti", ar: "يوجعني لما أتحرك" }
     ],
     "무릎": [
-      { id: "lk1", icon: "🩹", ko: "무릎이 까졌어요", en: "Scraped knee", zh: "膝盖擦伤了", ru: "Ссадина на колене", vi: "Trầy đầu gối", ja: "ひざをすりむいた", tl: "Nagasgas ang tuhod", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tizzam tirnaldi", ar: "ركبتي انخدشت" },
+      { id: "lk1", icon: "🩹", ko: "무릎이 까졌어요", en: "Scraped knee", zh: "膝盖擦伤了", ru: "Ссадина на колене", vi: "Trầy đầu gối", ja: "ひざをすりむいた", tl: "Nagasgas ang tuhod", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tizzam tirnaldi", ar: "ركبتي انخدشت" },
       { id: "lk2", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيها كدمة" },
-      { id: "lk3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخة" },
+      { id: "lk3", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّمة" },
       { id: "lk4", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
-      { id: "lk5", icon: "😵‍💫", ko: "굽히면 아파요", en: "Hurts to bend", zh: "弯曲时疼", ru: "Больно сгибать", vi: "Đau khi gập", ja: "まげるといたい", tl: "Masakit pag tinupi", km: "វាឈឺនៅពេលខ្ញុំបត់ជង្គង់", th: "งอเข่าแล้วเจ็บ", mn: "Өвдгөө нугалахаар өвдөж байна", uz: "Buksak og'riyapti", ar: "توجعني لما أثنيها" }
+      { id: "lk5", icon: "😵‍💫", ko: "굽히면 아파요", en: "Hurts to bend", zh: "弯曲时疼", ru: "Больно сгибать", vi: "Đau khi gập", ja: "まげるといたい", tl: "Masakit pag tinupi", km: "វាឈឺនៅពេលខ្ញុំបត់ជង្គង់", th: "งอเข่าแล้วเจ็บ", mn: "Өвдгөө нугалахаар өвдөж байна", uz: "Buksam og'riyapti", ar: "توجعني لما أثنيها" }
     ],
     "종아리·발목": [
       { id: "lc1", icon: "⚡", ko: "발목을 삐었어요", en: "Sprained ankle", zh: "扭伤脚踝", ru: "Подвернул(а) ногу", vi: "Bong gân mắt cá", ja: "あしくびをひねった", tl: "Napilay ang bukong-bukong", km: "ខ្ញុំគ្រេចកជើង", th: "หนู/ผมข้อเท้าพลิก", mn: "Миний шагай булгарчихсан", uz: "To'pig'imni qayirib oldim", ar: "التوى كاحلي" },
-      { id: "lc2", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخ" },
+      { id: "lc2", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّم" },
       { id: "lc3", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" },
       { id: "lc4", icon: "🚶", ko: "걸으면 아파요", en: "Hurts to walk", zh: "走路疼", ru: "Больно ходить", vi: "Đau khi đi", ja: "あるくといたい", tl: "Masakit maglakad", km: "វាឈឺនៅពេលខ្ញុំដើរ", th: "เดินแล้วเจ็บ", mn: "Алхахаар өвдөж байна", uz: "Yursam og'riyapti", ar: "يوجعني لما أمشي" }
     ],
     "발": [
-      { id: "lf1", icon: "🩹", ko: "까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Би шалбалчихсан", uz: "Tirnaldi", ar: "انخدشت" },
-      { id: "lf2", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Минийх хавдчихсан", uz: "Ishib ketdi", ar: "منفوخة" },
+      { id: "lf1", icon: "🩹", ko: "까졌어요", en: "Scraped", zh: "擦伤了", ru: "Ссадина", vi: "Bị trầy", ja: "すりむいた", tl: "Nagasgas", km: "ខ្ញុំរលាត់ស្បែក", th: "หนู/ผมมีแผลถลอก", mn: "Шалбарчихсан", uz: "Tirnaldi", ar: "انخدشت" },
+      { id: "lf2", icon: "🎈", ko: "부었어요", en: "Swollen", zh: "肿了", ru: "Опухло", vi: "Sưng", ja: "はれている", tl: "Namamaga", km: "ខ្ញុំហើម", th: "มันบวม", mn: "Хавдчихсан байна", uz: "Shishib ketdi", ar: "متورّمة" },
       { id: "lf3", icon: "🩸", ko: "피가 나요", en: "Bleeding", zh: "流血", ru: "Идёт кровь", vi: "Chảy máu", ja: "ちがでている", tl: "Dumudugo", km: "ខ្ញុំហូរឈាម", th: "เลือดไหล", mn: "Цус гарч байна", uz: "Qon kelyapti", ar: "ينزل دم" },
       { id: "lf4", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيها كدمة" },
       { id: "lf5", icon: "🫧", ko: "물집이 생겼어요", en: "Blister", zh: "起水泡了", ru: "Мозоль/волдырь", vi: "Phồng rộp", ja: "まめができた", tl: "May paltos", km: "ខ្ញុំមានពងទឹក", th: "หนู/ผมมีตุ่มพอง", mn: "Миний хөл цэврүүтчихсэн", uz: "Pufakcha chiqdi", ar: "ظهرت فقاعة ماء" }
@@ -1464,13 +1483,13 @@ const translations = {
     "등·허리": [
       { id: "bk1", icon: "⚡", ko: "아파요", en: "Hurts", zh: "疼", ru: "Болит", vi: "Đau", ja: "いたい", tl: "Masakit", km: "ខ្ញុំឈឺខ្នង", th: "หนู/ผมปวดหลัง", mn: "Миний нуруу өвдөж байна", uz: "Og'riyapti", ar: "يوجعني" },
       { id: "bk2", icon: "💥", ko: "부딪혔어요", en: "Bumped", zh: "撞到了", ru: "Ударился(лась)", vi: "Bị va đập", ja: "ぶつけた", tl: "Tumama", km: "ខ្ញុំបុកខ្នង", th: "หลังหนู/ผมไปกระแทกมา", mn: "Би нуруугаа мөргөчихсөн", uz: "Urib oldim", ar: "اصطدمت" },
-      { id: "bk3", icon: "😣", ko: "허리를 못 펴겠어요", en: "Can't straighten back", zh: "直不起腰", ru: "Не могу разогнуться", vi: "Không duỗi được lưng", ja: "せなかがのばせない", tl: "Hindi maidiretso ang likod", km: "ខ្ញុំអោនមិនរួចទេ", th: "หนู/ผมยืดหลังไม่ได้", mn: "Би нуруугаа тэнийлгэж чадахгүй байна", uz: "Qaddimni rostlay olmayapman", ar: "لا أستطيع فرد ظهري" },
+      { id: "bk3", icon: "😣", ko: "허리를 못 펴겠어요", en: "Can't straighten back", zh: "直不起腰", ru: "Не могу разогнуться", vi: "Không duỗi được lưng", ja: "せなかがのばせない", tl: "Hindi maidiretso ang likod", km: "ខ្ញុំត្រង់ខ្នងមិនរួចទេ", th: "หนู/ผมยืดหลังไม่ได้", mn: "Би нуруугаа тэнийлгэж чадахгүй байна", uz: "Qaddimni rostlay olmayapman", ar: "لا أستطيع فرد ظهري" },
       { id: "bk4", icon: "🫐", ko: "멍이 들었어요", en: "Bruised", zh: "淤青了", ru: "Синяк", vi: "Bầm tím", ja: "あおあざができた", tl: "May pasa", km: "ខ្ញុំជាំ", th: "หนู/ผมมีรอยฟกช้ำ", mn: "Би хөхөрчихсөн", uz: "Ko'kardi", ar: "فيه كدمة" }
     ],
     "피부": [
       { id: "sk1", icon: "🤚", ko: "가려워요", en: "Itchy", zh: "痒", ru: "Чешется", vi: "Ngứa", ja: "かゆい", tl: "Makati", km: "ស្បែកខ្ញុំរមាស់", th: "หนู/ผมคันผิว", mn: "Миний арьс загатнаж байна", uz: "Qichishyapti", ar: "تحكني" },
-      { id: "sk2", icon: "🔴", ko: "두드러기가 났어요", en: "Hives", zh: "起荨麻疹了", ru: "Крапивница", vi: "Nổi mề đay", ja: "じんましんがでた", tl: "May pantal", km: "ខ្ញុំចេញកន្ទួល", th: "หนู/ผมมีผื่นขึ้น", mn: "Миний биеэр юм туурчихсан", uz: "Toshma toshdi", ar: "ظهرت حبوب" },
-      { id: "sk3", icon: "🔥", ko: "데었어요", en: "Burned", zh: "烫伤了", ru: "Обжёгся(лась)", vi: "Bị bỏng", ja: "やけどした", tl: "Napaso", km: "ខ្ញុំរលាក", th: "หนู/ผมโดนลวก", mn: "Би түлэгдчихсэн", uz: "Kuyib qoldi", ar: "احترق" },
+      { id: "sk2", icon: "🔴", ko: "두드러기가 났어요", en: "Hives", zh: "起荨麻疹了", ru: "Крапивница", vi: "Nổi mề đay", ja: "じんましんがでた", tl: "May pantal", km: "ខ្ញុំចេញកន្ទួល", th: "หนู/ผมมีผื่นขึ้น", mn: "Биеэр тууралт гарчихсан", uz: "Toshma toshdi", ar: "طلع عندي طفح جلدي يحكّ" },
+      { id: "sk3", icon: "🔥", ko: "데었어요", en: "Burned", zh: "烫伤了", ru: "Обжёгся(лась)", vi: "Bị bỏng", ja: "やけどした", tl: "Napaso", km: "ខ្ញុំរលាក", th: "หนู/ผมโดนลวก", mn: "Би түлэгдчихсэн", uz: "Kuyib qoldi", ar: "انحرقت" },
       { id: "sk4", icon: "💧", ko: "물집이 생겼어요", en: "Blister", zh: "起水泡了", ru: "Мозоль/волдырь", vi: "Phồng rộp", ja: "まめができた", tl: "May paltos", km: "ខ្ញុំមានពងទឹក", th: "หนู/ผมมีตุ่มพอง", mn: "Миний бие дээр цэврүү гарсан", uz: "Pufakcha chiqdi", ar: "ظهرت فقاعة ماء" }
     ],
     "몸 전체": [
@@ -1482,8 +1501,11 @@ const translations = {
     ]
   };
   
-  const evaluateEmergency = (entries) => {
+  // followups: step4의 추가 질문 답 (몇 번 토했어요? 등, 방문 전체 공통)
+  const evaluateEmergency = (entries, followups) => {
     let flags = new Set();
+    // 실제로 토했는지 (추가 질문 '몇 번 토했어요?'에 1번 이상으로 답함)
+    const vomited = (followups || []).some(f => f && f.q === "몇 번 토했어요?" && ["1번", "2번", "3번 이상"].includes(f.a));
     let allSymptoms = entries.flatMap(e => e.symptoms.map(s => s.ko || s)).join(" ");
     let maxPain = 0;
     entries.forEach(e => {
@@ -1502,7 +1524,8 @@ const translations = {
       const hasTraumaCause = data.traumaCauses && Object.keys(data.traumaCauses).length > 0;
       // 머리를 부딪힌 경우도 외상으로 봄, headQ는 step2에서 true/false로 저장됨
       const headTrauma = hasTraumaCause || symptomsStr.includes("부딪혔어요");
-      if (data.part === "머리" && headTrauma && (data.headQ === true || data.headQ === "yes" || symptomsStr.includes("토할 것 같아요") || symptomsStr.includes("어지러워요"))) {
+      // 토할 것 같음은 배 등 다른 부위에서 고르므로 모든 기록(allSymptoms)과 추가 질문 답으로 확인
+      if (data.part === "머리" && headTrauma && (data.headQ === true || data.headQ === "yes" || allSymptoms.includes("토할 것 같아요") || vomited || symptomsStr.includes("어지러워요"))) {
         flags.add("뇌진탕 의심");
       }
       // 여러 구역을 골라 묶인 경우에도 실제 고른 구역(areas)으로 오른쪽 아래 확인
@@ -1553,6 +1576,8 @@ const translations = {
       current.symptoms = [];
       current.painLevels = {};
       current.headQ = null;
+      current.startTimes = {};
+      current.traumaCauses = {};
       current.done = [];
   }
 
@@ -1585,6 +1610,61 @@ const translations = {
       return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 
+  // 증상 목록을 찾을 부위 이름 (다리·발 (왼쪽 무릎) -> 무릎)
+  function resolveSymptomPart(lookupPart) {
+      if (!lookupPart) return lookupPart;
+      if (lookupPart.includes(' (')) {
+          const base = lookupPart.split(' (')[0];
+          const detail = lookupPart.split(' (')[1].replace(')', '');
+          const subParts = ['어깨·위팔', '팔꿈치·아래팔', '손·손목', '허벅지', '무릎', '종아리·발목', '발'];
+          const found = subParts.find(sp => detail.includes(sp));
+          return found && symptomsData[found] ? found : base;
+      }
+      return lookupPart;
+  }
+
+  // 증상 번역: 고른 부위의 증상 목록에서 먼저 찾음 (같은 한국어 '아파요'가 눈/귀/등에 다 있어서)
+  function translateSymptom(koStr, lookupPart, lang) {
+      if (!lang || lang === 'ko' || !koStr) return koStr;
+      const list = symptomsData[resolveSymptomPart(lookupPart)] || [];
+      const item = list.find(it => it.ko === koStr);
+      if (item && item[lang]) return item[lang];
+      return translateKoToLang(koStr, lang);
+  }
+
+  // 한국어 부위 이름(머리, 가슴, 몸 전체 등)의 번역 키
+  function partKeyOf(koName) {
+      return Object.keys(translations.ko).find(k => /^part_/.test(k) && translations.ko[k] === koName) || null;
+  }
+
+  // 학생 화면에 보여 줄 부위 이름 (step2·step4·step5 공통)
+  function partDisplayName(partObj, lang) {
+      if (!partObj) return '';
+      const t = translations[lang] || translations.ko;
+      const tr = k => t[k] || translations.ko[k] || k;
+      const areas = partObj.areas || [];
+      // 배·팔 '잘 모르겠어요': 부위 이름 + (잘 모르겠어요)
+      if (partObj.id === 'idk') {
+          const baseKey = partKeyOf(partObj.lookupPart);
+          return `${baseKey ? tr(baseKey) : translateKoToLang(partObj.lookupPart, lang)} (${tr('idk')})`;
+      }
+      // 다리: 세부 부위 + (왼쪽/오른쪽/양쪽), 모르는 것은 빼고 표시
+      if (partObj.legSide !== undefined) {
+          const sideText = ['left', 'right', 'both'].includes(partObj.legSide) ? tr('loc_' + partObj.legSide) : '';
+          const subText = partObj.legSub ? tr(partObj.legSub) : tr('part_leg');
+          return sideText ? `${subText} (${sideText})` : subText;
+      }
+      // 팔 여러 부위: 실제로 고른 구역을 나열
+      if (/_multi$/.test(partObj.id || '') && areas.length > 0) {
+          return areas.map(tr).join(', ');
+      }
+      if (partObj.id && partObj.id !== 'single' && translations.ko[partObj.id]) return tr(partObj.id);
+      const key = partKeyOf(partObj.name);
+      if (key) return tr(key);
+      if (t[partObj.name]) return t[partObj.name];
+      return translateKoToLang(partObj.name, lang);
+  }
+
   // UI Helpers
   function translateKoToLang(koStr, lang) {
       if (!lang || lang === 'ko' || !koStr) return koStr;
@@ -1605,7 +1685,7 @@ const translations = {
           }
       }
       
-      // 2. 복합 문자열 치환 (ex: "팔·손 (왼쪽 어깨·윗팔)" -> "Arm/Hand (Left Shoulder/Upper arm)")
+      // 2. 복합 문자열 치환 (ex: "팔·손 (왼쪽 어깨·위팔)" -> "Arm/Hand (Left Shoulder/Upper arm)")
       const keys = Object.keys(tKo).sort((a, b) => tKo[b].length - tKo[a].length);
       for (const key of keys) {
           if (tKo[key] && typeof tKo[key] === 'string' && tKo[key].length > 1) {
@@ -1618,6 +1698,9 @@ const translations = {
 
   function applyLanguageToUI() {
       const state = getState();
+      // 화면 언어 표시 (글꼴 선택·화면 읽기 프로그램용)
+      const htmlLang = { zh: 'zh-CN', tl: 'fil' }[state.lang] || state.lang || 'ko';
+      document.documentElement.setAttribute('lang', htmlLang);
       
       // 아랍어(ar) 우측 정렬(RTL) 레이아웃 적용
       if (state.lang === 'ar') {
@@ -1638,7 +1721,16 @@ const translations = {
       if (!window.speechSynthesis) return;
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = tts_codes[getState().lang] || "ko-KR";
+      const lang = getState().lang || 'ko';
+      utterance.lang = tts_codes[lang] || "ko-KR";
+      // 그 언어 목소리가 기기에 있으면 그 목소리로 (없으면 다른 언어 목소리로 엉뚱하게 읽지 않도록 말하지 않음)
+      const voices = window.speechSynthesis.getVoices() || [];
+      if (voices.length > 0) {
+          const prefixes = lang === 'tl' ? ['fil', 'tl'] : [utterance.lang.split('-')[0].toLowerCase()];
+          const voice = voices.find(v => prefixes.some(pre => (v.lang || '').replace('_', '-').toLowerCase().startsWith(pre)));
+          if (!voice) return;
+          utterance.voice = voice;
+      }
       window.speechSynthesis.speak(utterance);
   }
 

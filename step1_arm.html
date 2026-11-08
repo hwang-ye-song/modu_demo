@@ -42,8 +42,8 @@
     <!-- Arm Part Selection Overlay -->
     <div id="arm-part-flow" class="hidden hurt-flow">
       <div class="symptoms-grid single-select">
-        <button class="symptom-card" data-sub="arm_upper"><span class="emoji">🦾</span><span class="text" data-i18n="arm_upper">어깨·윗팔</span></button>
-        <button class="symptom-card" data-sub="arm_lower"><span class="emoji">🦾</span><span class="text" data-i18n="arm_lower">팔꿈치·아랫팔</span></button>
+        <button class="symptom-card" data-sub="arm_upper"><span class="emoji">🦾</span><span class="text" data-i18n="arm_upper">어깨·위팔</span></button>
+        <button class="symptom-card" data-sub="arm_lower"><span class="emoji">🦾</span><span class="text" data-i18n="arm_lower">팔꿈치·아래팔</span></button>
         <button class="symptom-card" data-sub="arm_hand"><span class="emoji">🖐️</span><span class="text" data-i18n="arm_hand">손·손목</span></button>
       </div>
     </div>
@@ -159,9 +159,9 @@
                 
                 if (parts.length === 1) {
                     let lookup = '팔·손';
-                    if (hasUpper) lookup = '어깨·윗팔';
+                    if (hasUpper) lookup = '어깨·위팔';
                     if (hasElbow) lookup = '팔꿈치';
-                    if (hasLower) lookup = '아랫팔';
+                    if (hasLower) lookup = '아래팔';
                     if (hasWrist) lookup = '손목';
                     if (hasHand) lookup = '손';
                     // 부위가 딱 1개일 때는 '왼쪽 손목', '오른쪽 팔꿈치' 등 고유 이름을 그대로 살려줍니다.
@@ -173,7 +173,7 @@
                 
                 // 2개 이상의 부위가 선택되었을 때만 그룹화된 이름을 사용합니다.
                 if (!hasUpper && midCount > 0 && bottomCount === 0) {
-                    return [{ id: `${sidePrefix}mid`, name: `${sidePrefix}mid`, lookupPart: '팔꿈치·아랫팔', areas: parts }];
+                    return [{ id: `${sidePrefix}mid`, name: `${sidePrefix}mid`, lookupPart: '팔꿈치·아래팔', areas: parts }];
                 }
                 if (!hasUpper && midCount === 0 && bottomCount > 0) {
                     return [{ id: `${sidePrefix}bot`, name: `${sidePrefix}bot`, lookupPart: '손·손목', areas: parts }];
@@ -217,7 +217,8 @@
       // I don't know button
       document.querySelector('.btn-idk').addEventListener('click', () => {
         restartRound(cur);
-        cur.queue = [{ id: 'idk', name: translations.ko['idk'], lookupPart: '팔·손' }];
+        // 이름은 '팔·손 (어딘지 모름)'으로 (부위 이름이 '잘 모르겠어요'로 바뀌지 않게)
+        cur.queue = [{ id: 'idk', name: '팔·손 (어딘지 모름)', lookupPart: '팔·손' }];
         saveState(state);
         window.location.href = 'step2.html';
       });

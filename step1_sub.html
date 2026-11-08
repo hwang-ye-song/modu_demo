@@ -120,6 +120,7 @@
           btn.onclick = (e) => {
             const side = e.currentTarget.dataset.side;
             cur.sub.sideLabel = translations.ko['side_' + side];
+            cur.sub.legSide = side;
             cur.sub.sideSelected = true;
             saveState(state);
             location.reload();
@@ -132,9 +133,9 @@
         document.querySelectorAll('#leg-part-flow [data-sub]').forEach(btn => {
           btn.onclick = (e) => {
             const subKey = e.currentTarget.dataset.sub;
-            const subLabel = translations.ko[subKey];
             restartRound(cur);
-            cur.part = `다리·발 (${cur.sub.sideLabel} ${subLabel})`;
+            cur.sub.legSub = subKey;
+            cur.part = legPartLabel(cur.sub.legSide, subKey);
             saveState(state);
             window.location.href = 'step2.html';
           };
@@ -183,8 +184,12 @@
                  const topAreas = allActive.filter(r => r.includes('top'));
                  const bottomAreas = allActive.filter(r => r.includes('bottom'));
                  selectedQueue = [];
-                 if (topAreas.length > 0) selectedQueue.push({ id: 'belly_top_all', name: '윗배 전체', lookupPart: '윗배', areas: topAreas });
-                 if (bottomAreas.length > 0) selectedQueue.push({ id: 'belly_bottom_all', name: '아랫배 전체', lookupPart: '아랫배', areas: bottomAreas });
+                 // 한 줄에 한 칸만 골랐으면 그 칸 이름 그대로 ('윗배 전체'는 두 칸을 다 골랐을 때만)
+                 const rowItem = (rowAreas, allId, allName, lookup) => rowAreas.length === 1
+                     ? { id: rowAreas[0], name: rowAreas[0], lookupPart: lookup, areas: rowAreas }
+                     : { id: allId, name: allName, lookupPart: lookup, areas: rowAreas };
+                 if (topAreas.length > 0) selectedQueue.push(rowItem(topAreas, 'belly_top_all', '윗배 전체', '윗배'));
+                 if (bottomAreas.length > 0) selectedQueue.push(rowItem(bottomAreas, 'belly_bottom_all', '아랫배 전체', '아랫배'));
               }
               document.getElementById('btn-belly-done').style.display = 'block';
           } else {
@@ -224,28 +229,43 @@
           cur.sub.headSub = true;
         } else if (cur.part === translations.ko['part_belly']) {
           restartRound(cur);
-          cur.queue = [{ id: 'idk', name: translations.ko['idk'], lookupPart: '배' }];
+          // 이름은 '배 (어딘지 모름)'으로 (부위 이름이 '잘 모르겠어요'로 바뀌지 않게)
+          cur.queue = [{ id: 'idk', name: '배 (어딘지 모름)', lookupPart: '배' }];
         } else if (cur.sub.side) {
           if (!cur.sub.sideSelected) {
              cur.sub.sideSelected = true;
              cur.sub.sideLabel = translations.ko['idk'];
+             cur.sub.legSide = 'idk';
              saveState(state);
              location.reload();
              return;
           } else {
              restartRound(cur);
-             cur.part = `다리·발 (${cur.sub.sideLabel} ${translations.ko['idk']})`;
+             cur.sub.legSub = null;
+             cur.part = legPartLabel(cur.sub.legSide, null);
           }
         }
         saveState(state);
         window.location.href = 'step2.html';
       });
 
+      // 다리 부위의 한국어 이름 (보건실 화면·DB용): 모르는 쪽/부위는 '잘 모르겠어요'를 두 번 붙이지 않음
+      function legPartLabel(side, subKey) {
+        const sub = subKey ? translations.ko[subKey] : null;
+        const sideLabel = { left: '왼쪽', right: '오른쪽', both: '양쪽' }[side] || null;
+        if (sideLabel && sub) return `다리·발 (${sideLabel} ${sub})`;
+        if (sideLabel) return `다리·발 (${sideLabel}, 부위 모름)`;
+        if (sub) return `다리·발 (${sub}, 어느 쪽인지 모름)`;
+        return '다리·발 (위치 모름)';
+      }
+
       // Back Button
       document.getElementById('btn-back').addEventListener('click', () => {
         if (cur.sub.side && cur.sub.sideSelected) {
           cur.sub.sideSelected = false;
           cur.sub.sideLabel = null;
+          cur.sub.legSide = null;
+          cur.sub.legSub = null;
           saveState(state);
           location.reload();
         } else {
