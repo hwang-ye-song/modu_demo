@@ -1,10 +1,11 @@
 // 대시보드 에디터로 배포할 때: Edge Functions → Deploy a new function → Via Editor
 //   이름 generate-ai-summary, 이 파일 전체를 붙여넣고 Deploy → 함수 설정에서 'Verify JWT' 끄기
-//   🔑 비밀 키는 코드에 쓰지 말고 Edge Functions → Secrets에 GEMINI_API_KEY, WEBHOOK_SECRET 이름으로 넣기
+//   🔑 비밀 키는 코드에 쓰지 말고 Edge Functions → Secrets에 ANTHROPIC_API_KEY, WEBHOOK_SECRET 이름으로 넣기
 // 수정할 때마다 다시 배포: supabase functions deploy generate-ai-summary --no-verify-jwt
 //   (브라우저는 JWT가 아닌 publishable 키(sb_publishable_...)를 쓰므로 JWT 검사를 끔. 웹훅은 x-webhook-secret으로 확인)
-// 비밀값: supabase secrets set WEBHOOK_SECRET=<임의의 긴 문자열> GEMINI_API_KEY=<Gemini API 키>
-//   (선택) GEMINI_MODEL=<모델 이름>  기본값 gemini-2.5-flash-lite (무료 한도가 있는 모델 중 가장 쌈)
+// 비밀값: supabase secrets set WEBHOOK_SECRET=<임의의 긴 문자열> ANTHROPIC_API_KEY=<Claude API 키>
+//   (선택) ANTHROPIC_MODEL=<모델 이름>  기본값 claude-haiku-5-5 (가장 저렴한 Claude 모델)
+//   Gemini는 약관상 18세 미만이 쓰는 서비스에 사용할 수 없어 Claude로 바꿈
 //   프로젝트에서 legacy 키를 껐다면 supabase secrets set SERVICE_KEY=<sb_secret_... 키> 도 설정
 // AI 요약은 태블릿이 아니라 DB 저장 뒤 여기서 만듦. Database Webhook 설정:
 //   Supabase Dashboard → Database → Webhooks → Create a new hook
@@ -18,6 +19,7 @@
 //   웹훅을 만들기 전에 저장된 기록은 요약이 채워지지 않음 (ai_summary가 비어 있는 행은 대시보드에서 직접 확인)
 // step4_allergy.html의 음성 알레르기 추출(mode: 'allergy_extract')도 이 함수가 처리함
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import Anthropic from "npm:@anthropic-ai/sdk@1.1.0"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -30,8 +32,8 @@ const MAX_ENTRIES = 10
 const MAX_ENTRIES_BYTES = 20 * 1024
 const MAX_TRANSCRIPT_CHARS = 300
 const MAX_FIELD_CHARS = 100
-const MAX_TOKENS = 4096   // 최신 Flash 모델은 답하기 전 생각(thinking)에도 토큰을 써서 넉넉히 둠
-const UPSTREAM_TIMEOUT_MS = 14000
+const MAX_TOKENS = 4096   // Claude는 답하기 전 생각(thinking)에도 토큰을 써서 넉넉히 둠
+const UPSTREAM_TIMEOUT_MS = 12000   // 재시도 1번까지 해도 웹훅·학생 화면이 너무 오래 기다리지 않게
 const DB_TIMEOUT_MS = 10000
 const LANGS = ['ko', 'en', 'zh', 'ru', 'vi', 'ja', 'tl', 'km', 'th', 'mn', 'uz', 'ar']
 
@@ -130,46 +132,54 @@ function buildAllergyPrompt(transcript: string, lang: string): string {
 
 type AIResult = { content: string } | { error: string, status: number }
 
-// AI 호출 (키 없음·시간 초과·네트워크 오류는 throw)
+// AI 호출 (키 없음은 throw, AI 서버 오류·시간 초과는 상태 코드로 돌려줌)
 async function callAI(promptText: string): Promise<AIResult> {
-  // 🔑 Secrets의 GEMINI_API_KEY (Google AI Studio에서 받은 Gemini API 키)
-  const apiKey = Deno.env.get('GEMINI_API_KEY')
-  // 모델 이름은 코드 수정 없이 GEMINI_MODEL 비밀값으로 바꿀 수 있음
-  const model = Deno.env.get('GEMINI_MODEL') || 'gemini-2.5-flash-lite'
+  // 🔑 Secrets의 ANTHROPIC_API_KEY (Claude Console에서 만든 API 키)
+  const apiKey = Deno.env.get('ANTHROPIC_API_KEY')
+  // 모델 이름은 코드 수정 없이 ANTHROPIC_MODEL 비밀값으로 바꿀 수 있음
+  const model = Deno.env.get('ANTHROPIC_MODEL') || 'claude-haiku-5-5'
 
   if (!apiKey) {
-    throw new Error('GEMINI_API_KEY is missing in environment variables.')
+    throw new Error('ANTHROPIC_API_KEY is missing in environment variables.')
   }
 
-  // Gemini의 OpenAI 호환 주소 (요청·응답 형식이 chat/completions와 같음)
-  const response = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
+  const client = new Anthropic({ apiKey, timeout: UPSTREAM_TIMEOUT_MS, maxRetries: 1 })
+  try {
+    const response = await client.messages.create({
       model,
-      messages: [{ role: "user", content: promptText }],
-      max_tokens: MAX_TOKENS
-    }),
-    signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS)
-  })
+      max_tokens: MAX_TOKENS,
+      // 요약·알레르기 추출은 간단한 일이라 생각은 짧게 (비용·속도)
+      output_config: { effort: 'low' },
+      messages: [{ role: 'user', content: promptText }],
+    })
 
-  // AI 서버 오류는 상태 코드만 그대로 전달 (응답 내용은 넘기지 않음)
-  if (!response.ok) {
-    console.error('Upstream error:', response.status)
-    await response.body?.cancel()
-    return { error: 'ai_error', status: response.status }
-  }
+    // 안전 정책으로 답하지 않은 경우 (기본 요약으로 넘어감)
+    if (response.stop_reason === 'refusal') {
+      console.error('AI refusal:', response.stop_details?.category ?? null)
+      return { error: 'ai_refused', status: 502 }
+    }
 
-  const data = await response.json().catch(() => null)
-  const content = data?.choices?.[0]?.message?.content
-  if (typeof content !== 'string' || !content.trim()) {
-    console.error('Upstream returned empty content')
-    return { error: 'ai_empty', status: 502 }
+    let content = ''
+    for (const block of response.content) {
+      if (block.type === 'text') content += block.text
+    }
+    if (!content.trim()) {
+      console.error('Upstream returned empty content:', response.stop_reason)
+      return { error: 'ai_empty', status: 502 }
+    }
+    return { content }
+  } catch (error) {
+    // AI 서버 오류는 상태 코드만 그대로 전달 (응답 내용은 넘기지 않음)
+    if (error instanceof Anthropic.APIConnectionError) {
+      console.error('Upstream connection error or timeout')
+      return { error: 'ai_timeout', status: 504 }
+    }
+    if (error instanceof Anthropic.APIError) {
+      console.error('Upstream error:', error.status)
+      return { error: 'ai_error', status: error.status ?? 502 }
+    }
+    throw error
   }
-  return { content }
 }
 
 // 요약을 만들어 그 행에 저장 (오류는 서버 로그에만 남기고 throw하지 않음)
