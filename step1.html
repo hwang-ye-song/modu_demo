@@ -143,13 +143,14 @@
           state.current = newRound(translations.ko[partKey] || partKey);
 
           // 팔은 팔 그림, 다리·머리·배는 세부 부위 화면, 나머지(가슴·몸 전체)는 바로 증상 선택
+          // 배: 중고등만 9칸 화면, 초등은 나누지 않고 '배' 하나로 (보건교사 종이 문진표처럼 부위만)
           let next = 'step2.html';
           if (partKey === 'part_arm') {
             next = 'step1_arm.html';
           } else if (partKey === 'part_leg') {
             state.current.sub.side = 'leg';
             next = 'step1_sub.html';
-          } else if (partKey === 'part_head' || partKey === 'part_belly') {
+          } else if (partKey === 'part_head' || (partKey === 'part_belly' && state.level === 'secondary')) {
             next = 'step1_sub.html';
           }
           saveState(state);

@@ -114,9 +114,16 @@
       if (state.visit.class_num) document.getElementById('input-class').value = state.visit.class_num;
       if (state.visit.student_num) document.getElementById('input-number').value = state.visit.student_num;
 
-      // 입력하면 빨간 표시 해제
+      // 입력하면 빨간 표시 해제, 입력값은 바로 저장 (🌐 언어 바꾸기로 다시 불러와도 남게)
       document.querySelectorAll('.form-group input').forEach(input => {
-        input.addEventListener('input', () => input.classList.remove('invalid'));
+        input.addEventListener('input', () => {
+          input.classList.remove('invalid');
+          const s = getState();
+          s.visit.grade = document.getElementById('input-grade').value;
+          s.visit.class_num = document.getElementById('input-class').value;
+          s.visit.student_num = document.getElementById('input-number').value;
+          saveState(s);
+        });
       });
 
       document.getElementById('btn-next').addEventListener('click', () => {

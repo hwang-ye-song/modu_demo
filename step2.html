@@ -76,7 +76,7 @@
         const doneCount = allEntries(state).length;
         const total = doneCount + cur.queue.length;
         // 앞에서 이미 고른 같은 부위면 그 번호를 씀 (step3에서 앞 기록에 합쳐지므로)
-        const sameIdx = cur.partObj ? state.visit.entries.findIndex(e => e.partObj && e.partObj.id === cur.partObj.id && e.partObj.name === cur.partObj.name && e.partObj.lookupPart === cur.partObj.lookupPart) : -1;
+        const sameIdx = cur.partObj ? state.visit.entries.findIndex(e => isSamePart(e.partObj, cur.partObj)) : -1;
         const currentIdx = sameIdx >= 0 ? sameIdx + 1 : doneCount + 1;
 
         // 부위 이름을 학생 언어로 (머리·가슴·다리 등도 번역)
@@ -170,9 +170,12 @@
           cur.sub.headSub = false;
           cur.part = translations.ko['part_head'];
           back = 'step1_sub.html';
-        } else if (cur.part === translations.ko['part_belly'] || cur.part === translations.ko['part_arm']) {
-          // 배·팔은 구역 선택 화면으로
-          back = cur.part === translations.ko['part_arm'] ? 'step1_arm.html' : 'step1_sub.html';
+        } else if (cur.part === translations.ko['part_arm']) {
+          // 팔은 팔 그림으로
+          back = 'step1_arm.html';
+        } else if (cur.part === translations.ko['part_belly'] && state.level === 'secondary') {
+          // 배는 중고등만 9칸 화면으로 (초등은 배를 나누지 않으므로 몸 그림으로)
+          back = 'step1_sub.html';
         }
         saveState(state);
         window.location.href = back;

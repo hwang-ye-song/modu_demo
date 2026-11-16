@@ -38,6 +38,8 @@ const translations = {
         belly_right_top: "오른쪽 윗배",
         belly_left_bottom: "왼쪽 아랫배",
         belly_right_bottom: "오른쪽 아랫배",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "윗배 가운데 (명치)", belly_left_mid: "왼쪽 옆배", belly_right_mid: "오른쪽 옆배", belly_center_bottom: "아랫배 가운데", belly_mid_all: "배꼽 높이 전체",
         pain_1: "아픈 곳 1",
         pain_2: "아픈 곳 2",
 
@@ -101,6 +103,8 @@ const translations = {
         belly_right_top: "Upper right belly",
         belly_left_bottom: "Lower left belly",
         belly_right_bottom: "Lower right belly",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "Upper middle belly", belly_left_mid: "Left side of belly", belly_right_mid: "Right side of belly", belly_center_bottom: "Lower middle belly", belly_mid_all: "Whole belly at navel level",
         pain_1: "Sore spot 1",
         pain_2: "Sore spot 2",
 
@@ -165,6 +169,8 @@ const translations = {
         belly_right_top: "右上腹",
         belly_left_bottom: "左下腹",
         belly_right_bottom: "右下腹",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "上腹中间（心窝）", belly_left_mid: "左侧腹", belly_right_mid: "右侧腹", belly_center_bottom: "下腹中间", belly_mid_all: "肚脐高度的整个腹部",
         pain_1: "疼的地方 1",
         pain_2: "疼的地方 2",
 
@@ -229,6 +235,8 @@ const translations = {
         belly_right_top: "Живот вверху справа",
         belly_left_bottom: "Живот внизу слева",
         belly_right_bottom: "Живот внизу справа",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "Живот вверху посередине", belly_left_mid: "Живот слева сбоку", belly_right_mid: "Живот справа сбоку", belly_center_bottom: "Живот внизу посередине", belly_mid_all: "Весь живот на уровне пупка",
         pain_1: "Боль 1",
         pain_2: "Боль 2",
 
@@ -293,6 +301,8 @@ const translations = {
         belly_right_top: "Bụng trên bên phải",
         belly_left_bottom: "Bụng dưới bên trái",
         belly_right_bottom: "Bụng dưới bên phải",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "Bụng trên chính giữa", belly_left_mid: "Bụng bên trái (ngang rốn)", belly_right_mid: "Bụng bên phải (ngang rốn)", belly_center_bottom: "Bụng dưới chính giữa", belly_mid_all: "Cả vùng bụng ngang rốn",
         pain_1: "Chỗ đau 1",
         pain_2: "Chỗ đau 2",
 
@@ -353,6 +363,8 @@ const translations = {
         belly_right_top: "おなかの みぎうえ",
         belly_left_bottom: "おなかの ひだりした",
         belly_right_bottom: "おなかの みぎした",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "おなかの うえの まんなか（みぞおち）", belly_left_mid: "おなかの ひだりよこ", belly_right_mid: "おなかの みぎよこ", belly_center_bottom: "おなかの したの まんなか", belly_mid_all: "おへその たかさ ぜんぶ",
         pain_1: "いたいところ 1",
         pain_2: "いたいところ 2",
 
@@ -491,6 +503,8 @@ const translations = {
         belly_right_top: "Kanang itaas ng tiyan",
         belly_left_bottom: "Kaliwang ibaba ng tiyan",
         belly_right_bottom: "Kanang ibaba ng tiyan",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "Gitna ng itaas na tiyan", belly_left_mid: "Kaliwang gilid ng tiyan", belly_right_mid: "Kanang gilid ng tiyan", belly_center_bottom: "Gitna ng ibabang tiyan", belly_mid_all: "Buong tiyan na kapantay ng pusod",
         pain_1: "Sakit 1",
         pain_2: "Sakit 2",
 
@@ -629,6 +643,8 @@ const translations = {
         belly_right_top: "ពោះខាងស្តាំផ្នែកខាងលើ",
         belly_left_bottom: "ពោះខាងឆ្វេងផ្នែកខាងក្រោម",
         belly_right_bottom: "ពោះខាងស្តាំផ្នែកខាងក្រោម",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "ពោះផ្នែកខាងលើចំកណ្តាល", belly_left_mid: "ចំហៀងពោះខាងឆ្វេង", belly_right_mid: "ចំហៀងពោះខាងស្តាំ", belly_center_bottom: "ពោះផ្នែកខាងក្រោមចំកណ្តាល", belly_mid_all: "ពោះត្រង់កម្រិតផ្ចិតទាំងមូល",
         pain_1: "ការឈឺចាប់ទី 1",
         pain_2: "ការឈឺចាប់ទី 2",
 
@@ -767,6 +783,8 @@ const translations = {
         belly_right_top: "ท้องส่วนบนขวา",
         belly_left_bottom: "ท้องส่วนล่างซ้าย",
         belly_right_bottom: "ท้องส่วนล่างขวา",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "ท้องส่วนบนตรงกลาง (ลิ้นปี่)", belly_left_mid: "ท้องด้านข้างซ้าย", belly_right_mid: "ท้องด้านข้างขวา", belly_center_bottom: "ท้องส่วนล่างตรงกลาง", belly_mid_all: "ท้องแนวสะดือทั้งหมด",
         pain_1: "จุดที่เจ็บ 1",
         pain_2: "จุดที่เจ็บ 2",
 
@@ -905,6 +923,8 @@ const translations = {
         belly_right_top: "Гэдэсний баруун дээд хэсэг",
         belly_left_bottom: "Гэдэсний зүүн доод хэсэг",
         belly_right_bottom: "Гэдэсний баруун доод хэсэг",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "Гэдэсний дээд голд (аюулхай)", belly_left_mid: "Гэдэсний зүүн хажуу", belly_right_mid: "Гэдэсний баруун хажуу", belly_center_bottom: "Гэдэсний доод голд", belly_mid_all: "Хүйсний түвшний гэдэс бүхэлдээ",
         pain_1: "Өвдөлт 1",
         pain_2: "Өвдөлт 2",
 
@@ -1043,6 +1063,8 @@ const translations = {
         belly_right_top: "O'ng yuqori qorin",
         belly_left_bottom: "Chap pastki qorin",
         belly_right_bottom: "O'ng pastki qorin",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "Yuqori qorin o'rtasi", belly_left_mid: "Qorinning chap yoni", belly_right_mid: "Qorinning o'ng yoni", belly_center_bottom: "Pastki qorin o'rtasi", belly_mid_all: "Kindik balandligidagi butun qorin",
         pain_1: "Og'riq 1",
         pain_2: "Og'riq 2",
 
@@ -1181,6 +1203,8 @@ const translations = {
         belly_right_top: "أعلى يمين البطن",
         belly_left_bottom: "أسفل يسار البطن",
         belly_right_bottom: "أسفل يمين البطن",
+        // 중고등 배 9칸 (3x3)
+        belly_center_top: "وسط أعلى البطن", belly_left_mid: "جانب البطن الأيسر", belly_right_mid: "جانب البطن الأيمن", belly_center_bottom: "وسط أسفل البطن", belly_mid_all: "البطن كله عند مستوى السرة",
         pain_1: "ألم 1",
         pain_2: "ألم 2",
 
@@ -1552,7 +1576,7 @@ const translations = {
   };
 
   // State Management Helpers
-  // state = { lang, visit: DB 한 줄에 들어갈 내용, current: 몸 그림에서 한 번 고른 부위(회차)를 답하는 중 }
+  // state = { lang, level: 'elem'(초등) | 'secondary'(중고등), visit: DB 한 줄에 들어갈 내용, current: 몸 그림에서 한 번 고른 부위(회차)를 답하는 중 }
   function newVisit() {
       return { grade: '', class_num: '', student_num: '', entries: [], followups: [], allergies: [], medications: [] };
   }
@@ -1584,9 +1608,9 @@ const translations = {
   function getState() {
       let state = null;
       try { state = JSON.parse(sessionStorage.getItem('medical_state')); } catch (e) { state = null; }
-      // 없거나 예전 형식이면 새로 시작 (언어는 유지)
+      // 없거나 예전 형식이면 새로 시작 (언어·학교급은 유지)
       if (!state || typeof state !== 'object' || !state.visit) {
-          return { lang: (state && state.lang) || 'ko', visit: newVisit(), current: null };
+          return { lang: (state && state.lang) || 'ko', level: (state && state.level) || 'elem', visit: newVisit(), current: null };
       }
       return state;
   }
@@ -1594,6 +1618,14 @@ const translations = {
   // 끝낸 부위 기록 전체 (앞 회차 + 이번 회차), 같은 객체를 돌려주므로 고친 뒤 saveState로 저장됨
   function allEntries(state) {
       return [...state.visit.entries, ...(state.current ? state.current.done : [])];
+  }
+
+  // '다른 곳도 아파요'로 다시 고른 부위가 앞 기록과 같은 부위인지 (step2 번호·step3 합치기 공통)
+  // 고른 칸(areas)까지 같아야 같은 부위 (배 9칸 '왼쪽+가운데'와 '가운데+오른쪽'처럼 이름만 같은 묶음을 합치지 않게)
+  function isSamePart(a, b) {
+      if (!a || !b) return false;
+      const areasKey = p => (p.areas || []).slice().sort().join('|');
+      return a.id === b.id && a.name === b.name && a.lookupPart === b.lookupPart && areasKey(a) === areasKey(b);
   }
 
   function saveState(state) {
@@ -1734,6 +1766,52 @@ const translations = {
       window.speechSynthesis.speak(utterance);
   }
 
+  // 중고등: 한국어로 시작하고, 필요한 학생만 위쪽 🌐 버튼으로 언어를 바꿈 (초등은 처음에 언어를 고르므로 없음)
+  const LANG_CHOICES = [
+      ['ko', '🇰🇷', '한국어'], ['zh', '🇨🇳', '中文'], ['vi', '🇻🇳', 'Tiếng Việt'], ['ja', '🇯🇵', '日本語'],
+      ['tl', '🇵🇭', 'Tagalog'], ['km', '🇰🇭', 'ភាសាខ្មែរ'], ['th', '🇹🇭', 'ภาษาไทย'], ['mn', '🇲🇳', 'Монгол'],
+      ['uz', '🇺🇿', "O'zbek"], ['ru', '🇷🇺', 'Русский'], ['en', '🇺🇸', 'English'], ['ar', '🇸🇦', 'العربية']
+  ];
+  function setupLangSwitcher() {
+      const state = getState();
+      const header = document.querySelector('header');
+      // 학생 화면(🔒 버튼이 있는 위쪽 줄)에만 붙임
+      const lock = header && header.querySelector('#btn-nurse-lock');
+      if (state.level !== 'secondary' || !lock) return;
+      const cur = LANG_CHOICES.find(c => c[0] === state.lang) || LANG_CHOICES[0];
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn btn-secondary lang-switch-btn';
+      btn.setAttribute('aria-haspopup', 'dialog');
+      btn.innerHTML = `<span aria-hidden="true">🌐</span> <span>${escapeHtml(cur[2])}</span>`;
+      header.insertBefore(btn, lock);
+
+      const overlay = document.createElement('div');
+      overlay.className = 'lang-switch-overlay hidden';
+      overlay.innerHTML = `<div class="lang-switch-box" role="dialog" aria-modal="true" aria-label="Language"><div class="lang-grid">${LANG_CHOICES.map(([code, flag, name]) =>
+          `<button type="button" class="lang-btn${code === state.lang ? ' selected' : ''}" data-switch-lang="${code}" lang="${code}"${code === state.lang ? ' aria-current="true"' : ''}><span class="emoji" aria-hidden="true">${flag}</span><span class="text">${escapeHtml(name)}</span></button>`).join('')}</div></div>`;
+      document.body.appendChild(overlay);
+      const closeOverlay = () => { overlay.classList.add('hidden'); btn.focus(); };
+      btn.addEventListener('click', () => {
+          overlay.classList.remove('hidden');
+          // 키보드 사용자를 위해 지금 언어 버튼으로 포커스 이동
+          const selected = overlay.querySelector('.lang-btn.selected') || overlay.querySelector('.lang-btn');
+          if (selected) selected.focus();
+      });
+      // 바깥을 누르거나 Esc를 누르면 닫기
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeOverlay(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeOverlay(); });
+      overlay.querySelectorAll('[data-switch-lang]').forEach(b => b.addEventListener('click', () => {
+          const s = getState();
+          if (s.lang === b.dataset.switchLang) { closeOverlay(); return; }
+          s.lang = b.dataset.switchLang;
+          saveState(s);
+          // 화면마다 그릴 때 언어를 읽어 두는 곳이 있어서 새로 불러옴 (저장된 답은 그대로)
+          location.reload();
+      }));
+  }
+
   // Setup Common UI (Header, Speaker)
   document.addEventListener('DOMContentLoaded', () => {
       // 뒤로 가기로 캐시된 화면이 복원되면 새로 읽음 (이전 상태가 다시 저장되지 않게)
@@ -1748,6 +1826,7 @@ const translations = {
               }
           });
       });
+      setupLangSwitcher();
       // 보건교사 화면으로 이동 (기록 보호는 nurse.html의 로그인이 맡음)
       const nurseBtn = document.getElementById('btn-nurse-lock');
       if (nurseBtn) {

@@ -28,11 +28,50 @@
       width: 100%;
       max-width: 400px;
     }
+    .welcome-sub {
+      font-size: 1rem;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+    /* 학교급 버튼: 한 줄에 하나씩 크게 */
+    .level-grid {
+      grid-template-columns: 1fr;
+    }
+    .level-btn .text {
+      text-align: start;
+    }
+    .level-back {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      min-height: unset;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
+    }
+    .level-btn .text small {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-sub);
+    }
   </style>
 </head>
 <body>
   <section class="step active" style="position: relative;">
-    <div class="welcome-wrap">
+    <!-- 1단계: 학교급 고르기 (초등: 언어를 먼저 고름 / 중고등: 한국어로 바로 시작, 위쪽 🌐로 언어 변경) -->
+    <div class="welcome-wrap" id="level-wrap">
+      <div class="welcome-icon">🏥</div>
+      <h1 class="welcome-title">어느 학교에 다녀요?<br><span class="welcome-sub">Which school are you in?</span></h1>
+      <div class="lang-grid level-grid">
+        <button class="lang-btn level-btn" data-level="elem"><span class="emoji">🎒</span><span class="text">초등학교<small>Elementary school</small></span></button>
+        <button class="lang-btn level-btn" data-level="secondary"><span class="emoji">🏫</span><span class="text">중학교 · 고등학교<small>Middle · High school</small></span></button>
+      </div>
+    </div>
+
+    <!-- 2단계 (초등만): 언어 고르기 -->
+    <div class="welcome-wrap hidden" id="lang-wrap">
+      <!-- 학교급을 잘못 골랐을 때 되돌아가기 -->
+      <button type="button" id="btn-level-back" class="btn btn-secondary level-back">◀ 이전 · Back</button>
       <div class="welcome-icon">🏥</div>
       <h1 class="welcome-title" data-i18n="step_0_title">언어를 선택하세요</h1>
       <!-- 아직 언어를 고르기 전이므로 여러 언어로 짧게 안내 -->
@@ -60,7 +99,32 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       clearState();
-      document.querySelectorAll('.lang-btn').forEach(btn => {
+      // 앞 학생이 고른 언어(아랍어 오른쪽 정렬 등)가 남지 않게 지운 상태로 다시 적용
+      applyLanguageToUI();
+      document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const level = e.currentTarget.dataset.level;
+          let state = getState();
+          state.level = level;
+          if (level === 'secondary') {
+            // 중고등: 한국어로 바로 시작 (필요한 학생만 위쪽 🌐 버튼으로 바꿈)
+            state.lang = 'ko';
+            saveState(state);
+            window.location.href = 'step0_profile.html';
+          } else {
+            // 초등: 지금처럼 언어를 먼저 고름
+            saveState(state);
+            document.getElementById('level-wrap').classList.add('hidden');
+            document.getElementById('lang-wrap').classList.remove('hidden');
+          }
+        });
+      });
+      document.getElementById('btn-level-back').addEventListener('click', () => {
+        clearState();
+        document.getElementById('lang-wrap').classList.add('hidden');
+        document.getElementById('level-wrap').classList.remove('hidden');
+      });
+      document.querySelectorAll('.lang-btn[data-lang]').forEach(btn => {
         btn.addEventListener('click', (e) => {
           let state = getState();
           state.lang = e.currentTarget.dataset.lang;

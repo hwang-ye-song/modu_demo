@@ -124,7 +124,7 @@
         };
 
         // '다른 곳도 아파요'로 같은 부위를 다시 고른 경우: 앞 기록에 합침 (같은 부위가 두 번 나오지 않게)
-        const same = state.visit.entries.find(e => e.partObj && e.partObj.id === record.partObj.id && e.partObj.name === record.partObj.name && e.partObj.lookupPart === record.partObj.lookupPart);
+        const same = state.visit.entries.find(e => isSamePart(e.partObj, record.partObj));
         if (same) {
             record.symptoms.forEach(s => {
                 if (!same.symptoms.includes(s)) same.symptoms.push(s);

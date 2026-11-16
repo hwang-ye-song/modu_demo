@@ -578,3 +578,37 @@ h2 {
 [dir="rtl"] .quick-btn .text {
   direction: rtl;
 }
+
+/* 중고등: 위쪽 🌐 언어 바꾸기 버튼과 언어 고르기 창 */
+header .lang-switch-btn {
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+[dir="rtl"] header .lang-switch-btn {
+  margin-left: 0.5rem;
+  margin-right: auto;
+}
+.lang-switch-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.lang-switch-box {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1rem;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+.lang-switch-box .lang-btn.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}

@@ -83,8 +83,8 @@
           const bellyPos = !isIdk && r.partObj.name !== r.partObj.lookupPart ? r.partObj.name : null;
           const areas = r.partObj.areas || [];
           // 묶음 이름(윗배 전체, 왼쪽 팔 여러 부위 등)이 실제로 고른 구역과 다르면 고른 구역을 그대로 나열
-          // (복부 전체·팔 전체, 윗배/아랫배 두 칸을 다 고른 경우는 묶음 이름이 정확하므로 그대로)
-          const isFullGroup = /_all$/.test(r.partObj.id) && (r.partObj.id === 'belly_all' || /^arm_/.test(r.partObj.id) || areas.length === 2);
+          // (복부 전체·팔 전체, 한 줄을 다 고른 경우(초등 2칸·중고등 3칸)는 묶음 이름이 정확하므로 그대로)
+          const isFullGroup = /_all$/.test(r.partObj.id) && (r.partObj.id === 'belly_all' || /^arm_/.test(r.partObj.id) || areas.length >= 2);
           const listAreas = bellyPos && areas.length > 0 && !isFullGroup && !(areas.length === 1 && areas[0] === bellyPos);
           return {
               part: r.partObj.lookupPart,

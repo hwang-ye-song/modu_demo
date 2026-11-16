@@ -70,10 +70,7 @@
             .belly-area.highlight { fill: rgba(255, 107, 107, 0.5); stroke: rgba(255, 107, 107, 1); stroke-width: 1.5; stroke-dasharray: none; }
             .belly-area.highlight-danger { fill: rgba(239, 68, 68, 0.5); stroke: var(--emergency); stroke-width: 1.5; stroke-dasharray: none; }
           </style>
-          <path d="M0.0 0.0 L0.0 50.0 L50.0 50.0 L50.0 0.0 Z" class="belly-area" data-sub="belly_left_top" />
-          <path d="M50.0 0.0 L50.0 50.0 L100.0 50.0 L100.0 0.0 Z" class="belly-area" data-sub="belly_right_top" />
-          <path d="M0.0 50.0 L0.0 100.0 L50.0 100.0 L50.0 50.0 Z" class="belly-area" data-sub="belly_left_bottom" />
-          <path d="M50.0 50.0 L50.0 100.0 L100.0 100.0 L100.0 50.0 Z" class="belly-area" data-sub="belly_right_bottom" />
+          <!-- 구역은 아래 스크립트가 그림 (중고등 3x3 9칸, 초등은 이 화면을 쓰지 않음) -->
         </svg>
       </div>
       
@@ -154,10 +151,37 @@
             window.location.href = 'step2.html';
           };
         });
+      } else if (cur.part === translations.ko['part_belly'] && state.level !== 'secondary') {
+        // 초등은 배를 나누지 않음 ('배' 하나로 증상 화면으로)
+        window.location.href = 'step2.html';
+        return;
       } else if (cur.part === translations.ko['part_belly']) {
-        // Belly Canvas Logic
+        // 중고등: 배 9칸 (3x3)
         updateTitle('part_belly');
         showFlow('belly-pos-flow');
+
+        // 배 구역 줄 (위에서 아래로, 각 줄은 왼쪽에서 오른쪽으로)
+        // 모서리 4칸은 예전 2x2와 같은 키라서 충수염 판단(belly_right_bottom)이 그대로 동작
+        const BELLY_ROWS = [
+          { cells: ['belly_left_top', 'belly_center_top', 'belly_right_top'], allId: 'belly_top_all', allName: '윗배 전체', multiId: 'belly_top_multi', lookup: '윗배' },
+          { cells: ['belly_left_mid', 'belly_navel', 'belly_right_mid'], allId: 'belly_mid_all', allName: '배꼽 높이 전체', multiId: 'belly_mid_multi', lookup: '배' },
+          { cells: ['belly_left_bottom', 'belly_center_bottom', 'belly_right_bottom'], allId: 'belly_bottom_all', allName: '아랫배 전체', multiId: 'belly_bottom_multi', lookup: '아랫배' }
+        ];
+
+        // 그림 위에 구역 그리기
+        const bellySvg = document.getElementById('belly-svg');
+        const cellH = 100 / BELLY_ROWS.length;
+        BELLY_ROWS.forEach((row, ri) => {
+          const cellW = 100 / row.cells.length;
+          row.cells.forEach((cell, ci) => {
+            const x1 = ci * cellW, x2 = (ci + 1) * cellW, y1 = ri * cellH, y2 = (ri + 1) * cellH;
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', `M${x1} ${y1} L${x1} ${y2} L${x2} ${y2} L${x2} ${y1} Z`);
+            path.setAttribute('class', 'belly-area');
+            path.setAttribute('data-sub', cell);
+            bellySvg.appendChild(path);
+          });
+        });
 
         // 구역을 터치해 선택/해제 (여러 곳 선택 가능), 확인을 누를 때 대기열로 저장
         let selectedQueue = null;
@@ -169,27 +193,29 @@
                   allActive.push(el.getAttribute('data-sub'));
               }
           });
+          // 고른 칸을 바로 저장 (🌐 언어 바꾸기로 다시 불러와도, step2에서 돌아와도 남게)
+          cur.sub.pickedAreas = allActive;
+          saveState(state);
 
           if (allActive.length > 0) {
-              const count = allActive.length;
+              const totalCells = BELLY_ROWS.reduce((n, row) => n + row.cells.length, 0);
               // areas: 실제로 고른 구역 (묶어서 보여줘도 오른쪽 아래 확인용으로 남김)
-              if (count === 4) {
+              if (allActive.length === totalCells) {
                  selectedQueue = [{ id: 'belly_all', name: '복부 전체', lookupPart: '배', areas: allActive }];
-              } else if (count === 1) {
-                 const r = allActive[0];
-                 const lookup = r.includes('top') ? '윗배' : '아랫배';
-                 selectedQueue = [{ id: r, name: r, lookupPart: lookup, areas: [r] }];
               } else {
-                 // 2~3개
-                 const topAreas = allActive.filter(r => r.includes('top'));
-                 const bottomAreas = allActive.filter(r => r.includes('bottom'));
+                 // 줄마다 하나로 묶음: 한 칸이면 그 칸 이름, 줄 전체면 '윗배 전체' 등, 일부(중고등 3칸 중 2칸)면 고른 칸을 나열
                  selectedQueue = [];
-                 // 한 줄에 한 칸만 골랐으면 그 칸 이름 그대로 ('윗배 전체'는 두 칸을 다 골랐을 때만)
-                 const rowItem = (rowAreas, allId, allName, lookup) => rowAreas.length === 1
-                     ? { id: rowAreas[0], name: rowAreas[0], lookupPart: lookup, areas: rowAreas }
-                     : { id: allId, name: allName, lookupPart: lookup, areas: rowAreas };
-                 if (topAreas.length > 0) selectedQueue.push(rowItem(topAreas, 'belly_top_all', '윗배 전체', '윗배'));
-                 if (bottomAreas.length > 0) selectedQueue.push(rowItem(bottomAreas, 'belly_bottom_all', '아랫배 전체', '아랫배'));
+                 BELLY_ROWS.forEach(row => {
+                   const rowAreas = row.cells.filter(c => allActive.includes(c));
+                   if (rowAreas.length === 0) return;
+                   if (rowAreas.length === 1) {
+                     selectedQueue.push({ id: rowAreas[0], name: rowAreas[0], lookupPart: row.lookup, areas: rowAreas });
+                   } else if (rowAreas.length === row.cells.length) {
+                     selectedQueue.push({ id: row.allId, name: row.allName, lookupPart: row.lookup, areas: rowAreas });
+                   } else {
+                     selectedQueue.push({ id: row.multiId, name: row.multiId, lookupPart: row.lookup, areas: rowAreas });
+                   }
+                 });
               }
               document.getElementById('btn-belly-done').style.display = 'block';
           } else {
@@ -209,6 +235,16 @@
             updateQueue();
           });
         });
+
+        // 저장해 둔 선택 되살리기
+        const picked = cur.sub.pickedAreas || [];
+        if (picked.length > 0) {
+          document.querySelectorAll('.belly-area').forEach(el => {
+            const sub = el.getAttribute('data-sub');
+            if (picked.includes(sub)) el.classList.add(sub === 'belly_right_bottom' ? 'highlight-danger' : 'highlight');
+          });
+          updateQueue();
+        }
 
         document.getElementById('btn-belly-done').onclick = () => {
           if (selectedQueue && selectedQueue.length > 0) {

@@ -142,6 +142,9 @@
                 allActive.push(el.getAttribute('data-sub'));
             }
         });
+        // 고른 칸을 바로 저장 (🌐 언어 바꾸기로 다시 불러와도, step2에서 돌아와도 남게)
+        cur.sub.pickedAreas = allActive;
+        saveState(state);
 
         if (allActive.length > 0) {
             const groupSide = (parts, sidePrefix, sideName) => {
@@ -203,6 +206,15 @@
           updateQueue();
         });
       });
+
+      // 저장해 둔 선택 되살리기
+      const picked = cur.sub.pickedAreas || [];
+      if (picked.length > 0) {
+        document.querySelectorAll('.belly-area').forEach(el => {
+          if (picked.includes(el.getAttribute('data-sub'))) el.classList.add('highlight');
+        });
+        updateQueue();
+      }
 
       // 고른 구역으로 이번 회차를 새로 시작 (step2에서 돌아와 다시 고른 경우 포함)
       document.getElementById('btn-belly-done').onclick = () => {
