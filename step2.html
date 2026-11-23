@@ -95,7 +95,8 @@
         
         const lookupPart = resolveSymptomPart(cur.partObj.lookupPart);
 
-        let symptomsList = symptomsData[lookupPart] || [];
+        // 초등은 부위별 카드(본 것·겪은 일), 중고등은 자세한 증상 목록
+        let symptomsList = symptomListFor(cur.partObj.lookupPart, state.level);
         symptomsList.forEach(s => {
           const btn = document.createElement('button');
           btn.className = 'symptom-card multi-select ' + (cur.symptoms.includes(s.ko) ? 'selected' : '');

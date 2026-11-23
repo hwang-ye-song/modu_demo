@@ -1347,6 +1347,24 @@ const translations = {
     ar: { btn_parts_done: "هذا كل شيء", loc_left: "على اليسار", loc_right: "على اليمين", loc_both: "على الجانبين", vomit_0: "لم أتقيأ", summary_more_info: "📝 أسئلة إضافية", summary_head_q: "هل تشعر بدوخة أو رغبة في التقيؤ؟", summary_hurt_how: "كيف أُصبت" }
   };
   for (const l in moreTranslations) Object.assign(translations[l], moreTranslations[l]);
+
+  // 처음 화면 안전 안내: 많이 아프거나 피가 나면 문진표를 하지 말고 바로 선생님께 (보건실 접수 키오스크 사례 참고)
+  // ⚠️ km/th/mn/uz/ar 등은 원어민 검수 전 번역이므로 검수 후 고칠 것
+  const urgentTranslations = {
+    ko: { urgent_notice: "많이 아프거나 피가 나면 이걸 하지 말고 바로 선생님께 말해요!" },
+    en: { urgent_notice: "If it hurts a lot or you are bleeding, skip this and tell the teacher right away!" },
+    zh: { urgent_notice: "如果很疼或者在流血，不用填这个，马上告诉老师！" },
+    ru: { urgent_notice: "Если очень больно или идёт кровь, не заполняй это — сразу скажи учителю!" },
+    vi: { urgent_notice: "Nếu đau nhiều hoặc đang chảy máu, đừng làm cái này, hãy nói ngay với thầy cô!" },
+    ja: { urgent_notice: "とても いたいときや ちが でているときは、これを しないで すぐに せんせいに いってね！" },
+    tl: { urgent_notice: "Kung sobrang sakit o dumudugo, huwag na itong sagutan. Sabihin agad sa guro!" },
+    km: { urgent_notice: "បើឈឺខ្លាំង ឬហូរឈាម កុំធ្វើវា ប្រាប់គ្រូភ្លាមៗ!" },
+    th: { urgent_notice: "ถ้าเจ็บมากหรือเลือดออก ไม่ต้องทำอันนี้ บอกคุณครูทันที!" },
+    mn: { urgent_notice: "Маш их өвдөж байвал эсвэл цус гарч байвал үүнийг бөглөлгүй багшдаа шууд хэлээрэй!" },
+    uz: { urgent_notice: "Juda og'risa yoki qon oqsa, buni to'ldirmang — darhol o'qituvchiga ayting!" },
+    ar: { urgent_notice: "إذا كان الألم شديدًا أو كان هناك نزيف، لا تملأ هذا وأخبر المعلم فورًا!" }
+  };
+  for (const l in urgentTranslations) Object.assign(translations[l], urgentTranslations[l]);
   
   // 필리핀어는 Chrome·Android에서 'fil-PH'를 씀
   const tts_codes = { ko: "ko-KR", en: "en-US", zh: "zh-CN", ru: "ru-RU", vi: "vi-VN", ja: "ja-JP", tl: "fil-PH", km: "km-KH", th: "th-TH", mn: "mn-MN", uz: "uz-UZ", ar: "ar-SA" };
@@ -1525,6 +1543,42 @@ const translations = {
     ]
   };
   
+  // 초등용 부위별 카드: '느낌' 표현(콕콕, 쥐어짜듯, 두근거려요 등)은 빼고
+  // 아이가 직접 보거나 겪은 일(넘어졌어요, 피가 나요, 코피가 나요 등)만 부위마다 몇 개씩 둠 (보건교사 2차 인터뷰)
+  // 응급 판단이 그대로 동작하도록 기존 증상 문구(숨쉬기 힘들어요, 부딪혔어요, 토할 것 같아요, 두드러기가 났어요 등)를 그대로 씀
+  // ⚠️ 새 문구(el_*)의 km/th/mn/uz/ar 번역은 원어민 검수 전
+  const symptomsDataElem = (() => {
+      // 번역은 검수자 2명이 따로 본 뒤 합친 안 (아랍어 담마 'ُ'는 음성 읽기가 3인칭 여성으로 읽지 않게 붙임)
+      const FALL = { id: "el_fall", icon: "🤸", ko: "넘어졌어요", en: "I fell down", zh: "摔倒了", ru: "Упал(а)", vi: "Bị ngã", ja: "ころんだ", tl: "Nadapa ako", km: "ខ្ញុំដួល", th: "หนู/ผมหกล้ม", mn: "Би уначихсан", uz: "Yiqilib tushdim", ar: "وقعتُ" };
+      // 머리·등이 아닌 곳에 쓰는 '부딪혔어요' (기존 문구는 '머리를', '등을'로 번역된 언어가 있음)
+      const BUMP = { id: "el_bump", icon: "💥", ko: "부딪혔어요", en: "Bumped it", zh: "撞到了", ru: "Ударился(лась)", vi: "Bị va đập", ja: "ぶつけた", tl: "Nabangga ako", km: "ខ្ញុំបុកនឹងអ្វីមួយ", th: "หนู/ผมไปชนมา", mn: "Би юманд мөргөчихсөн", uz: "Urilib ketdim", ar: "اصطدمتُ بشيء" };
+      const PAIN = { id: "el_pain", icon: "😣", ko: "그냥 아파요", en: "It just hurts", zh: "就是疼", ru: "Просто болит", vi: "Chỉ thấy đau thôi", ja: "なんか いたい", tl: "Basta masakit", km: "វាគ្រាន់តែឈឺ", th: "แค่เจ็บเฉยๆ", mn: "Зүгээр л өвдөж байна", uz: "Shunchaki og'riyapti", ar: "يوجعني وبس" };
+      const p = (part, id) => symptomsData[part].find(it => it.id === id);
+      const belly = [p("배", "b3"), p("배", "b4"), p("배", "b5"), PAIN];
+      const arm = [FALL, BUMP, p("팔·손", "ag1"), p("팔·손", "ag5"), p("팔·손", "ag3"), PAIN];
+      const hand = [FALL, p("손·손목", "ah1"), p("손·손목", "ah4"), p("손·손목", "ah2"), p("손·손목", "ah6"), PAIN];
+      const leg = [FALL, BUMP, p("다리·발", "lg1"), p("다리·발", "lg5"), p("다리·발", "lg3"), PAIN];
+      return {
+          "머리": [p("머리", "s3"), p("머리", "s2"), p("몸 전체", "w1"), PAIN],
+          "목": [p("목", "nk2"), p("목", "nk1"), PAIN],
+          "눈": [p("눈", "e4"), p("눈", "e3"), p("눈", "e1"), p("눈", "e2")],
+          "귀": [p("귀", "ea1"), p("귀", "ea2")],
+          "코": [p("코", "n3"), p("코", "n1"), p("코", "n2"), PAIN],
+          "입·이": [p("입·이", "m1"), p("입·이", "m2"), p("입·이", "m3")],
+          "가슴": [p("가슴", "c1"), BUMP, PAIN],
+          "배": belly, "윗배": belly, "아랫배": belly,
+          "팔·손": arm, "어깨·위팔": arm, "팔꿈치·아래팔": arm, "팔꿈치": arm, "아래팔": arm,
+          "손·손목": hand, "손목": hand, "손": hand,
+          "다리·발": leg, "허벅지": leg,
+          "무릎": [FALL, BUMP, p("무릎", "lk1"), p("무릎", "lk4"), p("무릎", "lk3"), PAIN],
+          "종아리·발목": [FALL, p("종아리·발목", "lc1"), p("종아리·발목", "lc2"), PAIN],
+          "발": [FALL, p("발", "lf1"), p("발", "lf3"), p("발", "lf5"), PAIN],
+          "등·허리": [p("등·허리", "bk2"), FALL, p("등·허리", "bk1")],
+          "피부": [p("피부", "sk1"), p("피부", "sk2"), p("피부", "sk3"), p("피부", "sk4")],
+          "몸 전체": [p("몸 전체", "w1"), p("몸 전체", "w2"), p("몸 전체", "w3"), p("배", "b3")]
+      };
+  })();
+
   // followups: step4의 추가 질문 답 (몇 번 토했어요? 등, 방문 전체 공통)
   const evaluateEmergency = (entries, followups) => {
     let flags = new Set();
@@ -1655,12 +1709,22 @@ const translations = {
       return lookupPart;
   }
 
+  // 증상 화면에 보여 줄 목록: 초등은 부위별 카드(symptomsDataElem), 중고등은 자세한 증상 목록
+  function symptomListFor(lookupPart, level) {
+      const part = resolveSymptomPart(lookupPart);
+      if (level !== 'secondary' && symptomsDataElem[part]) return symptomsDataElem[part];
+      return symptomsData[part] || [];
+  }
+
   // 증상 번역: 고른 부위의 증상 목록에서 먼저 찾음 (같은 한국어 '아파요'가 눈/귀/등에 다 있어서)
+  // 초등 카드 목록을 먼저 봄 (팔·다리의 '부딪혔어요'는 머리·등과 다르게 번역)
   function translateSymptom(koStr, lookupPart, lang) {
       if (!lang || lang === 'ko' || !koStr) return koStr;
-      const list = symptomsData[resolveSymptomPart(lookupPart)] || [];
-      const item = list.find(it => it.ko === koStr);
-      if (item && item[lang]) return item[lang];
+      const part = resolveSymptomPart(lookupPart);
+      for (const list of [symptomsDataElem[part], symptomsData[part]]) {
+          const item = (list || []).find(it => it.ko === koStr);
+          if (item && item[lang]) return item[lang];
+      }
       return translateKoToLang(koStr, lang);
   }
 

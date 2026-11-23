@@ -612,3 +612,26 @@ header .lang-switch-btn {
   border-color: var(--primary);
   background: var(--primary-light);
 }
+
+/* 처음 화면 안전 안내: 많이 아프거나 피가 나면 바로 선생님께 */
+.urgent-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  background: #FEF2F2;
+  border: 1.5px solid #FCA5A5;
+  border-radius: var(--radius);
+  color: #991B1B;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: start;
+}
+.urgent-notice .urgent-icon { font-size: 1.4rem; flex-shrink: 0; }
+.urgent-notice .urgent-text { flex: 1; min-width: 0; }
+.urgent-notice small { display: block; font-weight: 500; color: #B91C1C; }
+.urgent-notice .btn-speaker { flex-shrink: 0; }

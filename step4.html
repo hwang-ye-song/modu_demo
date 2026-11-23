@@ -154,8 +154,8 @@
         const translatedSymptom = escapeHtml(translateSymptom(symptom, entry.partObj.lookupPart, state.lang));
         const translatedPart = escapeHtml(partName);
         
-        // 다친 증상만 원인 질문 ('멍해요'는 다친 게 아니므로 제외)
-        const isTrauma = /다침|피가|코피|멍이|멍들|삐었|까졌|부딪|부었|데었|끼였/.test(symptom);
+        // 다친 증상만 원인 질문 ('멍해요'는 다친 게 아니므로 제외, 초등 카드 '넘어졌어요' 포함)
+        const isTrauma = /다침|피가|코피|멍이|멍들|삐었|까졌|부딪|부었|데었|끼였|넘어/.test(symptom);
 
         let followUpHtml = '';
         if (isTrauma) {
