@@ -6,44 +6,81 @@
   <title>그림 터치 문진표 - 어디가 아파요?</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* 터치 영역(svg)이 그림과 정확히 같은 크기가 되도록 상자를 그림 크기에 맞춤
-       (상자가 늘어나면 svg만 늘어나 머리를 눌러도 '가슴'으로 기록됨) */
+    /* 몸 그림이 남는 높이를 모두 씁니다. 그림 상자는 그림 비율 그대로라 누르는 영역(SVG)과 어긋나지 않습니다. */
+    /* 디자인 A: 그림 둘레를 연한 하늘색 상자로 감쌈 (누르는 영역 상자는 그대로라 위치가 어긋나지 않음) */
+    .body-map-area {
+      flex: 1 1 0;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      container-type: size;
+      padding: 0.9rem;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 50% 45%, var(--sky-soft) 0, #DCEEF8 75%);
+      border: 2px solid var(--sky);
+    }
     .body-map-container {
-      flex: 0 0 auto;
+      position: relative;
+      aspect-ratio: 756 / 1660;
+      width: min(100%, calc((100dvh - 330px) * 0.4554)); /* 컨테이너 단위를 모르는 브라우저용 */
+      width: min(100cqw, 100cqh * 0.4554);
+    }
+    .body-map-container img {
+      width: 100%;
+      height: 100%;
       display: block;
+      pointer-events: none;
+      user-select: none;
+      filter: saturate(1.3) brightness(0.94); /* 하늘 바탕 위에서 그림이 잘 보이게 살짝 진하게 */
     }
-    .svg-body {
-      flex: 1 1 auto;
-      max-height: 100%;
-      max-width: 320px;
-      width: auto;
-      height: auto;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-    }
-    .hitbox {
-      fill: transparent;
-      stroke: transparent;
-      cursor: pointer;
-      transition: fill 0.15s;
-    }
-    .hitbox:hover, .hitbox:active, .hitbox.hover-highlight {
-      fill: rgba(99, 102, 241, 0.25);
-      stroke: var(--primary);
-      stroke-width: 2;
-    }
-    .hitbox.highlight {
-      fill: rgba(99, 102, 241, 0.3);
-      stroke: var(--primary);
-      stroke-width: 3;
-    }
-    .whole-body-btn {
+    /* 몸 전체·피부·등허리 버튼: 흰 알약 모양. 좁은 화면에서는 두 줄로 넘기고 글자는 한 줄로 */
+    .whole-body-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.85rem 0 0.25rem;
       flex-shrink: 0;
-      padding: 0.6rem 2rem;
-      border-radius: 50px;
-      font-size: 1rem;
     }
-    .whole-body-btn .emoji {
-      font-size: 1.25rem;
+    .symptom-card.whole-body-btn {
+      flex-direction: row;
+      min-height: var(--tap);
+      padding: 0.5rem 1.15rem;
+      border-radius: var(--radius-pill);
+      gap: 0.45rem;
+      white-space: nowrap;
+      color: var(--ink);
+    }
+    .symptom-card.whole-body-btn .text { font-family: var(--font-display); font-weight: 400; }
+    .symptom-card.whole-body-btn .emoji { font-size: 1.5rem; margin: 0; }
+    @media (min-width: 700px) {
+      .whole-body-row { gap: 0.75rem; }
+      .symptom-card.whole-body-btn { min-height: 72px; padding: 0.5rem 2.25rem; }
+      .symptom-card.whole-body-btn .emoji { font-size: 2rem; }
+      .symptom-card.whole-body-btn .text { font-size: 1.4rem; }
+    }
+    /* 가로로 넓은 태블릿: 시안 2번처럼 왼쪽 몸 그림, 오른쪽 부위 버튼 목록 + 다음 버튼 */
+    @media (min-width: 900px) and (orientation: landscape) {
+      .step {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        column-gap: 1.5rem;
+        max-width: 1000px;
+        padding-bottom: 1.25rem;
+      }
+      .step > h1 { grid-column: 1 / -1; }
+      .body-map-area { grid-column: 1; grid-row: 2 / 4; min-height: 0; height: 100%; }
+      .whole-body-row {
+        grid-column: 2; grid-row: 2;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        padding: 0;
+      }
+      .symptom-card.whole-body-btn { width: 100%; justify-content: flex-start; padding: 0.5rem 1.5rem; }
+      #done-row { grid-column: 2; grid-row: 3; position: static; background: none; padding: 0.75rem 0 0; }
     }
   </style>
 </head>
@@ -60,14 +97,15 @@
     <h1 class="speakable"><span data-i18n="step_1_title">어디가 아파요?</span><button class="btn-speaker">🔊</button></h1>
 
     <!-- Body Map Interface -->
-    <div class="body-map-container" style="position: relative; width: min(100%, calc(55vh * 0.455), 250px); margin: 0 auto 1rem auto;">
-      <img src="body_cropped.png" alt="Body" style="width: 100%; display: block; border-radius: 12px; pointer-events: none;" />
+    <div class="body-map-area">
+      <div class="body-map-container">
+        <img src="body_map.png" alt="" draggable="false" />
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
         <style>
-          .body-area { fill: transparent; cursor: pointer; transition: fill 0.2s; }
-          .body-area:hover, .body-area:active, .body-area.hover-highlight { fill: rgba(74, 144, 226, 0.5); }
-          .body-area.highlight { fill: rgba(74, 144, 226, 0.6); stroke: var(--primary); stroke-width: 0.5; }
-        </style>
+            .body-area { fill: transparent; cursor: pointer; transition: fill 0.2s; }
+            .body-area:hover, .body-area:active, .body-area.hover-highlight { fill: rgba(232, 121, 74, 0.30); }
+            .body-area.highlight { fill: rgba(232, 121, 74, 0.42); stroke: var(--peach-deep); stroke-width: 0.5; } /* 디자인 A: 누른 곳은 진한 복숭아색 */
+          </style>
         <!-- 머리 및 목 -->
         <polygon points="43.4,2.2 39.7,4.1 38.6,8.9 39.2,11.3 41.8,12.8 42.3,15.9 40.7,17.1 34.4,18.1 33.9,19.0 67.2,19.0 67.2,18.3 60.3,16.6 58.2,14.9 58.2,12.8 61.4,10.6 60.8,4.1 55.6,1.7 45.5,1.7" class="body-area" data-part="part_head" />
         <!-- 가슴 -->
@@ -82,19 +120,20 @@
         <polygon points="49.2,54.7 49.2,57.6 52.4,58.3 65.6,96.4 68.3,98.6 75.1,97.6 75.1,92.3 69.8,86.7 70.9,73.0 68.8,70.1 72.0,54.7" class="body-area" data-part="part_leg" />
       </svg>
     </div>
+    </div>
     
     <!-- 온몸이 아파요 (몸 전체), 그림에서 고를 수 없는 피부·등/허리 버튼 -->
-    <div style="text-align: center; margin-bottom: 1rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">
-      <button class="symptom-card" data-part="part_whole" style="padding: 0.6rem 1.5rem; min-height: 0; border-radius: 30px; font-weight: bold; background: white; border: 2px solid #e2e8f0; color: var(--primary); display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-        <span class="emoji" style="font-size: 1.2rem; margin-bottom: 0;">🤒</span>
+    <div class="whole-body-row">
+      <button class="symptom-card whole-body-btn" data-part="part_whole">
+        <span class="emoji">🤒</span>
         <span class="text" data-i18n="part_whole">몸 전체</span>
       </button>
-      <button class="symptom-card" data-part="part_skin" style="padding: 0.6rem 1.5rem; min-height: 0; border-radius: 30px; font-weight: bold; background: white; border: 2px solid #e2e8f0; color: var(--primary); display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-        <span class="emoji" style="font-size: 1.2rem; margin-bottom: 0;">🩹</span>
+      <button class="symptom-card whole-body-btn" data-part="part_skin">
+        <span class="emoji">🩹</span>
         <span class="text" data-i18n="part_skin">피부</span>
       </button>
-      <button class="symptom-card" data-part="part_back" style="padding: 0.6rem 1.5rem; min-height: 0; border-radius: 30px; font-weight: bold; background: white; border: 2px solid #e2e8f0; color: var(--primary); display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-        <span class="emoji" style="font-size: 1.2rem; margin-bottom: 0;">🧍</span>
+      <button class="symptom-card whole-body-btn" data-part="part_back">
+        <span class="emoji">🧍</span>
         <span class="text" data-i18n="part_back">등·허리</span>
       </button>
     </div>
